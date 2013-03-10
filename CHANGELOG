@@ -1,0 +1,24 @@
+2010-04-03  Noah Snavely  <snavely@cs.cornell.edu>
+        * Upgrade to v0.4
+        * Removed reference implementations of LAPACK and BLAS due to
+          bugs in 64-bit version
+        * Updated Bundle2PMVS to work with new version of PMVS
+        * Updated RadialUndistort (note that you now must specify an 
+        * output directory)
+        * Added Bundle2Vis tool
+
+2009-05-04  Noah Snavely  <snavely@cs.cornell.edu>
+
+	* Upgrade to v0.3
+	* Added Visual Studio project files
+	* Added reference implementations of required libs: LAPACK, BLAS,
+	  MINPACK, CBLAS, f2c, etc.
+	* Several bug fixes
+	* Added Bundle2PMVS utility program
+	* Cleaner Makefiles and scripts (thanks to Bart van Andel)
+
+	
+2008-10-08  Noah Snavely  <snavely@cs.cornell.edu>
+
+	* Upgrade to v0.2
+	* Mainly code refactoring

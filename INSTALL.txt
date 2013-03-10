@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------
+  Bundler v0.4 Installation Guide
+    copyright 2009 Noah Snavely (snavely@cs.cornell.edu)
+  
+  based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
+    (University of Washington) and Richard Szeliski (Microsoft Research)
+
+  For more technical information, visit http://phototour.cs.washington.edu
+
+  The source provided in this distribution can be accessed at
+    http://phototour.cs.washington.edu/bundler/
+--------------------------------------------------------------------------
+
+This distribution contains source code for Bundler as well as several
+libraries and utility programs.  Note that you'll need several other
+libraries installed on your system in order to successfully compile
+and link Bundler.  Note that the binary distribution is *highly
+recommended*, as compiling from source is currently much less
+user-friendly than using the pre-compiled binaries.  Compilation has
+been tested on Linux, but has also worked under Windows using Cygwin
+and Visual Studio 2005.
+
+Bundler relies on several libraries.  Reference implementations from
+netlib are included with this distribution (and available from
+www.netlib.org, but you may want to install and link to optimized
+versions (e.g., GotoBLAS, or the Intel MKL)).  In Ubuntu, LAPACK,
+BLAS, and MINPACK and their dependencies can all be installed as
+standard packages.  The required libraries are:
+
+ - LAPACK  (the Linear Algebra PACKage) 
+ - BLAS    (Basic Linear Algebra Subprograms)
+ - CBLAS   (C interface to BLAS)
+
+   (Note that LAPACK, BLAS, and CBLAS implementations are also
+    provided as part of Intel's Math Kernel Library -- these
+    implementations can be significantly faster than the ones linked
+    to here.)
+
+ - MINPACK (non-linear minimization library)
+ - f2c     (fortran to C library)
+
+If you install alternate versions of these libraries, you may need to
+edit the Bundler Makefile (src/Makefile) to make sure that these
+libraries are all visible at link-time (or just copy the compiled
+libraries to the $(BASE_PATH)/lib directory).  In addition to these
+libraries, the standard libjpeg and libz libraries must be installed
+on your system.
+
+This distribution also contains a modified version of the Approximate
+Nearest Neighbors (ANN) v1.1 library of David M. Mount and Sunil Arya
+(http://www.cs.umd.edu/~mount/ANN/), and the Sparse Bundle Adjustment
+(SBA) v.1.2.1 package of Manolis Lourakis and Antonis Argyros
+(http://www.ics.forth.gr/~lourakis/sba/).
+
+On a Linux (or cygwin) system, typing "make" in the base directory
+will compile Bundler and its dependencies (assuming all goes well).
+Upon successful compilation, an executable called 'bundler' will be
+copied to the bin directory, along with an executable called
+'KeyMatchAll'.
+
+For Windows systems, see the vc++ directory for a Visual Studio 2005
+solution file (vc++/Bundler.sln).  Note that you will still need
+cygwin (or at least have bash and perl installed) in order to run the
+RunBundler.sh script.
+
+See the README.txt file for more information on running Bundler.
