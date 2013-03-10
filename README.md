@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------
-  Bundler v0.4 User's Manual
-    copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
+Bundler v0.4 User's Manual
+  copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
   
-  based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
-    (University of Washington) and Richard Szeliski (Microsoft Research)
+based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
+  (University of Washington) and Richard Szeliski (Microsoft Research)
 
-  For more technical information, visit http://phototour.cs.washington.edu
+For more technical information, visit http://phototour.cs.washington.edu
 
-  An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
+An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
 --------------------------------------------------------------------------
 
 
@@ -67,8 +67,7 @@ Before you begin
 
 You'll first need to download the Bundler distribution from:
 
-http://phototour.cs.washington.edu/bundler 
-(the binary distribution is highly recommended)
+    http://phototour.cs.washington.edu/bundler 
 
 and extract it into a directory (to be referred to as BASE_PATH).
 
@@ -339,7 +338,7 @@ Contact information
 
 Questions?  Comments?  Bug reports?  Please see the FAQ at
 http://phototour.cs.washington.edu/bundler/faq.html, or send email to
-Noah Snavely at snavely@cs.washington.edu.
+Noah Snavely at snavely@cs.cornell.edu.
 
 
 [1] Noah Snavely, Steven M. Seitz, and Richard Szeliski.  Photo
@@ -348,7 +347,7 @@ Noah Snavely at snavely@cs.washington.edu.
 
 [2] Noah Snavely, Steven M. Seitz, Richard Szeliski.  Modeling the
     World from Internet Photo Collections. International Journal of
-    Computer Vision (to appear), 2007.
+    Computer Vision, 2007.
 
 [3] M.I.A. Lourakis and A.A. Argyros.  The Design and Implementation
     of a Generic Sparse Bundle Adjustment Software Package Based on
