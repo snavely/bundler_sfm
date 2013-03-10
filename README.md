@@ -1,6 +1,6 @@
---------------------------------------------------------------------------
 Bundler v0.4 User's Manual
-  copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
+--------------------------
+copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
   
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
   (University of Washington) and Richard Szeliski (Microsoft Research)
@@ -8,10 +8,7 @@ based on the Photo Tourism work of Noah Snavely, Steven M. Seitz,
 For more technical information, visit http://phototour.cs.washington.edu
 
 An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
---------------------------------------------------------------------------
 
-
-----------------
 What is Bundler?
 ----------------
 
@@ -28,7 +25,6 @@ Currently, Bundler has been primarily compiled and tested under Linux
 (though a Windows version for cygwin has also been released).
 
 
------------------
 Conditions of use
 -----------------
 
@@ -37,7 +33,6 @@ information on commercial licensing, please contact the authors at the
 contact address below.
 
 
----------------
 What's included
 ---------------
 
@@ -61,7 +56,6 @@ reading Exif tags from JPEG images. Very special thanks to Matthias
 Wandel for putting this useful program in the public domain.
 
 
-----------------
 Before you begin
 ----------------
 
@@ -89,7 +83,6 @@ BASE_PATH/bin/ann_1.1_char.dll (Windows VS2005) to a location in your
 LD_LIBRARY_PATH (or add BASE_PATH/lib to LD_LIBRARY_PATH).
 
 
----------------
 Running bundler
 ---------------
 
@@ -137,7 +130,6 @@ RunBundler.sh creates an options file that will work in many
 situations.  Common options are described later in this document.
 
 
--------------
 Output format
 -------------
 
@@ -225,7 +217,6 @@ and the 3D position of a camera is
     -R' * t .
 
 
---------------------
 Command-line options
 --------------------
 
@@ -311,7 +302,6 @@ ones listed above, including:
      [Print out the complete list of command-line options.]
 
 
-----------------
 Acknowledgements
 ----------------
 
@@ -332,7 +322,6 @@ Thanks as well to Kathleen Tuite and Sebastian Koch for testing this
 distribution.
 
 
--------------------
 Contact information
 -------------------
 
