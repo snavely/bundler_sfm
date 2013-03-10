@@ -1,14 +1,13 @@
 --------------------------------------------------------------------------
   Bundler v0.4 User's Manual
-    copyright 2008-2009 Noah Snavely (snavely@cs.cornell.edu)
+    copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
   
   based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
     (University of Washington) and Richard Szeliski (Microsoft Research)
 
   For more technical information, visit http://phototour.cs.washington.edu
 
-  An html version of this manual is available at 
-     http://phototour.cs.washington.edu/bundler/
+  An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
 --------------------------------------------------------------------------
 
 
@@ -157,31 +156,32 @@ http://graphics.stanford.edu/software/scanalyze/.
 The bundle files contain the estimated scene and camera geometry have
 the following format:
 
-# Bundle file v0.3
-<num_cameras> <num_points>   [two integers]
-<camera1>
-<camera2>
-...
-<cameraN>
-<point1>
-<point2>
-...
-<pointM>
+    # Bundle file v0.3
+    <num_cameras> <num_points>   [two integers]
+    <camera1>
+    <camera2>
+     ...
+    <cameraN>
+    <point1>
+    <point2>
+     ...
+    <pointM>
 
 Each camera entry <cameraI> contains the estimated camera intrinsics
 and extrinsics, and has the form:
 
-<f> <k1> <k2>   [the focal length, followed by two radial distortion coeffs]
-<R>             [a 3x3 matrix representing the camera rotation]
-<t>             [a 3-vector describing the camera translation]
+    <f> <k1> <k2>   [the focal length, followed by two radial distortion coeffs]
+    <R>             [a 3x3 matrix representing the camera rotation]
+    <t>             [a 3-vector describing the camera translation]
 
 The cameras are specified in the order they appear in the list of
 images.
 
 Each point entry <pointI> has the form:
-<position>      [a 3-vector describing the 3D position of the point]
-<color>         [a 3-vector describing the RGB color of the point]
-<view list>     [a list of views the point is visible in]
+
+    <position>      [a 3-vector describing the 3D position of the point]
+    <color>         [a 3-vector describing the RGB color of the point]
+    <view list>     [a list of views the point is visible in]
 
 The view list begins with the length of the list (i.e., the number of
 cameras the point is visible in).  The list is then given as a list of
@@ -206,7 +206,7 @@ where P.z is the third coordinate of P.  In the last equation, r(p) is
 a function that computes a scaling factor to undo the radial
 distortion:
 
-r(p) = 1.0 + k1 * ||p||^2 + k2 * ||p||^4.
+    r(p) = 1.0 + k1 * ||p||^2 + k2 * ||p||^4.
 
 This gives a projection in pixels, where the origin of the image is
 the center of the image, the positive x-axis points right, and the
