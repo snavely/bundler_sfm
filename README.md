@@ -80,7 +80,10 @@ easiest way to run this script in Windows is through cygwin.
 Finally, copy the approximate nearest neighbors (ANN) shared library
 at BASE_PATH/bin/libANN_char.so (Linux/cygwin) or
 BASE_PATH/bin/ann_1.1_char.dll (Windows VS2005) to a location in your
-LD_LIBRARY_PATH (or add BASE_PATH/bin to LD_LIBRARY_PATH).
+LD_LIBRARY_PATH, or add BASE_PATH/bin to LD_LIBRARY_PATH with a 
+command like (in bash):
+
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/bundler/bin
 
 
 Running bundler
