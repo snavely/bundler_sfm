@@ -29,7 +29,11 @@
  *  converge at the 'kth' singular value.
  * 
  */
+#ifdef __APPLE__
+#include <malloc/malloc.h> /* for array allocation */
+#else
 #include <malloc.h> /* for array allocation */
+#endif
 #include <math.h>   /* for 'fabs'           */
 
 #include "matrix.h"
