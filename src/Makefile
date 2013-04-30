@@ -1,6 +1,7 @@
 # Makefile for bundler
 
 CC=gcc
+CXX=g++
 OPTFLAGS=-O3 -Wall
 
 OS=$(shell uname -o)
