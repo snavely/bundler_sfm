@@ -51,10 +51,6 @@ called Bundle2PMVS is also included.  Finally, this distribution
 includes a program called RadialUndistort for generating undistorted
 images (based on the undistortion parameters estimated by Bundler).
 
-Finally, included in the bin directory is the 'jhead' program for
-reading Exif tags from JPEG images. Very special thanks to Matthias
-Wandel for putting this useful program in the public domain.
-
 
 Before you begin
 ----------------
@@ -74,8 +70,8 @@ Lowe's SIFT binary, you'll need to download that binary from
 and copy it to BASE_PATH/bin (making sure it is called 'sift', or
 'siftWin32.exe' under Windows).
 
-The RunBundler.sh script relies on bash and perl being installed.  The
-easiest way to run this script in Windows is through cygwin.
+The bundler.py script requires that you have Python and the Python
+Image Library (PIL) installed on your computer.
 
 Finally, copy the approximate nearest neighbors (ANN) shared library
 at BASE_PATH/bin/libANN_char.so (Linux/cygwin) or
@@ -89,26 +85,40 @@ command like (in bash):
 Running bundler
 ---------------
 
-The easiest way to start using Bundler is to use the included bash
-shell script, RunBundler.sh.  Just execute this script in a directory
-with a set of images in JPEG format, and it will automatically run all
-the steps needed to run structure from motion on the images (assuming
+The easiest way to start using Bundler is to use the included Python
+script, bundler.py.  Just execute this script in a directory with a
+set of images in JPEG format, and it will automatically run all the
+steps needed to run structure from motion on the images (assuming
 everything goes well).
 
+To get help on using the Python script bundler.py:
+
+  > bundler.py -h
+
+To run bundler.py with verbose output on a single thread (this acts
+similar to the older RunBundler.sh bash script):
+
+  > bundler.py --verbose --no-parallel
+
+bundler.py can also be imported into your own Python modules to
+enable easy access to the bundler system.  Type 'help(bundler)'
+at the python command prompt after importing bundler.py for more
+information.
+
 The Bundler exectutable is actually the last in a sequence of steps
-that need to be run to reconstruct a scene.  RunBundler.sh takes care
+that need to be run to reconstruct a scene.  bundler.py takes care
 of all these steps for you, but it's useful to know what's going on.
 The main initial steps are to generate features and pairwise feature
 matches for the image set.  Any type of image features can be used,
 but Bundler assumes the features are in the SIFT format, and so David
 Lowe's SIFT detector, available at
 http://www.cs.ubc.ca/~lowe/keypoints/, is probably the easiest to get
-working with Bundler (RunBundler.sh assumes that SIFT is used).  A
+working with Bundler (bundler.py assumes that SIFT is used).  A
 list of images containing estimating focal length information also
 must be created.  The four steps to creating a reconstruction are
 therefore:
 
-1. Create a list of images using the script 'extract_focal.pl'
+1. Create a list of images using the function extract_focal_length.
    (this extracts focal length information, when available, from each
    image, and stores it in an image list).
 2. Generate (SIFT) features for each image.
@@ -117,20 +127,21 @@ therefore:
    'matches.init.txt'.
 4. Run 'bundler' with a suitable options file.
 
-Again, running the RunBundler.sh script is the easiest way to perform
-these steps.  To simplify steps 1-3, a number of utility scripts and
-programs are included with this distribution (and invoked from the
-RunBundler.sh script).
+Again, running the bundler.py script is the easiest way to perform
+these steps.  Steps 1-3 can also be invoked individually from
+functions contained in the bundler.py script.
 
 Bundler itself is typically invoked as follows:
 
  > bundler list.txt --options_file options.txt
 
-The first argument is the list of images to be reconstructed (created
-with the 'extract_focal.pl' utility).  Next, an options file
-containing settings to be used for the current run is given.
-RunBundler.sh creates an options file that will work in many
-situations.  Common options are described later in this document.
+The first argument is the list of images to be reconstructed.
+Next, an options file containing settings to be used for the
+current run is given.  bundler.py creates an options file that will
+work in many situations.  Common options are described later in this
+document.  To generate only the list of images, run:
+
+ > bundler.py --extract-focal
 
 
 Output format
@@ -227,9 +238,9 @@ Bundler has a number of internal parameters, so there are a large
 number of command-line options.  That said, we've found that a common
 set of parameters works well for most image collections we've tried,
 so it is probably safe to start with the recommended options (used by
-the RunBundler.sh script).  One very useful option is 
+the bundler.py script).  One very useful option is 
 "--options_file <file>", which tells Bundler to read a list of options
-from a file.  The default options file created by RunBundler.sh
+from a file.  The default options file created by bundler.py
 includes the following:
 
   --match_table matches.init.txt
