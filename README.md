@@ -7,7 +7,7 @@ based on the Photo Tourism work of Noah Snavely, Steven M. Seitz,
 
 For more technical information, visit http://phototour.cs.washington.edu
 
-An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
+For more information, see the Bundler homepage at http://www.cs.cornell.edu/~snavely/bundler/.
 
 What is Bundler?
 ----------------
