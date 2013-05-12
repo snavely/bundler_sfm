@@ -327,7 +327,7 @@ Contact information
 -------------------
 
 Questions?  Comments?  Bug reports?  Please see the FAQ at
-http://phototour.cs.washington.edu/bundler/faq.html, or send email to
+http://www.cs.cornell.edu/~snavely/bundler/faq.html, or send email to
 Noah Snavely at snavely@cs.cornell.edu.
 
 
