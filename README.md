@@ -5,8 +5,6 @@ copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
   (University of Washington) and Richard Szeliski (Microsoft Research)
 
-For more technical information, visit http://phototour.cs.washington.edu
-
 For more information, see the Bundler homepage at http://www.cs.cornell.edu/~snavely/bundler/.
 
 What is Bundler?
