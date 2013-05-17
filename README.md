@@ -303,6 +303,10 @@ ones listed above, including:
      [Print out the complete list of command-line options.]
 
 
+Links
+-----
+Pierre Moulon has a cmake version of Bundler available here: https://github.com/TheFrenchLeaf/Bundler.
+
 Acknowledgements
 ----------------
 
