@@ -36,8 +36,9 @@ standard packages.  The required libraries are:
     implementations can be significantly faster than the ones linked
     to here.)
 
- - MINPACK (non-linear minimization library)
- - f2c     (fortran to C library)
+ - MINPACK   (non-linear minimization library)
+ - f2c       (fortran to C library)
+ - gfortrain (GNU Fortran compiler package)
 
 If you install alternate versions of these libraries, you may need to
 edit the Bundler Makefile (src/Makefile) to make sure that these
