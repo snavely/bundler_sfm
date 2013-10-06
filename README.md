@@ -5,9 +5,7 @@ copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
   (University of Washington) and Richard Szeliski (Microsoft Research)
 
-For more technical information, visit http://phototour.cs.washington.edu
-
-An html version of this manual is available at http://phototour.cs.washington.edu/bundler/
+For more information, see the Bundler homepage at http://www.cs.cornell.edu/~snavely/bundler/.
 
 What is Bundler?
 ----------------
@@ -316,6 +314,10 @@ ones listed above, including:
      [Print out the complete list of command-line options.]
 
 
+Links
+-----
+Pierre Moulon has a cmake version of Bundler available here: https://github.com/TheFrenchLeaf/Bundler.
+
 Acknowledgements
 ----------------
 
@@ -340,7 +342,7 @@ Contact information
 -------------------
 
 Questions?  Comments?  Bug reports?  Please see the FAQ at
-http://phototour.cs.washington.edu/bundler/faq.html, or send email to
+http://www.cs.cornell.edu/~snavely/bundler/faq.html, or send email to
 Noah Snavely at snavely@cs.cornell.edu.
 
 

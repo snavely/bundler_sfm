@@ -136,10 +136,10 @@ void WriteVisFile(const char *vis_file,
                   std::vector<camera_params_t> &cameras,
                   std::vector<point_t> &points)
 {
-    int nCameras = (int) cameras.size();
-    int nPoints = (int) points.size();
+    size_t nCameras = cameras.size();
+    size_t nPoints = points.size();
 
-    printf("Num cameras: %d\n", nCameras);
+    printf("Num cameras: %lu\n", nCameras);
 
     FILE *f = fopen(vis_file, "w");
     if (!f) {
@@ -150,18 +150,18 @@ void WriteVisFile(const char *vis_file,
 
     /* Fill in the matches matrix */
     unsigned int *matches = new unsigned int[nCameras * nCameras];
-    for (int i = 0; i < nCameras; i++) {
-        for (int j = 0; j < nCameras; j++) {
+    for (size_t i = 0; i < nCameras; i++) {
+        for (size_t j = 0; j < nCameras; j++) {
             matches[i * nCameras + j] = 0;
         }
     }
     
-    for (int i = 0; i < nPoints; i++) {
+    for (size_t i = 0; i < nPoints; i++) {
         // bool seen = false;
-        int nViews = (int) points[i].views.size();
-        for (int j = 0; j < nViews; j++) {
+        size_t nViews = points[i].views.size();
+        for (size_t j = 0; j < nViews; j++) {
             int i1 = points[i].views[j].first;
-            for (int k = j+1; k < nViews; k++) {
+            for (size_t k = j+1; k < nViews; k++) {
                 if (j == k) continue;
                 int i2 = points[i].views[k].first;
 
@@ -172,21 +172,21 @@ void WriteVisFile(const char *vis_file,
     }
 
     fprintf(f, "VISDATA\n");
-    fprintf(f, "%d\n", nCameras);    
+    fprintf(f, "%lu\n", nCameras);    
 
     // write camera rows
     const unsigned int MATCH_THRESHOLD = 32;
-    for (int i = 0; i < nCameras; i++) {
+    for (size_t i = 0; i < nCameras; i++) {
         std::vector<int> vis;
-        for (int j = 0; j < nCameras; j++) {
+        for (size_t j = 0; j < nCameras; j++) {
             if (matches[i * nCameras + j] >= MATCH_THRESHOLD)
                 vis.push_back(j);
         }
          
-        int nVis = (int) vis.size();
-        fprintf(f, "%d %d", i, (int) nVis);
+        size_t nVis = vis.size();
+        fprintf(f, "%lu %lu", i, nVis);
 
-        for (int j = 0; j < nVis; j++) {
+        for (size_t j = 0; j < nVis; j++) {
             fprintf(f, " %d", vis[j]);
         }
 
