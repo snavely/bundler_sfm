@@ -60,8 +60,6 @@ copied to the bin directory, along with an executable called
 'KeyMatchAll'.
 
 For Windows systems, see the vc++ directory for a Visual Studio 2005
-solution file (vc++/Bundler.sln).  Note that you will still need
-cygwin (or at least have bash and perl installed) in order to run the
-RunBundler.sh script.
+solution file (vc++/Bundler.sln).
 
 See the README.txt file for more information on running Bundler.
