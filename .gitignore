@@ -1,3 +1,6 @@
 # Compiled source
 *.o
 *.a
+
+# emacs temp files
+*~
