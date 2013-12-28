@@ -1,6 +1,5 @@
 /* 
  *  Copyright (c) 2008-2010  Noah Snavely (snavely (at) cs.cornell.edu)
- *    and the University of Washington
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +29,6 @@
 #include "ImageData.h"
 
 
-
 #ifndef __DEMO__
 #include "sfm.h"
 #endif /* __DEMO__ */
@@ -42,8 +40,8 @@
 #include <list>
 
 #ifndef WIN32
-#include <ext/hash_map>
-#include <ext/hash_set>
+#include <unordered_map>
+#include <unordered_set>
 #else
 #include <hash_map>
 #include <hash_set>
@@ -104,7 +102,7 @@ namespace stdext {
     };
 }
 #else
-namespace __gnu_cxx {
+namespace std {
     template<>
     struct hash<MatchIndex> {
         size_t
@@ -155,7 +153,7 @@ public:
 typedef stdext::hash_map<unsigned int, std::vector<KeypointMatch> >
    MatchAdjTable;
 #else
-typedef __gnu_cxx::hash_map<unsigned int, std::vector<KeypointMatch> >
+typedef unordered_map<unsigned int, std::vector<KeypointMatch> >
    MatchAdjTable;
 #endif
 
@@ -417,9 +415,9 @@ public:
     /* Clear the current model */
     void ClearModel();
 
-    /* Write the match table in Drew's format */
-    void WriteMatchTableDrew(const char *append = "");
-    void ReadMatchTableDrew(const char *append = "");
+    /* Read / write the match table */
+    void ReadMatchTable(const char *append = "");
+    void WriteMatchTable(const char *append = "");
 
     /* Initialize images read from a file without performing bundle
      * adjustment */
@@ -559,7 +557,7 @@ public:
 #endif
 
 #ifndef WIN32
-    __gnu_cxx::hash_map<MatchIndex, TransformInfo> m_transforms;
+    unordered_map<MatchIndex, TransformInfo> m_transforms;
 #else
     stdext::hash_map<MatchIndex, TransformInfo> m_transforms;
 #endif

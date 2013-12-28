@@ -598,7 +598,7 @@ ModelMap SkeletalApp::BundleAllPairs(char *out_file,
                 continue;
         }
 
-        printf("[SifterApp::BundleAllPairs] Bundling (%lu,%lu)\n", i1, i2);
+        printf("[BundleAllPairs] Bundling (%lu,%lu)\n", i1, i2);
         fflush(stdout);
 
         if (!preload_keys) {
@@ -677,7 +677,7 @@ ModelMap SkeletalApp::BundleAllPairs(char *out_file,
                 
             if (num_found < 1 /*MAX(1.0, 0.002 * num_images)*/) {
                 /* Make node i2 dependent on node i1 */
-                printf("[SifterApp::BundleAllPairs] "
+                printf("[BundleAllPairs] "
                        "Node %lu depends on node %lu\n", i2, i1);
 
                 dependent = true;
@@ -714,7 +714,7 @@ ModelMap SkeletalApp::BundleAllPairs(char *out_file,
         }
 
         if (!dependent && success) {
-            printf("[SifterApp::BundleAllPairs] "
+            printf("[BundleAllPairs] "
                    "(%lu,%lu) successfully bundled\n", i1, i2);
             
             if (model.ComputeTrace(true) < 0.0) {
@@ -875,7 +875,7 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
     if (!m_image_data[i1].m_has_init_focal || 
         !m_image_data[i2].m_has_init_focal) {
 
-        printf("[SifterApp::BundleTwoFrame] "
+        printf("[BundleTwoFrame] "
                "Error: two frames must have focal length estimates\n");
         return false;
     }
@@ -1002,7 +1002,7 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
     // unsigned int num_matches = m_matches.GetNumMatches(list_idx);
 
     /* **** Set up the initial 3D points **** */
-    printf("[SifterApp::BundleTwoFrame] Adding initial matches...\n");
+    printf("[BundleTwoFrame] Adding initial matches...\n");
     fflush(stdout);
 
     int pt_count = 0;
@@ -1186,7 +1186,7 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
     num_pts_out = pt_count;
 
     if (RAD2DEG(angle_avg) < 0.5 /*1.5*/) { /* Thresh on triangulation angle */
-        printf("[SifterApp::BundleTwoFrame] Average tri.angle too small, "
+        printf("[BundleTwoFrame] Average tri.angle too small, "
                "aborting!\n");
         
         ClearKeys(m_image_data[i1]);
@@ -1197,7 +1197,7 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
 
     if ((double) num_in_back / num_matches > 0.30 /*0.035*/) {
         /* Too many points are in back of the cameras, abort */
-        printf("[SifterApp::BundleTwoFrame] Too many points [%d / %d / %0.3f] "
+        printf("[BundleTwoFrame] Too many points [%d / %d / %0.3f] "
                "in back of the cameras, aborting!\n", 
                num_in_back, num_matches, 100.0 * num_in_back / num_matches);
 
@@ -2235,7 +2235,7 @@ void BundlerApp::ComputeCameraCovariance()
 void BundlerApp::ComputeCameraCovariance()
 {
     if (m_covariance_fix1 == -1 || m_covariance_fix2 == -1) {
-        printf("[SifterApp::ComputeCameraCovariance] "
+        printf("[ComputeCameraCovariance] "
                "Two images need to be specified.\n");
     }
     

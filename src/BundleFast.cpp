@@ -43,7 +43,7 @@ void BundlerApp::BundleAdjustFast()
 
 #if 0
     /* Read keypoints */
-    printf("[SifterApp::BundleAdjust] Reading key colors...\n");
+    printf("[BundleAdjust] Reading key colors...\n");
     ReadKeyColors();
 #endif
 
@@ -101,7 +101,7 @@ void BundlerApp::BundleAdjustFast()
 	// good_pair_1 = 0; // i_best;
 	// good_pair_2 = 1; // j_best;
 
-	printf("[SifterApp::BundleAdjust] Adjusting cameras "
+	printf("[BundleAdjust] Adjusting cameras "
 	       "%d and %d (score = %0.3f)\n", 
 	       i_best, j_best, max_score);
 
@@ -236,9 +236,9 @@ void BundlerApp::BundleAdjustFast()
     } else {
 #if 0
 	if (m_initial_pair[0] == -1 || m_initial_pair[1] == -1) {
-	    printf("[SifterApp::BundleAdjust] Error: initial good pair "
+	    printf("[BundleAdjust] Error: initial good pair "
 		   "not provided!\n");
-	    printf("[SifterApp::BundleAdjust] Please specify a pair of "
+	    printf("[BundleAdjust] Please specify a pair of "
 		   "cameras with medium baseline using\n"
 		   "  --init_pair1 <img1> and --init_pair2 <img2>\n");
 	    exit(1);
@@ -248,9 +248,9 @@ void BundlerApp::BundleAdjustFast()
 	good_pair_2 = added_order_inv[m_initial_pair[1]];
 
 	if (good_pair_1 == -1 || good_pair_2 == -1) {
-	    printf("[SifterApp::BundleAdjust] Error: initial pair haven't "
+	    printf("[BundleAdjust] Error: initial pair haven't "
 		   "been adjusted!\n");
-	    printf("[SifterApp::BundleAdjust] Please specify another pair!\n");
+	    printf("[BundleAdjust] Please specify another pair!\n");
 	    exit(0);
 	}
 #endif
@@ -267,7 +267,7 @@ void BundlerApp::BundleAdjustFast()
                                       added_order, parent_idx, 
                                       max_matches, pt_views);
 
-	printf("[SifterApp::BundleAdjust] max_matches = %d\n", max_matches);
+	printf("[BundleAdjust] max_matches = %d\n", max_matches);
 
 	if (max_matches < m_min_max_matches)
 	    break; /* No more connections */
@@ -288,11 +288,11 @@ void BundlerApp::BundleAdjustFast()
         
 	int num_added_images = (int) image_set.size();
 
-	printf("[SifterApp::BundleAdjustFast] Registering %d images\n",
+	printf("[BundleAdjustFast] Registering %d images\n",
 	       num_added_images);
 
 	for (int i = 0; i < num_added_images; i++)
-	    printf("[SifterApp::BundleAdjustFast] Adjusting camera %d\n",
+	    printf("[BundleAdjustFast] Adjusting camera %d\n",
 		   image_set[i].first);
 
 	/* Now, throw the new cameras into the mix */
@@ -303,7 +303,7 @@ void BundlerApp::BundleAdjustFast()
 
 	    added_order[curr_num_cameras + image_count] = next_idx;
 
-	    printf("[SifterApp::BundleAdjust[%d]] Adjusting camera %d "
+	    printf("[BundleAdjust[%d]] Adjusting camera %d "
 		   "(parent = %d)\n", 
 		   round, next_idx, 
                    (parent_idx == -1 ? -1 : added_order[parent_idx]));
@@ -338,7 +338,7 @@ void BundlerApp::BundleAdjustFast()
         double dist0 = 0.0;
 #endif
 
-	printf("[SifterApp::BundleAdjust] Adding new matches\n");
+	printf("[BundleAdjust] Adding new matches\n");
 
 	pt_count = curr_num_pts;
 #if 0
@@ -363,7 +363,7 @@ void BundlerApp::BundleAdjustFast()
         
 	curr_num_pts = pt_count;
 
-	printf("[SifterApp::BundleAdjust] Number of points = %d\n", pt_count);
+	printf("[BundleAdjust] Number of points = %d\n", pt_count);
 	fflush(stdout);
 
         if (!m_skip_full_bundle) {

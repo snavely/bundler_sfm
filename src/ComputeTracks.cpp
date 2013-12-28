@@ -270,23 +270,23 @@ void BundlerApp::ComputeTracks(int new_image_start)
 	} /* for loop over features */
     } /* for loop over images */
 
-    printf("[SifterApp::ComputeTracks] Found %d points\n", pt_idx);
+    printf("[ComputeTracks] Found %d points\n", pt_idx);
     fflush(stdout);
 
     if (pt_idx != (int) tracks.size()) {
-	printf("[SifterApp::ComputeTracks] Error: point count "
+	printf("[ComputeTracks] Error: point count "
 	       "inconsistent!\n");
 	fflush(stdout);
     }
 
     /* Clear match lists */
-    printf("[SifterApp::ComputeTracks] Clearing match lists...\n");
+    printf("[ComputeTracks] Clearing match lists...\n");
     fflush(stdout);
 
     RemoveAllMatches();
 
     /* Create the new consistent match lists */
-    printf("[SifterApp::ComputeTracks] Creating consistent match lists...\n");
+    printf("[ComputeTracks] Creating consistent match lists...\n");
     fflush(stdout);
 
     int num_pts = pt_idx;
@@ -303,40 +303,12 @@ void BundlerApp::ComputeTracks(int new_image_start)
         }        
     }
 
-#ifdef SBK_OUTPUT
-    printf("%% Number of tracks\n");
-    printf("%d\n", num_pts);
-
-    printf("%% Number of frames\n");
-    printf("%d\n", num_images);
-
-    for (int i = 0; i < num_pts; i++) {
-	int num_features = (int) tracks[i].size();
-
-	printf("%% Length of track %d\n", i);
-	printf("%d\n", num_features);
-	printf("%% Track# Frame# X Y\n");
-
-	for (int j = 0; j < num_features; j++) {
-	    int img = tracks[i].m_views[j].first;
-	    int f = tracks[i].m_views[j].second;
-	    int w = m_image_data[img].GetWidth();
-	    int h = m_image_data[img].GetHeight();
-
-	    double x = GetKey(img,f)->m_x + 0.5 * w;
-	    double y = GetKey(img,f)->m_y + 0.5 * h;
-
-	    printf("%d %d %0.5f %0.5f\n", i, img, x, y);
-	}
-    }
-#endif
-
     /* Save the tracks */
     m_track_data = tracks;
 
     // SetMatchesFromTracks();
 
-    printf("[SifterApp::ComputeTracks] Done!\n");
+    printf("[ComputeTracks] Done!\n");
     fflush(stdout);
 }
 #undef LARGE_NUMBER

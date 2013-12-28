@@ -116,7 +116,7 @@ bool BundlerApp::EstimateRelativePose(int i1, int i2,
                 DecomposeHomography(H, f1, f2, R1, t1, R2, t2, p10, p20);
         
             if (success) {
-                printf("[SifterApp::BundleTwoFrame] Using homography "
+                printf("[BundleTwoFrame] Using homography "
                        "for initialization\n");
 
                 /* Decide which solution to use */

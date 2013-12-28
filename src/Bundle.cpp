@@ -289,7 +289,7 @@ void BundlerApp::ReRunSFM(double *S, double *U, double *V, double *W)
     int num_images = GetNumImages();
 
     /* Initialize all keypoints to have not been matched */
-    printf("[SifterApp::ReRunSFM] Initializing keypoints...\n");
+    printf("[ReRunSFM] Initializing keypoints...\n");
     for (int i = 0; i < num_images; i++) {
         int num_keys = GetNumKeys(i);
         for (int j = 0; j < num_keys; j++) {
@@ -305,7 +305,7 @@ void BundlerApp::ReRunSFM(double *S, double *U, double *V, double *W)
 
     camera_params_t *cameras = new camera_params_t[num_images];
 
-    printf("[SifterApp::ReRunSFM] Setting up cameras\n");
+    printf("[ReRunSFM] Setting up cameras\n");
     for (int i = 0; i < num_images; i++) {
         printf(".");
         fflush(stdout);

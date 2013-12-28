@@ -28,7 +28,7 @@
 #include "sfm.h"
 
 #ifndef WIN32
-#include <ext/hash_map>
+#include <map>
 #else
 #include <hash_map>
 #endif
@@ -104,7 +104,7 @@ public:
 typedef stdext::hash_map<unsigned int, TwoFrameModel >
    ModelTable;
 #else
-typedef __gnu_cxx::hash_map<unsigned int, TwoFrameModel >
+typedef unordered_map<unsigned int, TwoFrameModel >
    ModelTable;
 #endif
 
@@ -238,7 +238,7 @@ typedef stdext::hash_map<int, TwoFrameModel> ModelMap;
 #endif /* 1 */
 
 #ifndef WIN32
-typedef __gnu_cxx::hash_map<int, bool> PEdgeMap;
+typedef unordered_map<int, bool> PEdgeMap;
 #else
 typedef stdext::hash_map<int, bool> PEdgeMap;
 #endif

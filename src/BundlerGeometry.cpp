@@ -112,7 +112,7 @@ void BundlerApp::ComputeGeometricConstraints(bool overwrite,
             LoadMatches();
 
         if (num_images < 40000) 
-            WriteMatchTableDrew(".prune");
+            WriteMatchTable(".prune");
 
         if (!m_skip_fmatrix || !m_skip_homographies || 
             m_keypoint_border_width > 0 || m_keypoint_border_bottom > 0)
@@ -141,25 +141,17 @@ void BundlerApp::ComputeGeometricConstraints(bool overwrite,
         }
 
         if (!m_skip_fmatrix) {
-#ifdef SBk_OUTPUT
-            ComputeEpipolarGeometry(false, new_image_start);
-#else
             ComputeEpipolarGeometry(true, new_image_start);
-#endif
         }
 
         if (!m_skip_homographies) {
-#ifdef SBK_OUTPUT
-            ComputeTransforms(true, new_image_start);
-#else
             ComputeTransforms(false, new_image_start);
-#endif
         }
 
 	MakeMatchListsSymmetric();
 
         if (num_images < 40000)
-            WriteMatchTableDrew(".ransac");
+            WriteMatchTable(".ransac");
 
         // RemoveAllMatches();
 	ComputeTracks(new_image_start);
@@ -195,7 +187,7 @@ void BundlerApp::ComputeGeometricConstraints(bool overwrite,
         WriteGeometricConstraints(filename);
 
         if (num_images < 40000)
-            WriteMatchTableDrew(".corresp");
+            WriteMatchTable(".corresp");
 
 	// ComputeMatchPoints(new_image_start);
 
@@ -214,22 +206,10 @@ bool BundlerApp::ComputeTransform(int idx1, int idx2, bool removeBadMatches)
     double M[9];
 
     if (idx1 == idx2) {
-	printf("[SifterApp::ComputeTransform] Error: computing tranform "
+	printf("[ComputeTransform] Error: computing tranform "
 	       "for identical images\n");
 	return false;
     }
-
-#ifdef SBK_OUTPUT
-    for (int i = 0; i < GetNumKeys(idx1); i++) {
-	GetKey(idx1,i)->m_x += 0.5 * m_image_data[idx1].GetWidth();
-	GetKey(idx1,i)->m_y += 0.5 * m_image_data[idx1].GetHeight();
-    }
-
-    for (int i = 0; i < GetNumKeys(idx2); i++) {
-	GetKey(idx2,i)->m_x += 0.5 * m_image_data[idx2].GetWidth();
-	GetKey(idx2,i)->m_y += 0.5 * m_image_data[idx2].GetHeight();
-    }
-#endif
     
     std::vector<KeypointMatch> &list = m_matches.GetMatchList(offset);
 
@@ -245,19 +225,6 @@ bool BundlerApp::ComputeTransform(int idx1, int idx2, bool removeBadMatches)
 
     printf("Inliers[%d,%d] = %d out of %d\n", idx1, idx2, num_inliers, 
            (int) list.size());
-	   // (int) m_match_lists[offset].size());
-
-#ifdef SBK_OUTPUT
-    for (int i = 0; i < GetNumKeys(idx1); i++) {
-	GetKey(idx1,i)->m_x -= 0.5 * m_image_data[idx1].GetWidth();
-	GetKey(idx1,i)->m_y -= 0.5 * m_image_data[idx1].GetHeight();
-    }
-
-    for (int i = 0; i < GetNumKeys(idx2); i++) {
-	GetKey(idx2,i)->m_x -= 0.5 * m_image_data[idx2].GetWidth();
-	GetKey(idx2,i)->m_y -= 0.5 * m_image_data[idx2].GetHeight();
-    }
-#endif
 
     if (removeBadMatches) {
 	/* Refine the matches */
@@ -346,23 +313,9 @@ void BundlerApp::ComputeTransforms(bool removeBadMatches, int new_image_start)
         }
     }
 
-#ifdef SBK_OUTPUT
-    for (int i = 0; i < num_images - 1; i++) {
-	int next = (i+1) % num_images;
-	int idx = next * num_images + i;
-	double *H = m_transforms[idx].m_H;
-	printf("%% Homography mapping image %d to %d\n", next, i);
-	printf("%0.6f %0.6f %0.6f\n", H[0], H[1], H[2]);
-	printf("%0.6f %0.6f %0.6f\n", H[3], H[4], H[5]);
-	printf("%0.6f %0.6f %0.6f\n", H[6], H[7], H[8]);
-    }
-#endif
-
     /* Print the inlier ratios */
     FILE *f = fopen("pairwise_scores.txt", "w");
     
-    // for (int i = 0; i < num_images; i++) {
-    //     for (int j = i+1; j < num_images; j++) {
     for (unsigned int i = 0; i < num_images; i++) {
         MatchAdjList::iterator iter;
 
@@ -514,7 +467,7 @@ void BundlerApp::CoalesceFeatureDescriptorsMedian()
 	    m_point_data[i].m_desc[j] = 0.0f;
     }
 
-    printf("[SifterApp::CoalesceFeatureDescriptorsMedian] Loading keys\n");
+    printf("[CoalesceFeatureDescriptorsMedian] Loading keys\n");
 
     int num_images = GetNumImages();
     for (int i = 0; i < num_images; i++) {
@@ -525,7 +478,7 @@ void BundlerApp::CoalesceFeatureDescriptorsMedian()
 	m_image_data[i].LoadKeys(true);
     }
     
-    printf("[SifterApp::CoalesceFeatureDescriptors] Coalescing features\n");
+    printf("[CoalesceFeatureDescriptors] Coalescing features\n");
 
     for (int i = 0; i < num_points; i++) {
 	int num_views = (int) m_point_data[i].m_views.size();
@@ -610,7 +563,7 @@ void BundlerApp::CoalesceFeatureDescriptors()
 	if (!m_image_data[i].m_camera.m_adjusted)
 	    continue;
 
-	printf("[SifterApp::CoalesceFeatureDescriptors] Adding features from "
+	printf("[CoalesceFeatureDescriptors] Adding features from "
 	       "image %d\n", i);
         fflush(stdout);
 
@@ -649,7 +602,7 @@ void BundlerApp::CoalesceFeatureDescriptors()
 
     for (int i = 0; i < num_points; i++) {
 	if (num_observations[i] != (int) m_point_data[i].m_views.size())
-	    printf("[SifterApp::CoalesceFeatureDescriptors] "
+	    printf("[CoalesceFeatureDescriptors] "
 		   "Mismatch in observation count\n");
 
 	if (num_observations[i] == 0) continue;
@@ -670,7 +623,7 @@ void BundlerApp::CoalesceFeatureDescriptors()
     double median = 
         kth_element(num_points, iround(0.5 * num_points), variance);
 
-    printf("[SifterApp::CoalesceFeatureDescriptors] Median squared variance: "
+    printf("[CoalesceFeatureDescriptors] Median squared variance: "
            "%0.3f\n", median);
     fflush(stdout);
 
@@ -707,7 +660,7 @@ std::vector<KeypointMatch>
     ann_1_1_char::ANNkd_tree *tree = new ann_1_1_char::ANNkd_tree(pts, num_points, 128, 4);
     clock_t end = clock();
     
-    printf("[SifterApp::MatchKeysToPoints] Building tree took %0.3fs\n", 
+    printf("[MatchKeysToPoints] Building tree took %0.3fs\n", 
 	   (end - start) / ((double) CLOCKS_PER_SEC));
 
     /* Now do the search */
@@ -731,7 +684,7 @@ std::vector<KeypointMatch>
     }
     end = clock();
 
-    printf("[SifterApp::MatchKeysToPoints] Searching tree took %0.3fs\n",
+    printf("[MatchKeysToPoints] Searching tree took %0.3fs\n",
 	   (end - start) / ((double) CLOCKS_PER_SEC));
 
     int num_matches = (int) matches.size();
@@ -770,7 +723,7 @@ std::vector<KeypointMatch>
     ann_1_1_char::ANNkd_tree *tree = new ann_1_1_char::ANNkd_tree(pts, num_points, 128, 4);
     clock_t end = clock();
     
-    printf("[SifterApp::MatchPointsToKeys] Building tree took %0.3fs\n", 
+    printf("[MatchPointsToKeys] Building tree took %0.3fs\n", 
 	   (end - start) / ((double) CLOCKS_PER_SEC));
 
     /* Now do the search */
@@ -794,12 +747,12 @@ std::vector<KeypointMatch>
     }
     end = clock();
 
-    printf("[SifterApp::MatchPointsToKeys] Searching tree took %0.3fs\n",
+    printf("[MatchPointsToKeys] Searching tree took %0.3fs\n",
 	   (end - start) / ((double) CLOCKS_PER_SEC));
 
     int num_matches = (int) matches.size();
 
-    printf("[SifterApp::MatchPointsToKeys] Found %d matches\n", num_matches);
+    printf("[MatchPointsToKeys] Found %d matches\n", num_matches);
     fflush(stdout);
     
     /* Cleanup */

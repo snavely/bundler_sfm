@@ -88,17 +88,14 @@ public:
         m_bundle_output_file = m_bundle_output_base = NULL;
         m_bundle_file = NULL;
         m_intrinsics_file = NULL;
-        m_match_directory = ".";
+        m_match_directory = (const char *) ".";
         m_match_index_dir = NULL;
         m_match_table = NULL;
-        m_key_directory = ".";
-        m_image_directory = ".";
-        m_output_directory = ".";
-        // m_sift_binary = SIFT_COMMAND;
+        m_key_directory = (const char *) ".";
+        m_image_directory = (const char *) ".";
+        m_output_directory = (const char *) ".";
         m_use_intrinsics = false;
         
-        // m_matches = NULL;
-        // m_match_lists = NULL;
         m_matches_computed = false;
         m_match_global = false;
         m_ann_max_pts_visit = 400;

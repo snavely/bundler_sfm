@@ -32,7 +32,7 @@ void BundlerApp::RotateCameras(char *rotate_file)
     int num_images = GetNumImages();
     FILE *ff = fopen(rotate_file, "r");
     if (ff == NULL) {
-	printf("[SifterApp::RotateCameras] Error opening file %s "
+	printf("[RotateCameras] Error opening file %s "
 	       "for reading\n", rotate_file);
 	return;
     }
@@ -64,7 +64,7 @@ void BundlerApp::RotateCameras(char *rotate_file)
     sprintf(buf, "bundle.rotated.out");
     FILE *f = fopen(buf, "w");
     if (f == NULL) {
-	printf("[SifterApp::RotateCameras] Error opening file %s "
+	printf("[RotateCameras] Error opening file %s "
 	       "for writing\n", buf);
 	return;
     }
@@ -146,7 +146,7 @@ void BundlerApp::ScaleFocalLengths(char *focal_file)
     int num_images = GetNumImages();
     FILE *ff = fopen(focal_file, "r");
     if (ff == NULL) {
-	printf("[SifterApp::ScaleFocal] Error opening file %s "
+	printf("[ScaleFocal] Error opening file %s "
 	       "for reading\n", focal_file);
 	return;
     }
@@ -165,7 +165,7 @@ void BundlerApp::ScaleFocalLengths(char *focal_file)
     sprintf(buf, "bundle.scale.out");
     FILE *f = fopen(buf, "w");
     if (f == NULL) {
-	printf("[SifterApp::ScaleFocal] Error opening file %s "
+	printf("[ScaleFocal] Error opening file %s "
 	       "for writing\n", buf);
 	return;
     }
@@ -256,7 +256,7 @@ void BundlerApp::ScaleFocalLengths(double focal)
     sprintf(buf, "bundle.scale.out");
     FILE *f = fopen(buf, "w");
     if (f == NULL) {
-	printf("[SifterApp::ScaleFocal] Error opening file %s "
+	printf("[ScaleFocal] Error opening file %s "
 	       "for writing\n", buf);
 	return;
     }
@@ -343,7 +343,7 @@ void BundlerApp::OutputCompressed(const char *ext)
     FILE *f = fopen(buf, "w");
     
     if (f == NULL) {
-	printf("[SifterApp::OutputCompress] "
+	printf("[OutputCompress] "
                "Error opening file %s for writing\n", buf);
 	
 	return;
@@ -378,7 +378,7 @@ void BundlerApp::OutputCompressed(const char *ext)
     sprintf(buf, "bundle.%s.out", ext);
     f = fopen(buf, "w");
     if (f == NULL) {
-	printf("[SifterApp::OutputCompress] Error opening file %s "
+	printf("[OutputCompress] Error opening file %s "
 	       "for writing\n", buf);
 	return;
     }

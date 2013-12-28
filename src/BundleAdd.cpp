@@ -1,6 +1,5 @@
 /* 
  *  Copyright (c) 2008-2010  Noah Snavely (snavely (at) cs.cornell.edu)
- *    and the University of Washington
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,12 +17,12 @@
 /* Routines for adding new points into the bundle adjustment */
 
 #include <float.h>
-#include <math.h>
+#include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
 
 #ifndef WIN32
-#include <ext/hash_map>
+#include <map>
 #else
 #include <hash_map>
 #endif
@@ -46,8 +45,10 @@
 
 /* Triangulate a subtrack */
 v3_t BundlerApp::TriangulateNViews(const ImageKeyVector &views, 
-                                   int *added_order, camera_params_t *cameras,
-                                   double &error, bool explicit_camera_centers)
+                                   int *added_order, 
+                                   camera_params_t *cameras,
+                                   double &error, 
+                                   bool explicit_camera_centers)
 {
     int num_views = (int) views.size();
 
@@ -202,7 +203,6 @@ BundlerApp::BundleAdjustAddAllNewPoints(int num_points, int num_cameras,
     std::vector<int> track_idxs;
     std::vector<ImageKeyVector> new_tracks;
 
-    // __gnu_cxx::hash_map<int,bool> tracks_seen;
     int num_tracks_total = (int) m_track_data.size();
     int *tracks_seen = new int[num_tracks_total];
     for (int i = 0; i < num_tracks_total; i++) {
@@ -348,7 +348,7 @@ BundlerApp::BundleAdjustAddAllNewPoints(int num_points, int num_cameras,
                                          error, true);
         }
         
-	if (isnan(error) || error > max_reprojection_error) {
+	if (std::isnan(error) || error > max_reprojection_error) {
 	    num_high_reprojection++;
 #if 0
 	    printf(">> Reprojection error [%0.3f] is too large\n", error);

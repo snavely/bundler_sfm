@@ -1,6 +1,5 @@
 /* 
  *  Copyright (c) 2008-2010  Noah Snavely (snavely (at) cs.cornell.edu)
- *    and the University of Washington
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +18,8 @@
 
 #include <assert.h>
 #include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "keys2a.h"
@@ -28,14 +29,19 @@ int main(int argc, char **argv) {
     char *file_out;
     double ratio;
     
-    if (argc != 3) {
-	printf("Usage: %s <list.txt> <outfile>\n", argv[0]);
+    if (argc != 3 && argc != 4) {
+	printf("Usage: %s <list.txt> <outfile> [window_radius]\n", argv[0]);
 	return -1;
     }
     
     list_in = argv[1];
     ratio = 0.6;
     file_out = argv[2];
+
+    int window_radius = -1;
+    if (argc == 4) {
+        window_radius = atoi(argv[3]);
+    }
 
     clock_t start = clock();
 
@@ -91,7 +97,12 @@ int main(int argc, char **argv) {
         /* Create a tree from the keys */
         ANNkd_tree *tree = CreateSearchTree(num_keys[i], keys[i]);
 
-        for (int j = 0; j < i; j++) {
+        /* Compute the start index */
+        int start_idx = 0;
+        if (window_radius > 0) 
+            start_idx = std::max(i - window_radius, 0);
+
+        for (int j = start_idx; j < i; j++) {
             if (num_keys[j] == 0)
                 continue;
 
@@ -120,7 +131,6 @@ int main(int argc, char **argv) {
                (end - start) / ((double) CLOCKS_PER_SEC));
         fflush(stdout);
 
-        // annDeallocPts(tree->pts);
         delete tree;
     }
     

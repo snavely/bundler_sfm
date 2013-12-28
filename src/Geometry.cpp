@@ -903,7 +903,7 @@ std::vector<int> FitPlaneToPoints(const std::vector<PointData> &points,
                                   double *up)
 {
     if (par_to_up && perp_to_up) {
-	printf("[SifterApp::FitPlaneToPoints] Error: cannot be both "
+	printf("[FitPlaneToPoints] Error: cannot be both "
 	       "parallel and perpendicular to the up vector!\n");
 	perp_to_up = false;
     }

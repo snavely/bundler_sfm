@@ -3,6 +3,7 @@
 CC=gcc
 CXX=g++
 OPTFLAGS=-O3 -Wall
+OTHERFLAGS=-std=gnu++0x
 
 OS=$(shell uname -o)
 

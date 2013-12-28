@@ -1,6 +1,5 @@
 /* 
  *  Copyright (c) 2008-2010  Noah Snavely (snavely (at) cs.cornell.edu)
- *    and the University of Washington
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -107,7 +106,7 @@ void BaseApp::ReadGeometricConstraints(char *filename) {
 
     fscanf(f, "%d\n", &num_images);
     if (num_images != GetNumImages()) {
-	printf("[SifterApp::ReadGeometricConstraints] Error: number of "
+	printf("[ReadGeometricConstraints] Error: number of "
 	       "images don't match!\n");
 	return;
     }
@@ -176,7 +175,7 @@ void BaseApp::ReadGeometricConstraints(char *filename) {
     int num_tracks = 0;
     fscanf(f, "%d", &num_tracks);
 
-    printf("[SifterApp::ReadGeometricConstraints] Reading %d tracks\n", 
+    printf("[ReadGeometricConstraints] Reading %d tracks\n", 
 	   num_tracks);
 
     m_track_data.clear();
@@ -268,7 +267,6 @@ void BaseApp::ReadGeometricConstraints(char *filename) {
 
     // SetMatchesFromTracks();
 
-    // WriteMatchTableDrew(".corresp");
     // WriteGeometricConstraints("constraints_test.txt");
 }
 
@@ -526,7 +524,7 @@ void BaseApp::ComputeImageRotations()
 
 	int rot;
 	if (fabs(x_dot) > fabs(y_dot)) {
-            printf("[SifterApp::ComputeImageRotations] "
+            printf("[ComputeImageRotations] "
                    "Rotating image %d [90]\n", i);
 
 	    if (x_dot > 0.0) {
@@ -538,7 +536,7 @@ void BaseApp::ComputeImageRotations()
 	    if (y_dot > 0.0) {
 		rot = 0;
 	    } else {
-                printf("[SifterApp::ComputeImageRotations] "
+                printf("[ComputeImageRotations] "
                        "Rotating image %d [180]\n", i);
 
 		rot = 2;
@@ -553,7 +551,7 @@ void BaseApp::ComputeImageRotations()
 /* Estimate the world axes based on the image orientations */
 void BaseApp::EstimateAxes(double *xaxis, double *yaxis, double *zaxis)
 {
-    printf("[SifterApp::EstimateAxes] Estimating axes\n");
+    printf("[EstimateAxes] Estimating axes\n");
 
     double RTR[9] = { 0.0, 0.0, 0.0, 
 		      0.0, 0.0, 0.0, 
@@ -674,11 +672,11 @@ void BaseApp::EstimateAxes(double *xaxis, double *yaxis, double *zaxis)
     }
 
     if (num_neg > num_pos) {
-	printf("[SifterApp::EstimateAxes] Flipping y-axis (%d, %d)\n",
+	printf("[EstimateAxes] Flipping y-axis (%d, %d)\n",
 	       num_pos, num_neg);
 	matrix_scale(3, 1, yaxis, -1.0, yaxis);
     } else {
-	printf("[SifterApp::EstimateAxes] Not flipping\n");
+	printf("[EstimateAxes] Not flipping\n");
     }
 
 #if 0
@@ -822,7 +820,7 @@ void BaseApp::SetupSceneGroundPlane(double *center, double *up,
 	plane[2] /= norm;
     } else {
 	if (!m_image_data[m_up_image].m_camera.m_adjusted) {
-	    printf("[SifterApp::SetupScene] Error: user refered to an "
+	    printf("[SetupScene] Error: user refered to an "
 		   "unadjusted camera\n");
 	    exit(1);
 	}
@@ -1024,7 +1022,7 @@ void BaseApp::WritePoints(const char *filename)
 void BaseApp::RepositionScene(double *center_out, double *R_out, 
                               double &scale_out)
 {
-    printf("[SifterApp::RepositionScene] Repositioning scene\n");
+    printf("[RepositionScene] Repositioning scene\n");
 
     double center[3], up[3], x_axis[3], z_axis[3];
     double scale;

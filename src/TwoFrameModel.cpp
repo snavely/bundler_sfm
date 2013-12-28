@@ -399,7 +399,7 @@ ModelMap ReadModels(FILE *f, int *num_images_out)
             continue;
         }
 
-        if (isnan(m.m_angle) || isnan(m.m_error)) {
+        if (std::isnan(m.m_angle) || std::isnan(m.m_error)) {
             printf("[ReadModels] Error! NaNs in pair %d,%d!\n", i1, i2);
             continue;
         }
