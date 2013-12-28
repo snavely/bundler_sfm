@@ -212,21 +212,6 @@ void matrix_diff(int Am, int An, int Bm, int Bn, double *A, double *B, double *R
     }    
 }
 
-void matrix_product33(double *A, double *B, double *R)
-{
-    R[0] = A[0] * B[0] + A[1] * B[3] + A[2] * B[6];
-    R[1] = A[0] * B[1] + A[1] * B[4] + A[2] * B[7];
-    R[2] = A[0] * B[2] + A[1] * B[5] + A[2] * B[8];
-    
-    R[3] = A[3] * B[0] + A[4] * B[3] + A[5] * B[6];
-    R[4] = A[3] * B[1] + A[4] * B[4] + A[5] * B[7];
-    R[5] = A[3] * B[2] + A[4] * B[5] + A[5] * B[8];
-
-    R[6] = A[6] * B[0] + A[7] * B[3] + A[8] * B[6];
-    R[7] = A[6] * B[1] + A[7] * B[4] + A[8] * B[7];
-    R[8] = A[6] * B[2] + A[7] * B[5] + A[8] * B[8];
-}
-
 void matrix_product44(double *A, double *B, double *R)
 {
     R[0] = A[0] * B[0] + A[1] * B[4] + A[2] * B[8] + A[3] * B[12];
@@ -248,23 +233,6 @@ void matrix_product44(double *A, double *B, double *R)
     R[13] = A[12] * B[1] + A[13] * B[5] + A[14] * B[9] + A[15] * B[13];
     R[14] = A[12] * B[2] + A[13] * B[6] + A[14] * B[10] + A[15] * B[14];
     R[15] = A[12] * B[3] + A[13] * B[7] + A[14] * B[11] + A[15] * B[15];
-}
-
-void matrix_product121(double *A, double *b, double *r)
-{
-    r[0] = A[0] * b[0] + A[1] * b[1];
-}
-
-void matrix_product131(double *A, double *b, double *r)
-{
-    r[0] = A[0] * b[0] + A[1] * b[1] + A[2] * b[2];
-}
-
-void matrix_product331(double *A, double *b, double *r)
-{
-    r[0] = A[0] * b[0] + A[1] * b[1] + A[2] * b[2];
-    r[1] = A[3] * b[0] + A[4] * b[1] + A[5] * b[2];
-    r[2] = A[6] * b[0] + A[7] * b[1] + A[8] * b[2];
 }
 
 void matrix_product341(double *A, double *b, double *r)
