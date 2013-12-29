@@ -1,5 +1,5 @@
-Bundler v0.4 User's Manual
---------------------------
+Bundler User's Manual
+---------------------
 copyright 2008-2013 Noah Snavely (snavely@cs.cornell.edu)
   
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
@@ -60,6 +60,7 @@ Before you begin
 You'll first need to download the Bundler distribution from GitHub:
 
 or visit the Bundler homepage at 
+
    http://phototour.cs.washington.edu/bundler 
 
 and extract it into a directory (to be referred to as BASE_PATH).
