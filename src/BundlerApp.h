@@ -31,7 +31,7 @@ class BundlerApp : public BaseApp
 public:
     BundlerApp() {
         /* Set initial values */
-        m_bundle_version = 0.1;
+        m_bundle_version = 0.3;
 
         m_fisheye = false;
         m_fixed_focal_length = true;

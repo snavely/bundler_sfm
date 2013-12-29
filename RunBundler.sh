@@ -17,6 +17,11 @@
 #   INIT_FOCAL=<num>   # value to use for initial focal length
 #   FOCAL_WEIGHT=<num> # weight used to constrain focal length
 #   RAY_ANGLE_THRESHOLD=<num> # used to remove ill-conditioned points
+#   USE_CERES=yes # enables use of Ceres solver for bundle adjustment
+#                 # (if this is enabled at compile time)
+#   NUM_MATCHES_ADD_CAMERA=<num> # number of matches above which bundler
+#                                # will definitely attempt to add a camera
+#                                # (e.g., you might use 500)
 #
 
 BASE_PATH=$(dirname $(which $0));
@@ -113,6 +118,17 @@ echo "--constrain_focal" >> options.txt
 echo "--constrain_focal_weight $FOCAL_WEIGHT" >> options.txt
 echo "--estimate_distortion" >> options.txt
 echo "--ray_angle_threshold $RAY_ANGLE_THRESHOLD" >> options.txt
+
+if [ "$NUM_MATCHES_ADD_CAMERA" != "" ]
+then
+    echo "--num_matches_add_camera $NUM_MATCHES_ADD_CAMERA" >> options.txt
+fi
+
+if [ "$USE_CERES" != "" ]
+then
+    echo "--use_ceres" >> options.txt
+fi
+
 echo "--run_bundle" >> options.txt
 
 # Run Bundler!

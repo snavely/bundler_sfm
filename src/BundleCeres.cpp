@@ -648,8 +648,6 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
                                     iround(0.5 * num_pts_proj), dists), 
                    thresh);
 
-	    // printf("Outlier threshold is %0.3f\n", thresh);
-
 	    pt_count = 0;
 	    for (int j = 0; j < num_keys; j++) {
 		int pt_idx = GetKey(added_order[i],j).m_extra;

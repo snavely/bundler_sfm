@@ -561,9 +561,8 @@ double BundlerApp::RunSFM(int num_pts, int num_cameras, int start_camera,
     return 
         RunSFM_SBA(num_pts, num_cameras, start_camera, fix_points, 
                    init_camera_params, init_pts, 
-                   added_order, colors, pt_views,
-                   max_iter, max_iter2, verbosity, eps2, S, U, V, W, 
-                   remove_outliers, final_bundle, write_intermediate);
+                   added_order, colors, pt_views, eps2, S, U, V, W, 
+                   remove_outliers);
 #endif
 }
 

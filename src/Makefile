@@ -1,9 +1,11 @@
 # Makefile for bundler
 
+USE_CERES=true
+
 CC=gcc
 CXX=g++
 OPTFLAGS=-O3 -Wall
-OTHERFLAGS=-std=gnu++0x -D__USE_CERES__
+OTHERFLAGS=-std=gnu++0x
 
 OS=$(shell uname -o)
 
@@ -24,11 +26,9 @@ endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
 	-I../lib/5point -I../lib/sba-1.5 -I../lib/ann_1.1_char/include  \
-	-I../include -I/usr/include/eigen3
+	-I../include
 
 LIB_PATH=-L../lib -L../lib/ann_1.1_char/lib
-
-CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH) $(DEFINES)
 
 BUNDLER_DEFINES=-D__NO_UI__ -D__BUNDLER__ -D__BUNDLER_DISTR__
 
@@ -37,12 +37,21 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 	ImageData.o SifterUtil.o BaseGeometry.o BundlerGeometry.o	\
 	BoundingBox.o BundleAdd.o ComputeTracks.o BruteForceSearch.o	\
 	BundleIO.o ProcessBundle.o BundleTwo.o Decompose.o		\
-	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o		\
-	BundleCeres.o
+	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o
 
 BUNDLER_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -lblas -llapack \
 	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran
-CERES_LIBS=-lceres -lgomp -lglog -lcholmod
+CERES_LIBS= -lceres -lgomp -lglog -lcholmod
+
+# if we are using Ceres, add to options
+ifdef USE_CERES
+BUNDLER_DEFINES+=-D__USE_CERES__
+BUNDLER_LIBS+=$(CERES_LIBS)
+BUNDLER_OBJS+=BundleCeres.o
+INCLUDE_PATH+=-I/usr/include/eigen3
+endif
+
+CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH)
 
 all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
 

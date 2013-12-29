@@ -1,11 +1,12 @@
 Bundler v0.4 User's Manual
 --------------------------
-copyright 2008-2012 Noah Snavely (snavely@cs.cornell.edu)
+copyright 2008-2013 Noah Snavely (snavely@cs.cornell.edu)
   
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
   (University of Washington) and Richard Szeliski (Microsoft Research)
 
-For more information, see the Bundler homepage at http://www.cs.cornell.edu/~snavely/bundler/.
+For more information, see the Bundler homepage at 
+    http://www.cs.cornell.edu/~snavely/bundler/
 
 What is Bundler?
 ----------------
@@ -20,16 +21,19 @@ of the Sparse Bundle Adjustment package of Lourakis and Argyros [3] as
 the underlying optimization engine.
 
 Currently, Bundler has been primarily compiled and tested under Linux
-(though a Windows version for cygwin has also been released).
-
+(though it may also compile in Windows under Cygwin, and a Visual
+Studio solution file is also provided).
 
 Conditions of use
 -----------------
 
 Bundler is distributed under the GNU General Public License.  For
 information on commercial licensing, please contact the authors at the
-contact address below.
+contact address below.  If you use Bundler for a publication, please
+cite the following paper:
 
+  Noah Snavely, Steven M. Seitz, and Richard Szeliski. Photo Tourism:
+  Exploring Photo Collections in 3D. SIGGRAPH Conf. Proc., 2006.
 
 What's included
 ---------------
@@ -53,9 +57,10 @@ images (based on the undistortion parameters estimated by Bundler).
 Before you begin
 ----------------
 
-You'll first need to download the Bundler distribution from:
+You'll first need to download the Bundler distribution from GitHub:
 
-    http://phototour.cs.washington.edu/bundler 
+or visit the Bundler homepage at 
+   http://phototour.cs.washington.edu/bundler 
 
 and extract it into a directory (to be referred to as BASE_PATH).
 
@@ -68,14 +73,29 @@ Lowe's SIFT binary, you'll need to download that binary from
 and copy it to BASE_PATH/bin (making sure it is called 'sift', or
 'siftWin32.exe' under Windows).
 
-The bundler.py script requires that you have Python and the Python
-Image Library (PIL) installed on your computer.
+The utils/bundler.py script requires that you have Python and the
+Python Image Library (PIL) installed on your computer.
 
-Finally, copy the approximate nearest neighbors (ANN) shared library
-at BASE_PATH/bin/libANN_char.so (Linux/cygwin) or
-BASE_PATH/bin/ann_1.1_char.dll (Windows VS2005) to a location in your
-LD_LIBRARY_PATH, or add BASE_PATH/bin to LD_LIBRARY_PATH with a 
-command like (in bash):
+To make bundler, just type 'make' in the main bundler directory.
+Note that if you plan to run Bundler on large problems, you may wish
+to enable the use of the Ceres solver for bundle adjustment, which can
+improve speed over the default SBA bundle adjuster.  To do so, edit
+the file 'src/Makefile' and uncomment the line
+
+    USE_CERES=true
+
+Note that this assumes you have Ceres and its dependencies installed
+on your system.  See the Ceres solver page at
+
+   https://code.google.com/p/ceres-solver/
+
+for more information.
+
+Finally, once Bundler is compiled, copy the approximate nearest
+neighbors (ANN) shared library at BASE_PATH/bin/libANN_char.so
+(Linux/cygwin) or BASE_PATH/bin/ann_1.1_char.dll (Windows VS2005) to a
+location in your LD_LIBRARY_PATH, or add BASE_PATH/bin to
+LD_LIBRARY_PATH with a command like (in bash):
 
     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/bundler/bin
 
@@ -83,11 +103,15 @@ command like (in bash):
 Running bundler
 ---------------
 
-The easiest way to start using Bundler is to use the included Python
-script, bundler.py.  Just execute this script in a directory with a
-set of images in JPEG format, and it will automatically run all the
-steps needed to run structure from motion on the images (assuming
-everything goes well).
+The easiest way to start using Bundler is to either use the provided
+RunBundler.sh bash script, or the included Python script (by Isaac
+Lenton), utils/bundler.py.  Just execute either script in a directory
+with a set of images in JPEG format, and it will automatically run all
+the steps needed to run structure from motion on the images (assuming
+everything goes well).  For RunBundler.sh, you may optionally provide
+a configuration file as a command line argument---see RunBundler.sh
+for a description of the configuration options available.  Notably,
+you can choose to use Ceres when running Bundler.
 
 To get help on using the Python script bundler.py:
 
@@ -125,19 +149,21 @@ therefore:
    'matches.init.txt'.
 4. Run 'bundler' with a suitable options file.
 
-Again, running the bundler.py script is the easiest way to perform
-these steps.  Steps 1-3 can also be invoked individually from
-functions contained in the bundler.py script.
+Again, running the RunBundler.sh or bundler.py script is the easiest
+way to perform these steps.  Steps 1-3 can also be invoked
+individually from functions contained in the bundler.py script.
 
 Bundler itself is typically invoked as follows:
 
  > bundler list.txt --options_file options.txt
 
-The first argument is the list of images to be reconstructed.
-Next, an options file containing settings to be used for the
-current run is given.  bundler.py creates an options file that will
-work in many situations.  Common options are described later in this
-document.  To generate only the list of images, run:
+The first argument is the list of images to be reconstructed.  Next,
+an options file containing settings to be used for the current run is
+given.  The RunBundler.sh and bundler.py scripts create an options
+file that will work in many situations (and some of these options can
+be controlled by the configuration file passed to RunBundler.sh).
+Common options are described later in this document.  To generate only
+the list of images, run:
 
  > bundler.py --extract-focal
 
@@ -236,10 +262,10 @@ Bundler has a number of internal parameters, so there are a large
 number of command-line options.  That said, we've found that a common
 set of parameters works well for most image collections we've tried,
 so it is probably safe to start with the recommended options (used by
-the bundler.py script).  One very useful option is 
+the RunBundler.sh and bundler.py scripts).  One very useful option is
 "--options_file <file>", which tells Bundler to read a list of options
-from a file.  The default options file created by bundler.py
-includes the following:
+from a file.  The default options file created by RunBundler.sh or
+bundler.py includes the following options:
 
   --match_table matches.init.txt
      [specifies the file where the match files are stored]
@@ -316,7 +342,8 @@ ones listed above, including:
 
 Links
 -----
-Pierre Moulon has a cmake version of Bundler available here: https://github.com/TheFrenchLeaf/Bundler.
+Pierre Moulon has a cmake version of Bundler available here: 
+    https://github.com/TheFrenchLeaf/Bundler.
 
 Acknowledgements
 ----------------

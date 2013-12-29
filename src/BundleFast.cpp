@@ -400,6 +400,8 @@ void BundlerApp::BundleAdjustFast()
                 }
                 // printf("   [%03d] %0.3f\n", i, cameras[i].f);
             }
+
+            fflush(stdout);
         }
 
 #if 0
