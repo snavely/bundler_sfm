@@ -1,0 +1,10 @@
+# This file is a sample configuration file for the RunBundler.sh script
+# To use this configuration file, you would run 
+#
+#   ../../RunBundler.sh bundler.config.example
+#
+# See RunBundler.sh for a full list of configuration options
+
+# USE_CERES=true # if uncommented, would enable the use of Ceres solver
+#                # (assuming you have installed it and compiled it into
+#                # bundler -- see src/Makefile)
