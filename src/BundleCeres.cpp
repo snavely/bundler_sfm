@@ -311,14 +311,14 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
             /* Take care of priors on distortion parameters */
             prior_cost_function = 
                 new ceres::AutoDiffCostFunction<PriorError, 1, 9>(
-                    new PriorError(7, 0.0, m_distortion_weight * m_distortion_weight * num_vis[i]));
+                    new PriorError(7, 0.0, 0.0001 * m_distortion_weight * num_vis[i]));
 
             problem.AddResidualBlock(prior_cost_function, NULL,
                                      cameras + cnp * i);
 
             prior_cost_function = 
                 new ceres::AutoDiffCostFunction<PriorError, 1, 9>(
-                    new PriorError(8, 0.0, m_distortion_weight * m_distortion_weight * num_vis[i]));
+                    new PriorError(8, 0.0, 0.0001 * m_distortion_weight * num_vis[i]));
 
             problem.AddResidualBlock(prior_cost_function, NULL,
                                      cameras + cnp * i);
