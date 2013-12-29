@@ -300,9 +300,9 @@ void sfm_project2(camera_params_t *init, double f,
 }
 
 
-void sfm_project_rd(camera_params_t *init, double *K, double *k,
-                    double *R, double *dt, double *b, double *p,
-                    int undistort, int explicit_camera_centers)
+int sfm_project_rd(camera_params_t *init, double *K, double *k,
+                   double *R, double *dt, double *b, double *p,
+                   int undistort, int explicit_camera_centers)
 {
     double *t;
 
@@ -314,6 +314,8 @@ void sfm_project_rd(camera_params_t *init, double *K, double *k,
     tnew[0] = dt[0];
     tnew[1] = dt[1];
     tnew[2] = dt[2];
+
+    int in_front = 1;
 
     /* Project! */
     if (!explicit_camera_centers) {
@@ -329,6 +331,9 @@ void sfm_project_rd(camera_params_t *init, double *K, double *k,
 	matrix_product331(R, b2, b_cam);
     }
     
+    if (b_cam[2] >= 0.0)
+        in_front = 0; // cheirality violation...
+
     if (!init->known_intrinsics) {
         p[0] = -b_cam[0] * K[0] / b_cam[2];
         p[1] = -b_cam[1] * K[0] / b_cam[2];
@@ -371,6 +376,8 @@ void sfm_project_rd(camera_params_t *init, double *K, double *k,
 	p[0] *= factor;
 	p[1] *= factor;
     }
+
+    return in_front;
 }
 
 static double *global_last_ws = NULL;

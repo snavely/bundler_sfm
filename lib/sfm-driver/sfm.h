@@ -58,9 +58,9 @@ void sfm_project(camera_params_t *init, double *K,
 		 double *w, double *dt, double *b, double *p,
 		 int explicit_camera_centers);
 
-void sfm_project_rd(camera_params_t *init, double *K, double *k,
-                    double *R, double *dt, double *b, double *p,
-                    int undistort, int explicit_camera_centers);
+int sfm_project_rd(camera_params_t *init, double *K, double *k,
+                   double *R, double *dt, double *b, double *p,
+                   int undistort, int explicit_camera_centers);
 
 v2_t sfm_project_final(camera_params_t *params, v3_t pt,
 		       int explicit_camera_centers, int undistort);
