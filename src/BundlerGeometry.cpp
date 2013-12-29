@@ -103,7 +103,7 @@ void BundlerApp::ComputeGeometricConstraints(bool overwrite,
     int num_images = GetNumImages();
 
     /* Read information from files if they exist */
-    char *filename = "constraints.txt";
+    const char *filename = "constraints.txt";
     if (!overwrite && FileExists(filename)) {
 	ReadGeometricConstraints(filename);
         return;
@@ -383,9 +383,8 @@ bool BundlerApp::ComputeEpipolarGeometry(int idx1, int idx2,
 
 	memcpy(m_transforms[offset].m_fmatrix, F, 9 * sizeof(double));
 	// m_transforms[offset]->m_scale = sqrt(M[0] * M[0] + M[1] * M[1]);
-	printf("Inliers[%d,%d] = %d out of %d\n", idx1, idx2, num_inliers, 
+	printf("Inliers[%d,%d] = %d out of %lu\n", idx1, idx2, num_inliers, 
                list.size());
-	       // (int) m_match_lists[offset].size());
 
 	return true;
     } else {

@@ -3,7 +3,7 @@
 CC=gcc
 CXX=g++
 OPTFLAGS=-O3 -Wall
-OTHERFLAGS=-std=gnu++0x
+OTHERFLAGS=-std=gnu++0x -D__USE_CERES__
 
 OS=$(shell uname -o)
 
@@ -23,7 +23,8 @@ RADIALUNDISTORT=RadialUndistort
 endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
-	-I../lib/5point -I../lib/sba-1.5 -I../lib/ann_1.1_char/include
+	-I../lib/5point -I../lib/sba-1.5 -I../lib/ann_1.1_char/include  \
+	-I../include -I/usr/include/eigen3
 
 LIB_PATH=-L../lib -L../lib/ann_1.1_char/lib
 
@@ -36,11 +37,12 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 	ImageData.o SifterUtil.o BaseGeometry.o BundlerGeometry.o	\
 	BoundingBox.o BundleAdd.o ComputeTracks.o BruteForceSearch.o	\
 	BundleIO.o ProcessBundle.o BundleTwo.o Decompose.o		\
-	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o
+	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o		\
+	BundleCeres.o
 
-BUNDLER_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -llapack -lblas \
+BUNDLER_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -lblas -llapack \
 	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran
-
+CERES_LIBS=-lceres -lgomp -lglog -lcholmod
 
 all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
 
@@ -49,7 +51,7 @@ all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RAD
 
 $(BUNDLER): $(BUNDLER_OBJS)
 	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) \
-		$(BUNDLER_DEFINES) $(BUNDLER_OBJS) $(BUNDLER_LIBS)
+		$(BUNDLER_DEFINES) $(BUNDLER_OBJS) $(BUNDLER_LIBS) $(CERES_LIBS)
 	cp $@ ../bin
 
 $(KEYMATCHFULL): KeyMatchFull.o keys2a.o

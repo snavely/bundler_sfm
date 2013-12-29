@@ -23,7 +23,7 @@ typedef struct
     
 } point_t;
 
-void ReadListFile(char *list_file, std::vector<std::string> &files)
+void ReadListFile(const char *list_file, std::vector<std::string> &files)
 {
     FILE *f = fopen(list_file, "r");
     
@@ -41,7 +41,7 @@ void ReadListFile(char *list_file, std::vector<std::string> &files)
     fclose(f);
 }
 
-void ReadBundleFile(char *bundle_file, 
+void ReadBundleFile(const char *bundle_file, 
                     std::vector<camera_params_t> &cameras,
                     std::vector<point_t> &points, double &bundle_version)
 {
@@ -141,7 +141,8 @@ void ReadBundleFile(char *bundle_file,
     fclose(f);
 }
 
-void WritePMVS(const char *output_path, char *list_file, char *bundle_file,
+void WritePMVS(const char *output_path, 
+               const char *list_file, const char *bundle_file,
                std::vector<std::string> images, 
                std::vector<camera_params_t> &cameras)
 {
@@ -261,9 +262,9 @@ int main(int argc, char **argv)
         return 1;
     }
     
-    char *list_file = argv[1];
-    char *bundle_file = argv[2];
-    char *output_path = "pmvs";
+    const char *list_file = argv[1];
+    const char *bundle_file = argv[2];
+    const char *output_path = "pmvs";
 
     if (argc == 4)
         output_path = argv[3];

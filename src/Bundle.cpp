@@ -437,8 +437,9 @@ void BundlerApp::ReRunSFM(double *S, double *U, double *V, double *W)
         num_images, num_init_cams, num_pts,
         added_order, cameras, init_pts, colors, pt_views);
 
-    RunSFM(num_pts, num_init_cams, 0, false, cameras, init_pts, added_order, 
-        colors, pt_views, 0.0 /*eps2*/, S, U, V, W);
+    RunSFM(num_pts, num_init_cams, 0, false, cameras, 
+           init_pts, added_order, colors, pt_views, 
+           0, 0, 0, 0.0 /*eps2*/, S, U, V, W);
 
     /* Save the camera parameters and points */
 
@@ -530,13 +531,50 @@ static int compare_doubles(const void *d1, const void *d2)
     return 0;
 }
 
-
 double BundlerApp::RunSFM(int num_pts, int num_cameras, int start_camera,
-                          bool fix_points, camera_params_t *init_camera_params,
+                          bool fix_points, 
+                          camera_params_t *init_camera_params,
                           v3_t *init_pts, int *added_order, v3_t *colors,
-                          std::vector<ImageKeyVector> &pt_views, double eps2, 
+                          std::vector<ImageKeyVector> &pt_views, 
+                          int max_iter, int max_iter2, 
+                          int verbosity, double eps2, 
                           double *S, double *U, double *V, double *W,
-                          bool remove_outliers)
+                          bool remove_outliers, bool final_bundle, 
+                          bool write_intermediate)
+{
+#ifdef __USE_CERES__
+    if (!m_use_ceres) {
+        return 
+            RunSFM_SBA(num_pts, num_cameras, start_camera, fix_points, 
+                       init_camera_params, init_pts, 
+                       added_order, colors, pt_views, eps2, S, U, V, W, 
+                       remove_outliers);
+    } else { /* use_ceres */
+        return 
+            RunSFM_Ceres(num_pts, num_cameras, start_camera, fix_points, 
+                         init_camera_params, init_pts, added_order, colors, pt_views,
+                         max_iter, max_iter2, verbosity, eps2, S, U, V, W, 
+                         remove_outliers, final_bundle, write_intermediate);
+    }
+#else
+    /* Just use SBA */
+    return 
+        RunSFM_SBA(num_pts, num_cameras, start_camera, fix_points, 
+                   init_camera_params, init_pts, 
+                   added_order, colors, pt_views,
+                   max_iter, max_iter2, verbosity, eps2, S, U, V, W, 
+                   remove_outliers, final_bundle, write_intermediate);
+#endif
+}
+
+double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
+                              bool fix_points, 
+                              camera_params_t *init_camera_params,
+                              v3_t *init_pts, int *added_order, v3_t *colors,
+                              std::vector<ImageKeyVector> &pt_views, 
+                              double eps2, 
+                              double *S, double *U, double *V, double *W,
+                              bool remove_outliers)
 {
 #define MIN_POINTS 20
     int num_outliers = 0;
@@ -546,6 +584,8 @@ double BundlerApp::RunSFM(int num_pts, int num_cameras, int start_camera,
 
     int *remap = new int [num_pts];
     v3_t *nz_pts = new v3_t[num_pts];
+
+    const int MIN_OUTLIERS = 40;
 
     do {
         if (num_pts - total_outliers < MIN_POINTS) {
@@ -863,7 +903,7 @@ double BundlerApp::RunSFM(int num_pts, int num_cameras, int start_camera,
 
         if (!remove_outliers) break;
 
-    } while (num_outliers > 0);
+    } while (num_outliers > MIN_OUTLIERS);
 
     delete [] remap;
     delete [] nz_pts;
@@ -1862,11 +1902,9 @@ void BundlerApp::EstimateIgnoredCameras(int &curr_num_cameras,
         }
     }
 
-#if 1
-    /* TEST */
     RunSFM(curr_num_pts, curr_num_cameras, 0, true,
-        cameras, points, added_order, colors, pt_views, 1.0e-20 /*eps*/);
-#endif
+           cameras, points, added_order, colors, pt_views, 
+           1.0e-20 /*eps*/);
 
     int pt_count = 
         BundleAdjustAddAllNewPoints(curr_num_pts, curr_num_cameras,
@@ -1916,11 +1954,8 @@ void BundlerApp::EstimateIgnoredCameras(int &curr_num_cameras,
 #endif
     }
 
-#if 1
-    /* TEST */
     RunSFM(curr_num_pts, curr_num_cameras, 0, true,
-        cameras, points, added_order, colors, pt_views, 1.0e-20);
-#endif
+           cameras, points, added_order, colors, pt_views, 1.0e-20);
 
     pt_count = 
         BundleAdjustAddAllNewPoints(curr_num_pts, curr_num_cameras,
@@ -2103,8 +2138,8 @@ void BundlerApp::BundleAdjust()
         double *S = new double[2 * 2 * cnp * cnp];
         double error0;
         error0 = RunSFM(curr_num_pts, 2, 0, false,
-            cameras, points, added_order, colors, pt_views, 0.0,
-            S, NULL, NULL, NULL, !m_fix_necker);
+                        cameras, points, added_order, colors, pt_views, 
+                        0, 0, 0, 0.0, S, NULL, NULL, NULL, !m_fix_necker);
 
         delete [] S;
 
@@ -2332,7 +2367,7 @@ void BundlerApp::BundleAdjust()
 
             /* Run sfm again to update parameters */
             RunSFM(curr_num_pts, round + 1, 0, false,
-                cameras, points, added_order, colors, pt_views);
+                   cameras, points, added_order, colors, pt_views);
 
             /* Remove bad points and cameras */
             RemoveBadPointsAndCameras(curr_num_pts, curr_num_cameras + 1, 
@@ -3528,7 +3563,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
     if (!m_skip_full_bundle) {
         /* Run sfm again to update parameters */
         RunSFM(num_points, num_cameras + 1, 0, false,
-            cameras, points, added_order, colors, pt_views);
+               cameras, points, added_order, colors, pt_views);
     }
 }
 

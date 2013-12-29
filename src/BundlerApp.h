@@ -79,6 +79,7 @@ public:
         m_max_track_views = 100000;
         m_min_num_feat_matches = 16;
         m_min_max_matches = 16;
+        m_num_matches_add_camera = -1; /* No maximum by default */
         m_ray_angle_threshold = 2.0;
 
         m_keypoint_border_width = 0;
@@ -88,19 +89,18 @@ public:
         m_bundle_output_file = m_bundle_output_base = NULL;
         m_bundle_file = NULL;
         m_intrinsics_file = NULL;
-        m_match_directory = (const char *) ".";
+        m_match_directory = ".";
         m_match_index_dir = NULL;
         m_match_table = NULL;
-        m_key_directory = (const char *) ".";
-        m_image_directory = (const char *) ".";
-        m_output_directory = (const char *) ".";
+        m_key_directory = ".";
+        m_image_directory = ".";
+        m_output_directory = ".";
         m_use_intrinsics = false;
         
         m_matches_computed = false;
         m_match_global = false;
         m_ann_max_pts_visit = 400;
         m_global_nn_sigma = 16.0;
-        m_global_knn = 200;
         
         // m_transforms = NULL;
         // m_set_transforms = NULL;
@@ -110,11 +110,12 @@ public:
         m_features_coalesced = false;
 
         m_assemble = false;
-        m_server_mode = false;
-        m_server_port = -1;
         m_run_bundle = false;
         m_rerun_bundle = false;
         m_fast_bundle = true;
+#ifdef __USE_CERES__
+        m_use_ceres = false;
+#endif /* __USE_CERES__ */
         m_skip_full_bundle = false;
         m_skip_add_points = false;
         m_use_angular_score = false;
@@ -129,10 +130,6 @@ public:
         m_rotate_cameras_file = NULL;
         m_output_relposes = false;
         m_output_relposes_file = NULL;
-
-
-
-        m_sky_model_file = NULL;
 
         m_compute_covariance = false;
         m_covariance_fix1 = -1;
@@ -376,12 +373,40 @@ public:
                              double *V = NULL, double *W = NULL);
     void ReRunSFM(double *S = NULL, double *U = NULL, double *V = NULL, 
                   double *W = NULL);
+
+    /* Run bundle adjustment on a given reconstruction */
     double RunSFM(int num_pts, int num_cameras, int start_camera,
-		  bool fix_points, camera_params_t *init_camera_params,
-		  v3_t *init_pts, int *added_order, v3_t *colors,
-		  std::vector<ImageKeyVector> &pt_views, double eps2 = 1.0e-12,
+                  bool fix_points, camera_params_t *init_camera_params,
+                  v3_t *init_pts, int *added_order, v3_t *colors,
+                  std::vector<ImageKeyVector> &pt_views, 
+                  int max_iter = 0, int max_iter2 = 0, 
+                  int verbosity = 0, double eps2 = 1.0e-12,
                   double *S = NULL, double *U = NULL, double *V = NULL,
-                  double *W = NULL, bool remove_outliers = true);
+                  double *W = NULL, bool remove_outliers = true,
+                  bool final_bundle = false, 
+                  bool write_intermediate = false);
+
+    double RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
+                      bool fix_points, camera_params_t *init_camera_params,
+                      v3_t *init_pts, int *added_order, v3_t *colors,
+                      std::vector<ImageKeyVector> &pt_views, 
+                      double eps2 = 1.0e-12,
+                      double *S = NULL, double *U = NULL, double *V = NULL,
+                      double *W = NULL, bool remove_outliers = true);
+
+#ifdef __USE_CERES__
+    double RunSFM_Ceres(int num_pts, int num_cameras, int start_camera,
+                        bool fix_points, camera_params_t *init_camera_params,
+                        v3_t *init_pts, int *added_order, v3_t *colors,
+                        std::vector<ImageKeyVector> &pt_views, 
+                        int max_iter = 0, int max_iter2 = 0, 
+                        int verbosity = 0, double eps2 = 1.0e-12,
+                        double *S = NULL, double *U = NULL, double *V = NULL,
+                        double *W = NULL, bool remove_outliers = true,
+                        bool final_bundle = false, 
+                        bool write_intermediate = false);
+#endif /* __USE_CERES__ */
+
     double RunSFMNecker(int i1, int i2, 
                         camera_params_t *cameras, 
                         int num_points, v3_t *points, v3_t *colors,
@@ -389,6 +414,8 @@ public:
                         camera_params_t *cameras_new,
                         v3_t *points_new, 
                         double threshold);
+
+
 #endif /* __DEMO__ */
 
     bool BundleTwoFrame(int i1, int i2, TwoFrameModel *model, 
@@ -430,6 +457,7 @@ public:
 
     /* Find a ground plane in the scene */
     void FindGroundPlane();
+
     /* Find a sky plane in the scene */
     void FindSkyPlane();
 
@@ -475,8 +503,6 @@ public:
     bool m_match_global;         /* Compute matches using global matcher */
     double m_global_nn_sigma;    /* Threshold from expected variance
                                   * where features match */
-    int m_global_knn;            /* Number of neighbors to find in
-                                  * global matching */
 
     bool m_optimize_for_fisheye; /* Optimize for fisheye-distorted
                                   * points */
@@ -513,10 +539,12 @@ public:
 
     int m_min_max_matches;           /* Minimum number of matches
                                       * needed to register an image */
+    int m_num_matches_add_camera;    /* Number of matches needed to 
+                                      * consider registering an image */
 
-    char *m_bundle_output_file;  /* Output file names for BA */
-    char *m_bundle_output_base;
-    char *m_output_directory;
+    const char *m_bundle_output_file;  /* Output file names for BA */
+    const char *m_bundle_output_base;
+    const char *m_output_directory;
 
     bool m_compute_covariance;   /* Compute the covariance of a
                                   * reconstruction */
@@ -559,8 +587,6 @@ public:
 
     bool m_features_coalesced;   /* Have features been coalesced */
 
-    int m_server_port;           /* Port to use when in server mode */
-    bool m_server_mode;          /* Run bundler as a server? */
     bool m_assemble;             /* Assemble the scene from the bottom up */
     bool m_run_bundle;           /* Should we run bundle adjustment
 				  * automatically? */
@@ -568,6 +594,12 @@ public:
 				  * automatically? */
     bool m_fast_bundle;          /* Should we run the fast version of
 				  * bundle adjustment? */
+
+#ifdef __USE_CERES__
+    bool m_use_ceres;            /* Use Ceres solver for 
+                                  * bundle adjustment? */
+#endif /* __USE_CERES__ */
+
     bool m_skip_full_bundle;     /* Skip full optimization stages */
     bool m_skip_add_points;      /* Don't add new points to the
                                   * optimization */
@@ -593,11 +625,6 @@ public:
 
     bool m_output_relposes;
     char *m_output_relposes_file;
-
-    bool m_segment_sky;          /* Activative sky segmentation */
-    char *m_sky_model_file; 
-
-
 
     bool m_enrich_points;        /* Enrich the point set? */
     bool m_zero_distortion_params; /* Set all distortion parameters to

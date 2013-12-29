@@ -84,7 +84,7 @@ int CompareImageDates(ImageDate *date1, ImageDate *date2)
     return 0;
 }
 
-static char *month_strings[] = 
+static const char *month_strings[] = 
     { "January",
       "February",
       "March",
@@ -183,7 +183,8 @@ void ImageNote::Read(FILE *f, double width, double height)
 }
 
 /* Initialize the image data given a string description */
-void ImageData::InitFromString(char *buf, char *path, bool fisheye_by_default) 
+void ImageData::InitFromString(char *buf, const char *path, 
+                               bool fisheye_by_default) 
 {
     /* Eat the newline */
     if (buf[strlen(buf)-1] == '\n')
@@ -712,7 +713,7 @@ int ImageData::GetNumKeys()
 #endif
 }
 
-void ImageData::LoadOrExtractKeys(char *sift_binary, bool undistort) 
+void ImageData::LoadOrExtractKeys(const char *sift_binary, bool undistort) 
 {
     if (m_keys_loaded)
 	return;   /* Already loaded the keys */
@@ -735,7 +736,7 @@ void ImageData::LoadOrExtractKeys(char *sift_binary, bool undistort)
     }
 }
 
-void ImageData::ExtractFeatures(char *sift_binary, bool undistort) 
+void ImageData::ExtractFeatures(const char *sift_binary, bool undistort) 
 {
 #ifndef __DEMO__
     /* Find the extension */

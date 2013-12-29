@@ -272,14 +272,20 @@ void BundlerApp::BundleAdjustFast()
 	if (max_matches < m_min_max_matches)
 	    break; /* No more connections */
 
-	/* Find all images with 90% of the matches of the maximum */
+	/* Find all images with 75% of the matches of the maximum 
+         * (unless overruled by m_num_points_add_camera) */
 	std::vector<ImagePair> image_set;
 
-        if (false && max_matches < 48) {
+        if (false && max_matches < 48) { /* disabling this */
             image_set.push_back(ImagePair(max_cam, parent_idx));
         } else {
-            // int nMatches = MIN(100, iround(0.75 /* 0.9 */ * max_matches));
-            int nMatches = iround(0.75 /* 0.9 */ * max_matches);
+            int nMatches = iround(0.75 * max_matches);
+
+            if (m_num_matches_add_camera > 0) {
+                /* Alternate threshold based on user parameter */
+                nMatches = std::min(nMatches, m_num_matches_add_camera);
+            }
+
 	    image_set = 
                 FindCamerasWithNMatches(nMatches,
                                         curr_num_cameras, curr_num_pts, 
@@ -312,10 +318,11 @@ void BundlerApp::BundleAdjustFast()
             bool success = false;
             camera_params_t camera_new = 
 		BundleInitializeImage(m_image_data[next_idx], 
-				      next_idx, curr_num_cameras + image_count,
+				      next_idx, 
+                                      curr_num_cameras + image_count,
 				      curr_num_cameras, curr_num_pts,
 				      added_order, points, 
-				      NULL /*cameras + parent_idx*/, cameras, 
+				      NULL, cameras, 
 				      pt_views, &success);
 
             if (success) {
@@ -497,7 +504,6 @@ void BundlerApp::BundleAdjustFast()
 #else
 	pdata.m_views = pt_views[i];
 #endif
-	// pdata.m_views = pt_views[i];
 
 	m_point_data.push_back(pdata);
     }

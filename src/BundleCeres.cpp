@@ -799,8 +799,8 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
             printf("[RunSFM] %d points completely removed\n", num_dead);
 
             RemoveBadPointsAndCameras(num_pts, num_cameras, 
-                                      added_order, init_camera_params, init_pts, colors,
-                                      pt_views);            
+                                      added_order, init_camera_params, 
+                                      init_pts, colors, pt_views);
         } else if (round == 0) {
             RemoveBadPointsAndCameras(num_pts, num_cameras, 
                                       added_order, init_camera_params, 

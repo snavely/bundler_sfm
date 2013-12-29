@@ -958,7 +958,7 @@ void CameraInfo::WriteFile(FILE *f)
 
 void CameraInfo::WriteXML(FILE *f)
 {
-    static char *spacer = "    ";
+    static const char *spacer = "    ";
 
     fprintf(f, "%s<focal> %0.8e </focal>\n", spacer, m_focal);
     fprintf(f, "%s<rot> %0.8e %0.8e %0.8e "

@@ -154,13 +154,12 @@ public:
         m_day_photo = true;
         m_added = false;
         m_is_rep = false;
-        // m_tps_lu = NULL;
-        // m_tps_ipiv = NULL;
         m_geosupport = 0.0;
     }
 
     /* Initialize the image data given a string description */
-    void InitFromString(char *buf, char *path, bool fisheye_by_default);
+    void InitFromString(char *buf, const char *path, 
+                        bool fisheye_by_default);
 
     /* Create a pinhole view for the keys */
     void UndistortKeys();
@@ -244,13 +243,13 @@ public:
     void UnloadThumb256();
 
     int GetNumKeys();
-    void LoadOrExtractKeys(char *sift_binary, bool undistort = true);
+    void LoadOrExtractKeys(const char *sift_binary, bool undistort = true);
     void LoadKeys(bool descriptor = true, bool undistort = true);
     void LoadDescriptors(bool undistort);
     void LoadKeysWithScaleRot(bool descriptor = true, bool undistort = true);
     void UnloadKeys();
     void UnloadKeysWithScaleRot();
-    void ExtractFeatures(char *sift_binary, bool undistort);
+    void ExtractFeatures(const char *sift_binary, bool undistort);
 
     /* Find line segments in the image */
     void DetectLineSegments(double sigma, 

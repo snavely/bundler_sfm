@@ -99,7 +99,7 @@ void BaseApp::WriteTrackPairs(const char *filename)
     fclose(f);
 }
 
-void BaseApp::ReadGeometricConstraints(char *filename) {
+void BaseApp::ReadGeometricConstraints(const char *filename) {
     FILE *f = fopen(filename, "r");
 
     int num_images; // = GetNumImages();
@@ -270,7 +270,7 @@ void BaseApp::ReadGeometricConstraints(char *filename) {
     // WriteGeometricConstraints("constraints_test.txt");
 }
 
-void BaseApp::WriteGeometricConstraints(char *filename) {
+void BaseApp::WriteGeometricConstraints(const char *filename) {
     FILE *f = fopen(filename, "w");
 
     if (f == NULL) {
@@ -392,7 +392,8 @@ void BaseApp::WriteTracks(char *filename)
     fclose(f);
 }
 
-void BaseApp::WriteTracksForSameer(char *filename) {
+void BaseApp::WriteTracks2(char *filename) 
+{
     FILE *f = fopen(filename, "w");
 
     if (f == NULL) {
