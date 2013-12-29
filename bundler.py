@@ -45,7 +45,7 @@ as output."""
 # This module replaces the existing RunBundler.sh script with a more
 # cross platform implementation.  Additional elements replaced:
 #   - RunBundler.sh             2008 Noah Snavely
-#   - ToShift.sh
+#   - ToSift.sh
 #   - extract_focal.pl          2005-2009 Noah Snavely
 #   - jhead
 
