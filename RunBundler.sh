@@ -17,8 +17,8 @@
 #   INIT_FOCAL=<num>   # value to use for initial focal length
 #   FOCAL_WEIGHT=<num> # weight used to constrain focal length
 #   RAY_ANGLE_THRESHOLD=<num> # used to remove ill-conditioned points
-#   USE_CERES=yes # enables use of Ceres solver for bundle adjustment
-#                 # (if this is enabled at compile time)
+#   USE_CERES=true # enables use of Ceres solver for bundle adjustment
+#                  # (if this is enabled at compile time)
 #   NUM_MATCHES_ADD_CAMERA=<num> # number of matches above which bundler
 #                                # will definitely attempt to add a camera
 #                                # (e.g., you might use 500)
