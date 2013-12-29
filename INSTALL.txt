@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------
-  Bundler v0.4 Installation Guide
-    copyright 2009 Noah Snavely (snavely@cs.cornell.edu)
+  Bundler Installation Guide
+    copyright 2009-2013 Noah Snavely (snavely@cs.cornell.edu)
   
   based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
     (University of Washington) and Richard Szeliski (Microsoft Research)
@@ -8,6 +8,8 @@
   For more technical information, visit http://phototour.cs.washington.edu
 
   The source provided in this distribution can be accessed at
+    https://github.com/snavely/bundler_sfm
+      or at
     http://phototour.cs.washington.edu/bundler/
 --------------------------------------------------------------------------
 
@@ -38,7 +40,7 @@ standard packages.  The required libraries are:
 
  - MINPACK   (non-linear minimization library)
  - f2c       (fortran to C library)
- - gfortrain (GNU Fortran compiler package)
+ - gfortran  (GNU Fortran compiler package)
 
 If you install alternate versions of these libraries, you may need to
 edit the Bundler Makefile (src/Makefile) to make sure that these
@@ -57,7 +59,14 @@ On a Linux (or cygwin) system, typing "make" in the base directory
 will compile Bundler and its dependencies (assuming all goes well).
 Upon successful compilation, an executable called 'bundler' will be
 copied to the bin directory, along with an executable called
-'KeyMatchAll'.
+'KeyMatchAll'.  Note that bundler optionally can use Ceres solver for
+bundle adjustment (the default solver is SBA, but Ceres is often much
+faster).  Assuming you have installed Ceres and its dependencies, you
+can enable compilation with Ceres by editing 'src/Makefile' and
+uncommenting the USE_CERES=true line.  If you are using RunBundler.sh
+to run the bundler pipeline, you will also need to create a
+RunBundler.sh config file with the line USE_CERES=true (see
+RunBundler.sh for more details).
 
 For Windows systems, see the vc++ directory for a Visual Studio 2005
 solution file (vc++/Bundler.sln).
