@@ -310,9 +310,7 @@ void BundlerApp::ProcessOptions(int argc, char **argv)
             {"key_dir",      1, 0, 301},//
 
             {"analyze_matches", 0, 0, 'M'},//
-            {"match_global", 0, 0, '<'},//
             {"ann_max_pts_visit", 1, 0, 302},//
-            {"global_nn_sigma", 1, 0, 304},//
 
 	    {"output_dir",   1, 0, 'u'},
 	    {"use_constraints", 0, 0, '=' },
@@ -465,8 +463,6 @@ void BundlerApp::ProcessOptions(int argc, char **argv)
                 m_track_file = strdup(optarg);
                 break;
 
-
-
             case 340:
                 m_compute_covariance = true;
                 break;
@@ -506,8 +502,6 @@ void BundlerApp::ProcessOptions(int argc, char **argv)
 	    case '@':
 		m_add_image_file = strdup(optarg);
 		break;
-
-
 
 	    case 'U':
 		m_use_focal_estimate = true;
@@ -633,18 +627,9 @@ void BundlerApp::ProcessOptions(int argc, char **argv)
                 m_factor_essential = false;
                 break;
 
-            case '<':
-                m_match_global = true;
-                break;
-
             case 302:
                 m_ann_max_pts_visit = atoi(optarg);
                 printf("  ann_max_pts_visit: %d\n", m_ann_max_pts_visit);
-                break;
-
-            case 304:
-                m_global_nn_sigma = atof(optarg);
-                printf("  global_nn_sigma: %0.3f\n", m_global_nn_sigma);
                 break;
 
 	    case 'u':
@@ -1059,10 +1044,6 @@ bool BundlerApp::OnInit()
 }
 
 static BundlerApp *bundler_app = NULL;
-
-BundlerApp &wxGetApp() {
-    return *bundler_app;
-}
 
 int main(int argc, char **argv) 
 {

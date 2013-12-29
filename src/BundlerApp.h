@@ -98,14 +98,8 @@ public:
         m_use_intrinsics = false;
         
         m_matches_computed = false;
-        m_match_global = false;
         m_ann_max_pts_visit = 400;
-        m_global_nn_sigma = 16.0;
         
-        // m_transforms = NULL;
-        // m_set_transforms = NULL;
-        // m_images_per_set = 0;
-
         m_matches_loaded = false;
         m_features_coalesced = false;
 
@@ -499,10 +493,6 @@ public:
 
     int m_ann_max_pts_visit;     /* Maximum points to visit during
                                   * global matching */
-
-    bool m_match_global;         /* Compute matches using global matcher */
-    double m_global_nn_sigma;    /* Threshold from expected variance
-                                  * where features match */
 
     bool m_optimize_for_fisheye; /* Optimize for fisheye-distorted
                                   * points */

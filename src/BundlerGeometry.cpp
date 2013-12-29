@@ -108,8 +108,7 @@ void BundlerApp::ComputeGeometricConstraints(bool overwrite,
 	ReadGeometricConstraints(filename);
         return;
     } else {
-        if (!m_match_global)
-            LoadMatches();
+        LoadMatches();
 
         if (num_images < 40000) 
             WriteMatchTable(".prune");
@@ -272,19 +271,13 @@ void BundlerApp::ComputeTransforms(bool removeBadMatches, int new_image_start)
 
     m_transforms.clear();
 
-    // for (int i = 0; i < num_images; i++) {
-    //    for (int j = i+1; j < num_images; j++) {
-
     for (unsigned int i = 0; i < num_images; i++) {
         MatchAdjList::iterator iter;
         for (iter = m_matches.Begin(i); iter != m_matches.End(i); iter++) {
-            // unsigned int i = iter->first;
-            // unsigned int j = iter->second;
             unsigned int j = iter->m_index;
 
             assert(ImagesMatch(i, j));
 
-            // MatchIndex idx = *iter; 
             MatchIndex idx = GetMatchIndex(i, j);
             MatchIndex idx_rev = GetMatchIndex(j, i);
 
@@ -320,8 +313,6 @@ void BundlerApp::ComputeTransforms(bool removeBadMatches, int new_image_start)
         MatchAdjList::iterator iter;
 
         for (iter = m_matches.Begin(i); iter != m_matches.End(i); iter++) {
-            // unsigned int i = iter->first;
-            // unsigned int j = iter->second;
             unsigned int j = iter->m_index; // first;
  
             assert(ImagesMatch(i, j));
@@ -400,22 +391,16 @@ void BundlerApp::ComputeEpipolarGeometry(bool removeBadMatches,
     
     m_transforms.clear();
 
-    // for (int i = 0; i < num_images; i++) {
-    //    for (int j = MAX(i+1, new_image_start); j < num_images; j++) {
-
     std::vector<MatchIndex> remove;
 
     for (unsigned int i = 0; i < num_images; i++) {
         MatchAdjList::iterator iter;
 
         for (iter = m_matches.Begin(i); iter != m_matches.End(i); iter++) {
-            // unsigned int i = iter->first;
-            // unsigned int j = iter->second;
             unsigned int j = iter->m_index; // first;
 
             assert(ImagesMatch(i, j));
 
-            // MatchIndex idx = *iter;
             MatchIndex idx = GetMatchIndex(i, j);
             MatchIndex idx_rev = GetMatchIndex(j, i);
 
