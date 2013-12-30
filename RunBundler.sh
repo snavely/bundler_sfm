@@ -16,6 +16,7 @@
 #                             # window of size 2rad+1 
 #   INIT_FOCAL=<num>   # value to use for initial focal length
 #   FOCAL_WEIGHT=<num> # weight used to constrain focal length
+#   TRUST_FOCAL=true   # tell bundler to trust the provided focal lengths
 #   RAY_ANGLE_THRESHOLD=<num> # used to remove ill-conditioned points
 #   USE_CERES=true # enables use of Ceres solver for bundle adjustment
 #                  # (if this is enabled at compile time)
@@ -116,6 +117,12 @@ echo "--variable_focal_length" >> options.txt
 echo "--use_focal_estimate" >> options.txt
 echo "--constrain_focal" >> options.txt
 echo "--constrain_focal_weight $FOCAL_WEIGHT" >> options.txt
+
+if [ "$TRUST_FOCAL" != "" ]
+then
+    echo "--trust_focal" >> options.txt
+fi
+
 echo "--estimate_distortion" >> options.txt
 echo "--ray_angle_threshold $RAY_ANGLE_THRESHOLD" >> options.txt
 
