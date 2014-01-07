@@ -17,7 +17,7 @@
 #include "BundlerApp.h"
 #include "Distortion.h"
 
-#include "ceres/ceres.h"
+#include <ceres/ceres.h>
 #include "snavely_reprojection_error.h"
 
 #include <omp.h>
