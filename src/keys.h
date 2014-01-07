@@ -37,11 +37,12 @@
 class Keypoint {
 public:    
     Keypoint()  
-    { m_x = 0.0; m_y = 0.0; m_extra = -1; m_track = -1; }
+    { m_x = 0.0; m_y = 0.0; m_extra = -1; m_track = -1; 
+        m_r = m_g = m_b = 0; }
 
     Keypoint(float x, float y) :
 	m_x(x), m_y(y)
-    { m_r = 0; m_g = 0; m_b = 0; }
+    { m_extra = -1; m_track = -1; m_r = 0; m_g = 0; m_b = 0; }
 
     virtual ~Keypoint() {}   
     
@@ -49,9 +50,9 @@ public:
         return NULL;
     }
 
-    float m_x, m_y;        /* Subpixel location of keypoint. */
-    // float m_scale, m_ori;  /* Scale and orientation (range [-PI,PI]) */
-    unsigned char m_r, m_g, m_b;          /* Color of this key */
+    float m_x, m_y;              /* Subpixel location of keypoint. */
+    // float m_scale, m_ori;     /* Scale and orientation (range [-PI,PI]) */
+    unsigned char m_r, m_g, m_b; /* Color of this key */
 
     int m_extra;  /* 4 bytes of extra storage */
     int m_track;  /* Track index this point corresponds to */
@@ -147,14 +148,7 @@ std::vector<KeypointWithDesc>
 std::vector<KeypointWithScaleRot> 
     ReadKeyFileWithScaleRot(const char *filename, bool descriptor);
 
-/* Read keypoints from the given file pointer and return the list of
- * keypoints.  The file format starts with 2 integers giving the total
- * number of keypoints and the size of descriptor vector for each
- * keypoint (currently assumed to be 128). Then each keypoint is
- * specified by 4 floating point numbers giving subpixel row and
- * column location, scale, and orientation (in radians from -PI to
- * PI).  Then the descriptor vector for each keypoint is given as a
- * list of integers in range [0,255]. */
+/* Read keypoints from the given file pointer */
 std::vector<Keypoint> ReadKeys(FILE *fp, bool descriptor);
 
 /* Read keys more quickly */
@@ -174,15 +168,8 @@ std::vector<KeypointWithDesc> ReadKeysFastBin(FILE *fp, bool descriptor,
 std::vector<KeypointWithDesc> ReadKeysFastBinGzip(gzFile fp, bool descriptor,
                                                   float **scales = NULL, 
                                                   float **orients = NULL);
-/* Read keys using MMAP to speed things up */
-std::vector<Keypoint> ReadKeysMMAP(FILE *fp);
 
 #ifndef __DEMO__
-/* Create a search tree for the given set of keypoints */
-// ANNkd_tree *CreateSearchTree(const std::vector<KeypointWithDesc> &k, 
-//                              bool spatial = false,
-//                              double alpha = 0.0);
-
 /* Create a search tree for the given set of keypoints */
 ann_1_1_char::ANNkd_tree 
     *CreateSearchTreeChar(const std::vector<KeypointWithDesc> &k);

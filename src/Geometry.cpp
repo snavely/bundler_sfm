@@ -56,7 +56,7 @@ void PointData::WriteCoordinates(FILE *f)
 /* Write the point data in XML */
 void PointData::WriteXML(FILE *f)
 {
-    static char *spacer = "    ";
+    static const char *spacer = "    ";
 
     /* Position and color */
     fprintf(f, "%s<point>\n", spacer);

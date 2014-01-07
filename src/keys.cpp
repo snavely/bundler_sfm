@@ -298,112 +298,6 @@ static char *strchrn(char *str, int c, int n) {
     return str - 1;
 }
 
-#if 0
-/* Read keys using MMAP to speed things up */
-std::vector<Keypoint> ReadKeysMMAP(FILE *fp) 
-{    
-    int i, j, num, len, val, n;
-
-    std::vector<Keypoint> kps;
-
-    struct stat sb;
-
-    /* Stat the file */
-    if (fstat(fileno(fp), &sb) < 0) {
-	printf("[ReadKeysMMAP] Error: could not stat file\n");
-	return kps;
-    }
-
-    char *file = (char *)mmap(NULL, sb.st_size, PROT_READ, MAP_SHARED, 
-			      fileno(fp), 0);
-
-    char *file_start = file;
-
-    char string_buf[1024];
-    char *str = string_buf;
-
-    /* Find the first '\n' */
-    char *newline = strchr(file, '\n');
-    int pos = (int) (newline - file);
-	
-    memcpy(str, file, pos);
-    str[pos] = 0;
-
-    if (sscanf(str, "%d %d%n", &num, &len, &n) != 2) {
-	printf("[ReadKeysMMAP] Invalid keypoint file beginning.");
-	return kps;
-    }
-
-#ifdef KEY_LIMIT
-    num = MIN(num, 65536); // we'll store at most 65536 features per
-                           // image
-#endif /* KEY_LIMIT */
-
-    file += (pos + 1);
-
-    if (len != 128) {
-	printf("[ReadKeysMMAP] Keypoint descriptor length invalid "
-	       "(should be 128).");
-	return kps;
-    }
-
-    for (i = 0; i < num; i++) {
-	str = string_buf;
-
-	/* Allocate memory for the keypoint. */
-	unsigned char *d = new unsigned char[len];
-	float x, y, scale, ori;
-
-	/* Find the first '\n' */
-	newline = strchr(file, '\n');
-	pos = (int) (newline - file);
-	
-	memcpy(str, file, pos);
-	str[pos] = 0;
-
-	if (sscanf(str, "%f %f %f %f%n", &y, &x, &scale, &ori, &n) != 4) {
-	    printf("[ReadKeysMMAP] Invalid keypoint file format.");
-	    return kps;
-	}
-
-	file += (pos + 1);
-
-	/* Find the next seven '\n's */
-	str = string_buf;
-
-	char *seventh_newline = strchrn(file, '\n', 7);
-	pos = (int) (seventh_newline - file);
-
-	memcpy(str, file, pos);
-	str[pos] = 0;
-
-	for (j = 0; j < len; j++) {
-	    if (sscanf(str, "%d%n", &val, &n) != 1 || val < 0 || val > 255) {
-		printf("[ReadKeysMMAP] Invalid keypoint file value.");
-		return kps;
-	    }
-	    d[j] = (unsigned char) val;
-	    str += n;
-	}
-
-	file += (pos + 1);
-
-        if (desc)
-            kps.Add(Keypoint(x, y, d));
-        else
-            kps.Add(Keypoint(x, y));
-    }
-
-    /* Unmap */
-    if (munmap(file_start, sb.st_size) < 0) {
-	printf("[ReadKeysMMAP] Error: could not unmap memory\n");
-	return kps;
-    }
-
-    return kps;    
-}
-#endif
-
 /* Read keypoints from the given file pointer and return the list of
  * keypoints.  The file format starts with 2 integers giving the total
  * number of keypoints and the size of descriptor vector for each
@@ -865,17 +759,17 @@ std::vector<KeypointMatch> MatchKeys(const std::vector<KeypointWithDesc> &k1,
 	}	
     }
     
-    clock_t start = clock();
+    // clock_t start = clock();
     /* Create a search tree for k2 */
     ann_1_1_char::ANNkd_tree *tree = new ann_1_1_char::ANNkd_tree(pts, num_pts, 128, 4);
-    clock_t end = clock();
+    // clock_t end = clock();
     
     // printf("Building tree took %0.3fs\n", 
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
     /* Now do the search */
     ann_1_1_char::ANNpoint query = ann_1_1_char::annAllocPt(128);
-    start = clock();
+    // start = clock();
     for (int i = 0; i < (int) k1.size(); i++) {
 	int j;
 
@@ -898,7 +792,7 @@ std::vector<KeypointMatch> MatchKeys(const std::vector<KeypointWithDesc> &k1,
 	    }
 	}
     }
-    end = clock();
+    // end = clock();
     // printf("Searching tree took %0.3fs\n",
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
@@ -963,17 +857,17 @@ std::vector<KeypointMatchWithScore>
 	}	
     }
     
-    clock_t start = clock();
+    // clock_t start = clock();
     /* Create a search tree for k2 */
     ann_1_1_char::ANNkd_tree *tree = new ann_1_1_char::ANNkd_tree(pts, num_pts, 128, 4);
-    clock_t end = clock();
+    // clock_t end = clock();
     
     // printf("Building tree took %0.3fs\n", 
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
     /* Now do the search */
     ann_1_1_char::ANNpoint query = ann_1_1_char::annAllocPt(128);
-    start = clock();
+    // start = clock();
     for (int i = 0; i < (int) k1.size(); i++) {
 	int j;
 
@@ -999,7 +893,7 @@ std::vector<KeypointMatchWithScore>
 	    }
 	}
     }
-    end = clock();
+    // end = clock();
     // printf("Searching tree took %0.3fs\n",
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
@@ -1108,18 +1002,18 @@ std::vector<KeypointMatch>
 	}	
     }
     
-    clock_t start = clock();
+    // clock_t start = clock();
     /* Create a search tree for k2 */
     ann_1_1_char::ANNkd_tree *tree = 
         new ann_1_1_char::ANNkd_tree(pts, num_pts, 128, 4);
-    clock_t end = clock();
+    // clock_t end = clock();
     
     // printf("Building tree took %0.3fs\n", 
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
     /* Now do the search */
     ann_1_1_char::ANNpoint query = ann_1_1_char::annAllocPt(128);
-    start = clock();
+    // start = clock();
     for (int i = 0; i < (int) k1.size(); i++) {
 	int j;
 
@@ -1142,7 +1036,7 @@ std::vector<KeypointMatch>
 	    }
 	}
     }
-    end = clock();
+    // end = clock();
     // printf("Searching tree took %0.3fs\n",
     //        (end - start) / ((double) CLOCKS_PER_SEC));
 
