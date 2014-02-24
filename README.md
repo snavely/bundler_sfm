@@ -48,7 +48,7 @@ verctors of unsigned bytes, is also included.
 
 A utility program for converting bundle files (.out) to the input
 required by Dr. Yasutaka Furukawa's PMVS multi-view stereo system
-(http://www.cs.washington.edu/homes/furukawa/research/pmvs/index.html)
+(http://www.di.ens.fr/pmvs/)
 called Bundle2PMVS is also included.  Finally, this distribution
 includes a program called RadialUndistort for generating undistorted
 images (based on the undistortion parameters estimated by Bundler).
