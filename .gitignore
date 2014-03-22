@@ -1,6 +1,7 @@
-# Compiled source
+# Compiled source and libraries
 *.o
 *.a
+*.so
 
 # emacs temp files
 *~
