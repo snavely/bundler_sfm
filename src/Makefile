@@ -1,6 +1,6 @@
 # Makefile for bundler
 
-USE_CERES=true
+USE_CERES=false
 
 CC=gcc
 CXX=g++
@@ -44,7 +44,7 @@ BUNDLER_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -lblas -llapack \
 CERES_LIBS= -lceres -lgomp -lglog -lcholmod -lpthread
 
 # if we are using Ceres, add to options
-ifdef USE_CERES
+ifeq ($(USE_CERES),true)
 BUNDLER_DEFINES+=-D__USE_CERES__
 BUNDLER_LIBS+=$(CERES_LIBS)
 BUNDLER_OBJS+=BundleCeres.o
@@ -60,7 +60,7 @@ all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RAD
 
 $(BUNDLER): $(BUNDLER_OBJS)
 	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) \
-		$(BUNDLER_DEFINES) $(BUNDLER_OBJS) $(BUNDLER_LIBS) $(CERES_LIBS)
+		$(BUNDLER_DEFINES) $(BUNDLER_OBJS) $(BUNDLER_LIBS)
 	cp $@ ../bin
 
 $(KEYMATCHFULL): KeyMatchFull.o keys2a.o
