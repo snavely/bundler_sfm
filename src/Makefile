@@ -1,6 +1,6 @@
 # Makefile for bundler
 
-USE_CERES=false
+USE_CERES=true
 
 CC=gcc
 CXX=g++
