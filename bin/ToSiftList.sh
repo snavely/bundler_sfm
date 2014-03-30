@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ToSift.sh
+# ToSiftList.sh
 # Create a script for extracting sift features from a list of images
 
 # Set this variable to your base install path (e.g., /home/foo/bundler)
@@ -21,11 +21,9 @@ else
     SIFT=$BIN_PATH/sift
 fi
 
-if [ -e $SIFT ]
-then 
-:
-else
-    echo "[ToSift] Error: SIFT not found.  Please install SIFT to $BIN_PATH" > /dev/stderr
+if ! [ -e $SIFT ] ; then
+    echo "[ToSiftList] Error: SIFT not found.  Please install SIFT to $BIN_PATH" > /dev/stderr
+    exit 1
 fi
 
 IMAGE_LIST=$1

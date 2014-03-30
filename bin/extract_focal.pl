@@ -18,6 +18,11 @@ if ($OS eq "Cygwin") {
     $JHEAD_EXE = "$BIN_PATH/jhead";
 }
 
+unless (-e $JHEAD_EXE) {
+  printf("[extract_focal] Error: jhead not found.  Please install jhead to %s\n", $BIN_PATH);
+  exit(1);
+}
+
 $OUT_DIR = "./prepare";
 
 $SCALE=1.0;
@@ -293,7 +298,7 @@ $SCALE=1.0;
      "SONY DSC-W80"                     => 5.75,   # 1/2.5"
 );
 
-`mkdir $OUT_DIR`;
+`mkdir -p $OUT_DIR`;
 `rm -f $OUT_DIR/list.txt`;
 
 print "$#ARGV\n";

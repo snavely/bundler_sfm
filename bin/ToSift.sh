@@ -22,11 +22,9 @@ else
     SIFT=$BIN_PATH/sift
 fi
 
-if [ -e $SIFT ]
-then 
-:
-else
+if ! [ -e $SIFT ] ; then
     echo "[ToSift] Error: SIFT not found.  Please install SIFT to $BIN_PATH" > /dev/stderr
+    exit 1
 fi
 
 for d in `ls -1 $IMAGE_DIR | egrep "jpg$"`

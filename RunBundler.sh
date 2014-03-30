@@ -80,7 +80,7 @@ then
   if [ "$INIT_FOCAL" == "" ]
   then
     # Extract focal lengths using Exif data
-    $EXTRACT_FOCAL list_tmp.txt
+    $EXTRACT_FOCAL list_tmp.txt || exit 1
     cp prepare/list.txt .
   else
     # Use the provided focal length
@@ -93,7 +93,7 @@ fi
 # Run the ToSift script to generate a list of SIFT commands
 echo "[- Extracting keypoints -]"
 rm -f sift.txt
-$TO_SIFT_LIST $IMAGE_LIST > sift.txt 
+$TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
 # Execute the SIFT commands
 sh sift.txt
@@ -106,7 +106,7 @@ echo $MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
 $MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
 
 # Generate the options file for running bundler 
-mkdir bundle
+mkdir -p bundle
 rm -f options.txt
 
 echo "--match_table matches.init.txt" >> options.txt
