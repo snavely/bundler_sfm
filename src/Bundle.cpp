@@ -1743,27 +1743,26 @@ int BundlerApp::SetupInitialCameraPair(int i_best, int j_best,
         m_image_data[i_best].m_init_focal;
     else 
         init_focal_length_0 = cameras[0].f = 
-        m_init_focal_length; // INITIAL_FOCAL_LENGTH;
+            m_init_focal_length; // INITIAL_FOCAL_LENGTH;
 
     if (m_image_data[j_best].m_has_init_focal)
         init_focal_length_1 = cameras[1].f = 
-        m_image_data[j_best].m_init_focal;
+            m_image_data[j_best].m_init_focal;
     else
         init_focal_length_1 = cameras[1].f = 
-        m_init_focal_length; // INITIAL_FOCAL_LENGTH;
+            m_init_focal_length; // INITIAL_FOCAL_LENGTH;
 
     bool solved_for_extrinsics = false;
     if (m_factor_essential && m_image_data[i_best].m_has_init_focal && 
         m_image_data[j_best].m_has_init_focal && 
         !m_use_constraints) {
 
-            /* Solve for the initial locations */
-            if (EstimateRelativePose2(i_best, j_best, cameras[0], cameras[1])) {
-                solved_for_extrinsics = true;
-            }        
+        /* Solve for the initial locations */
+        if (EstimateRelativePose2(i_best, j_best, cameras[0], cameras[1])) {
+            solved_for_extrinsics = true;
+        }        
     } else {
-#define INITIAL_DEPTH 3.0 // 1000.0 // 3.0 /* was 3.0, fixme! */
-
+#define INITIAL_DEPTH 3.0 // 1000.0 // 3.0
         /* Put second camera at origin too */
         cameras[1].R[0] = 1.0;  cameras[1].R[1] = 0.0;  cameras[1].R[2] = 0.0;
         cameras[1].R[3] = 0.0;  cameras[1].R[4] = 1.0;  cameras[1].R[5] = 0.0;
