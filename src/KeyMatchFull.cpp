@@ -77,9 +77,6 @@ int main(int argc, char **argv) {
 
     clock_t start = clock();
 
-    unsigned char **keys;
-    int *num_keys;
-
     /* Read the list of files */
     std::vector<std::string> key_files;
     if (ReadFileList(list_in, key_files) != 0) return EXIT_FAILURE;
@@ -92,13 +89,13 @@ int main(int argc, char **argv) {
 
     int num_images = (int) key_files.size();
 
-    keys = new unsigned char *[num_images];
-    num_keys = new int[num_images];
+    std::vector<unsigned char*> keys(num_images);
+    std::vector<int> num_keys(num_images);
 
     /* Read all keys */
     for (int i = 0; i < num_images; i++) {
         keys[i] = NULL;
-        num_keys[i] = ReadKeyFile(key_files[i].c_str(), keys+i);
+        num_keys[i] = ReadKeyFile(key_files[i].c_str(), &keys[i]);
     }
 
     clock_t end = clock();
@@ -145,7 +142,7 @@ int main(int argc, char **argv) {
             }
         }
 
-        end = clock();    
+        end = clock();
         printf("[KeyMatchFull] Matching took %0.3fs\n", 
                (end - start) / ((double) CLOCKS_PER_SEC));
         fflush(stdout);
@@ -158,8 +155,6 @@ int main(int argc, char **argv) {
         if (keys[i] != NULL)
             delete [] keys[i];
     }
-    delete [] keys;
-    delete [] num_keys;
 
     fclose(f);
     return EXIT_SUCCESS;
