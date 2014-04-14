@@ -1738,20 +1738,23 @@ int BundlerApp::SetupInitialCameraPair(int i_best, int j_best,
     else
         cameras[0].t[2] = 0.0;
 
-    if (m_image_data[i_best].m_has_init_focal)
+    if (m_fixed_focal_length || !m_image_data[i_best].m_has_init_focal) {
         init_focal_length_0 = cameras[0].f = 
-        m_image_data[i_best].m_init_focal;
-    else 
+            m_init_focal_length;
+    } else {
+        /* Use focal length from list file */
         init_focal_length_0 = cameras[0].f = 
-            m_init_focal_length; // INITIAL_FOCAL_LENGTH;
+            m_image_data[i_best].m_init_focal;
+    }
 
-    if (m_image_data[j_best].m_has_init_focal)
+    if (m_fixed_focal_length || !m_image_data[j_best].m_has_init_focal) {
+        init_focal_length_1 = cameras[1].f = 
+            m_init_focal_length;
+    } else {
         init_focal_length_1 = cameras[1].f = 
             m_image_data[j_best].m_init_focal;
-    else
-        init_focal_length_1 = cameras[1].f = 
-            m_init_focal_length; // INITIAL_FOCAL_LENGTH;
-
+    }
+    
     bool solved_for_extrinsics = false;
     if (m_factor_essential && m_image_data[i_best].m_has_init_focal && 
         m_image_data[j_best].m_has_init_focal && 
