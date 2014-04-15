@@ -41,7 +41,8 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 
 BUNDLER_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -lblas -llapack \
 	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran
-CERES_LIBS= -lceres -lgomp -lglog -lcholmod -lpthread
+CERES_LIBS= -lceres -lcholmod -lcolamd -lamd -lcamd -lcxsparse \
+	-lsuitesparseconfig -lgomp -lglog -lpthread
 
 # if we are using Ceres, add to options
 ifeq ($(USE_CERES),true)
