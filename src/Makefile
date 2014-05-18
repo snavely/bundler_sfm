@@ -42,7 +42,7 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 
 BUNDLER_BASE_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -llapack -lblas \
 	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran
-CERES_LIBS=-lceres -lcholmod -lcolamd -lamd -lcamd -lcxsparse \
+CERES_LIBS=-lceres -lcholmod -lccolamd -lcolamd -lamd -lcamd -lcxsparse \
 	-lsuitesparseconfig -lgomp -lglog -lpthread
 
 # if we are using Ceres, add to options
@@ -55,7 +55,7 @@ BUNDLER_LIBS=$(CERES_LIBS) $(BUNDLER_BASE_LIBS)
 BUNDLER_OBJS+=BundleCeres.o
 INCLUDE_PATH+=$(CERES_INCLUDE_PATH)
 LIB_PATH+=$(CERES_LIB_PATH)
-# INCLUDE_PATH+=-I/usr/include/eigen3
+INCLUDE_PATH+=-I/usr/include/eigen3
 else
 BUNDLER_LIBS=$(BUNDLER_BASE_LIBS)
 endif
