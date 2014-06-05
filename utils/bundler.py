@@ -329,15 +329,40 @@ CCD_WIDTHS = {
      "SONY DSC-W80"                              : 5.75,   # 1/2.5"
 }
 
+# TODO remove need to change filename extensions
+# src/ImageData.cpp needs also other filename handling fixes, other problems
+# that exists are:
+#   - maximum filename length is 512 characters
+#   - non-ascii filenames will probably break
+def normalize_jpeg_names(jpegs, verbose=False):
+    """Normalize jpeg filename extension to '.jpg'
+
+    Bundler ignores all jpeg files if their extension is NOT lowercase 'jpg',
+    thus we crudely rename all jpegs to have acceptable name.
+    """
+    normalized_names = []
+    for jpeg in jpegs:
+        fname, extension = os.path.splitext(jpeg)
+        if extension != '.jpg':
+            new_name = fname + '.jpg'
+            os.rename(jpeg, new_name)
+            normalized_names.append(new_name)
+            if verbose: print "  [Renamed {0} -> {1}]".format(jpeg, new_name)
+        else:
+            normalized_names.append(jpeg)
+            if verbose: print "  [Found image {0}]".format(jpeg)
+    return normalized_names
+
 def is_jpeg(filename):
     mime = mimetypes.guess_type(filename)[0]
     return mime == 'image/jpeg'
 
-def get_images():
-    """Searches the present directory for JPEG images."""
+def get_images(verbose=False):
+    """Searches the present directory for JPEG images"""
     all_files = os.listdir('.')
-    return filter(is_jpeg, all_files)
-
+    jpegs = filter(is_jpeg, all_files)
+    jpgs = normalize_jpeg_names(jpegs, verbose)
+    return jpgs
 
 def extract_focal_length(images=[], scale=1.0, verbose=False):
     """Extracts (pixel) focal length from images where available.
@@ -346,7 +371,7 @@ def extract_focal_length(images=[], scale=1.0, verbose=False):
     """
     if len(images) == 0:
         if verbose: print "[- Creating list of images -]"
-        images = get_images()
+        images = get_images(verbose)
 
     ret = {}
     for image in images:
@@ -591,7 +616,7 @@ def run_bundler(images=[], verbose=False, parallel=True):
     # Create list of images
     if len(images) == 0:
         if verbose: print "[- Creating list of images -]"
-        images = get_images()
+        images = get_images(verbose)
 
     # Extract focal length
     if type(images) == list:
