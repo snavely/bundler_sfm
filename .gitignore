@@ -24,3 +24,12 @@ src/Bundle2Vis
 src/KeyMatchFull
 src/RadialUndistort
 src/bundler
+
+# Binaries we depend on
+bin/sift
+
+# misc
+list_keys.txt
+list_tmp.txt
+options.txt
+sift.txt
