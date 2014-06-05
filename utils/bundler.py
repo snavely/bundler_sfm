@@ -25,7 +25,7 @@ import gzip
 import os
 import sys
 import Image
-import glob
+import mimetypes
 import subprocess
 import tempfile
 from multiprocessing import Pool
@@ -329,14 +329,15 @@ CCD_WIDTHS = {
      "SONY DSC-W80"                              : 5.75,   # 1/2.5"
 }
 
+def is_jpeg(filename):
+    mime = mimetypes.guess_type(filename)[0]
+    return mime == 'image/jpeg'
+
 def get_images():
     """Searches the present directory for JPEG images."""
-    images = glob.glob("./*.[jJ][pP][gG]")
-    if len(images) == 0:
-        error_str = ("Error: No images supplied!  "
-                     "No JPEG files found in directory!")
-        raise Exception(error_str)
-    return images
+    all_files = os.listdir('.')
+    return filter(is_jpeg, all_files)
+
 
 def extract_focal_length(images=[], scale=1.0, verbose=False):
     """Extracts (pixel) focal length from images where available.
