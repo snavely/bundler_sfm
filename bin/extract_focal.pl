@@ -114,6 +114,7 @@ $SCALE=1.0;
      "Canon Canon PowerShot SD700 IS"   => 5.76,   # 1/2.5"
      "Canon Canon PowerShot SD750"      => 5.75,   # 1/2.5"
      "Canon Canon PowerShot SD800 IS"   => 5.76,   # 1/2.5"
+     "Canon Canon PowerShot SX500 IS"   => 6.17,   # 1/2.3"
      "Canon EOS 300D DIGITAL"            => 22.66,
      "Canon EOS DIGITAL REBEL"          => 22.66,
      "Canon PowerShot A510"             => 5.76,   # 1/2.5" ???
