@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+*.dll
 
 # emacs temp files
 *~
