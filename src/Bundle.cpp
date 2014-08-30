@@ -1808,11 +1808,17 @@ int BundlerApp::SetupInitialCameraPair(int i_best, int j_best,
         int key_idx2 = list[i].m_idx2;
 
 
-        printf("  Adding match %d ==> %d [%d]\n", 
-            key_idx1, key_idx2, pt_count);
 
         double x_proj = GetKey(i_best,key_idx1).m_x;
         double y_proj = GetKey(i_best,key_idx1).m_y;
+        
+        double x_proj1 = GetKey(i_best,key_idx1).m_x;
+        double y_proj1 = GetKey(i_best,key_idx1).m_y;
+        double x_proj2 = GetKey(j_best,key_idx2).m_x;
+        double y_proj2 = GetKey(j_best,key_idx2).m_y;
+
+        printf("  Adding match %d ==> %d -- %0.3f %0.3f ==> %0.3f %0.3f [%d]\n", 
+               key_idx1, key_idx2, x_proj1, y_proj1, x_proj2, y_proj2, pt_count);
 
         /* Back project the point to a constant depth */
         if (!solved_for_extrinsics) {
@@ -1822,11 +1828,6 @@ int BundlerApp::SetupInitialCameraPair(int i_best, int j_best,
 
             points[pt_count] = v3_new(x_pt, y_pt, z_pt);
         } else {
-            double x_proj1 = GetKey(i_best,key_idx1).m_x;
-            double y_proj1 = GetKey(i_best,key_idx1).m_y;
-            double x_proj2 = GetKey(j_best,key_idx2).m_x;
-            double y_proj2 = GetKey(j_best,key_idx2).m_y;
-
             double error;
 
             v2_t p = v2_new(x_proj1, y_proj1);

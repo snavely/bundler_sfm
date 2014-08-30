@@ -1,6 +1,6 @@
 # Makefile for bundler
 
-USE_CERES=true
+# USE_CERES=true
 
 CC=gcc
 CXX=g++
@@ -89,6 +89,14 @@ $(RADIALUNDISTORT): RadialUndistort.o LoadJPEG.o
 		-limage -lmatrix -llapack -lblas -lcblas -lgfortran \
 		-lminpack -ljpeg
 	cp $@ ../bin
+
+SIFTDraw2: SIFTDraw2.o keys_lite.o LoadJPEG.o
+	$(CXX) -o $@ -g2 $^ $(LIB_PATH) -ljpeg -lz $(BUNDLER_LIBS)
+	cp $@ ../../bin
+
+MatchDraw2: MatchDraw2.o keys_lite.o LoadJPEG.o
+	$(CXX) -o $@ -g2 $^ $(LIB_PATH) -ljpeg -lz $(BUNDLER_LIBS)
+	cp $@ ../../bin
 
 clean:
 	rm -f *.o *~ $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PMVS) \
