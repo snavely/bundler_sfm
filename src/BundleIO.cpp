@@ -73,14 +73,11 @@ void BaseApp::ReadMatchFile(int i, int j)
         fscanf(f, "%d", &num_matches);
 		
         if (num_matches < MIN_MATCHES) {
-            // RemoveMatch(i, j);
-            // RemoveMatch(j, i);
             fclose(f);
             return;
         }
 
         SetMatch(i, j);
-        // SetMatch(j, i);
 
         std::vector<KeypointMatch> matches;
 		
@@ -137,9 +134,6 @@ void BaseApp::LoadMatchTable(const char *filename) {
         sscanf(buf, "%d %d\n", &i1, &i2);
 
         SetMatch(i1, i2);
-        // SetMatch(i2, i1);
-        // m_matches[i1 * num_images + i2] = true;
-        // m_matches[i2 * num_images + i1] = true;
 
         /* Read the number of matches */
         int nMatches;
@@ -165,7 +159,6 @@ void BaseApp::LoadMatchTable(const char *filename) {
         }
 
         MatchIndex idx = GetMatchIndex(i1, i2);
-        // m_match_lists[idx] = matches;
         m_matches.GetMatchList(idx) = matches;
     }
     
@@ -265,7 +258,6 @@ void BaseApp::LoadMatches() {
             fflush(stdout);
 
             /* Set all matches to false */
-            // ClearMatches();
             RemoveAllMatches();
 
             char buf[256];
@@ -297,7 +289,6 @@ void BaseApp::RemoveAllMatches()
 /* Load a list of image names from a file */
 void BaseApp::LoadImageNamesFromFile(FILE *f)
 {
-    // m_image_names.clear();
     m_image_data.clear();
 
     char buf[256];
@@ -325,12 +316,8 @@ void BaseApp::LoadImageNamesFromFile(FILE *f)
             key_buf[len - 2] = 'e';
             key_buf[len - 1] = 'y';
 
-            // char key_path[512];
-            // sprintf(key_path, "%s/%s", m_key_directory, key_buf);
             data.m_key_name = strdup(key_buf);
         }
-
-        // printf("Keyname: %s\n", data.m_key_name);
 
 #if 0
 	if (log != NULL) {
@@ -414,10 +401,9 @@ void BaseApp::LoadImageNamesFromFile(FILE *f)
 	// wxSafeYield();
     }
 
-    // Create the match table
+    /* Create the match table */
     m_matches = MatchTable(GetNumImages());
 
-    // ClearMatches();
     RemoveAllMatches();
 
     m_matches_computed = true;
@@ -767,12 +753,9 @@ void BaseApp::DumpOutputFile(const char *output_dir, const char *filename,
         return;
     }
 
-    // if (output_radial_distortion) {
     /* Print version number */
-    // fprintf(f, "# Bundle file v0.4\n");
     fprintf(f, "# Bundle file v0.3\n");
-    // }
-
+    /* Print number of cameras and points */
     fprintf(f, "%d %d\n", num_images, num_visible_points);
 
     /* Dump cameras */
@@ -794,15 +777,9 @@ void BaseApp::DumpOutputFile(const char *output_dir, const char *filename,
         }
 
         if (idx == -1) {
-            // if (!output_radial_distortion)
-            //     fprintf(f, "0\n");
-            // else
             fprintf(f, "0 0 0\n");
             fprintf(f, "0 0 0\n0 0 0\n0 0 0\n0 0 0\n");
         } else {
-            // if (!output_radial_distortion)
-            //     fprintf(f, "%0.10e\n", cameras[idx].f);
-            // else
             fprintf(f, "%0.10e %0.10e %0.10e\n", 
                     cameras[idx].f, cameras[idx].k[0], cameras[idx].k[1]);
 
@@ -835,7 +812,6 @@ void BaseApp::DumpOutputFile(const char *output_dir, const char *filename,
             /* Position */
             fprintf(f, "%0.10e %0.10e %0.10e\n", 
                     Vx(points[i]), Vy(points[i]), Vz(points[i]));
-            // Vx(points[idx]), Vy(points[idx]), Vz(points[idx]));
 
             /* Color */
             fprintf(f, "%d %d %d\n", 
@@ -984,7 +960,6 @@ void BaseApp::WritePointsGeoXML(const char *filename)
     int num_ge2 = 0;
 
     for (int i = 0; i < num_points; i++) {
-        // if (m_num_views_orig[i] >= min_views) {
         if ((int) m_point_data[i].m_views.size() >= min_views) {
             m_point_data[i].WriteGeoXML(f);
             num_ge2++;
