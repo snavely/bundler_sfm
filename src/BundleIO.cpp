@@ -1138,8 +1138,7 @@ void BaseApp::DumpPointsToPly(const char *output_directory,
                               const char *filename, 
                               int num_points, int num_cameras, 
                               v3_t *points, v3_t *colors,
-                              camera_params_t *cameras 
-                              /*bool reflect*/) 
+                              camera_params_t *cameras) 
 {
     int num_good_pts = 0;
 
@@ -1174,8 +1173,6 @@ void BaseApp::DumpPointsToPly(const char *output_directory,
 	/* Output the vertex */
 	fprintf(f, "%0.6e %0.6e %0.6e %d %d %d\n", 
 		Vx(points[i]), Vy(points[i]), Vz(points[i]),
-		// Vx(points[idx]), Vy(points[idx]), Vz(points[idx]),
-                // (reflect ? -1 : 1) * Vz(points[i]),
 		iround(Vx(colors[i])), 
 		iround(Vy(colors[i])), 
 		iround(Vz(colors[i])));
@@ -1191,16 +1188,11 @@ void BaseApp::DumpPointsToPly(const char *output_directory,
 	
 	if ((i % 2) == 0)
 	    fprintf(f, "%0.6e %0.6e %0.6e 0 255 0\n", c[0], c[1], c[2]);
-                    // (reflect ? -1 : 1) * c[2]);
 	else
 	    fprintf(f, "%0.6e %0.6e %0.6e 255 0 0\n", c[0], c[1], c[2]);
-                    // (reflect ? -1 : 1) * c[2]);
 
 	double p_cam[3] = { 0.0, 0.0, -0.05 };
 	double p[3];
-
-        // if (!reflect)
-        //    p_cam[2] *= -1.0;
 
 	matrix_product(3, 3, 3, 1, Rinv, p_cam, p);
 
@@ -1209,7 +1201,7 @@ void BaseApp::DumpPointsToPly(const char *output_directory,
 	p[2] += c[2];
 
 	fprintf(f, "%0.6e %0.6e %0.6e 255 255 0\n",
-		p[0], p[1], p[2]); // (reflect ? -1 : 1) * p[2]);
+		p[0], p[1], p[2]);
     }
 
     fclose(f);
