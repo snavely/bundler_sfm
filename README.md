@@ -7,6 +7,8 @@ based on the Photo Tourism work of Noah Snavely, Steven M. Seitz,
 
 For more information, see the Bundler homepage at 
     http://www.cs.cornell.edu/~snavely/bundler/
+or see the FAQ at 
+    http://www.cs.cornell.edu/~snavely/bundler/faq.html
 
 What is Bundler?
 ----------------

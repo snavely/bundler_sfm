@@ -511,6 +511,9 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
 
 	start = clock();
 
+        double global_reprojection_error = 0;
+        int global_num_observations = 0;
+
 	std::vector<int> outliers;
         std::vector<int> outlier_views;
 	std::vector<double> reproj_errors;
@@ -649,6 +652,9 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
                                     iround(0.5 * num_pts_proj), dists), 
                    thresh);
 
+            global_reprojection_error += sum;
+            global_num_observations += num_pts_proj;
+
 	    pt_count = 0;
 	    for (int j = 0; j < num_keys; j++) {
 		int pt_idx = GetKey(added_order[i],j).m_extra;
@@ -714,6 +720,11 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
 
 	    delete [] dists;
 	}
+
+        printf("[RunSFM] Global mean reprojection error: %0.3e "
+               "(%d observations)\n",
+               global_reprojection_error / global_num_observations,
+               global_num_observations);
 
 	/* Remove outlying points */
         if ((!final_bundle || round > 0) && remove_outliers) {

@@ -16,7 +16,6 @@
 /* KeyMatchFull.cpp */
 /* Read in keys, match, write results to a file */
 
-#include <assert.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,16 +23,49 @@
 
 #include "keys2a.h"
 
+int ReadFileList(char* list_in, std::vector<std::string>& key_files) {
+    FILE* fp;
+
+    if ((fp = fopen(list_in, "r")) == NULL) {
+        printf("Error opening file %s for reading.\n", list_in);
+        return 1;
+    }
+
+    char buf[512], *start;
+    while (fgets(buf, 512, fp)) {
+        // Remove trailing new-line
+        if (buf[strlen(buf) - 1] == '\n') buf[strlen(buf) - 1] = '\0';
+
+        // Find first non-space character
+        start = buf;
+        while(isspace(*start)) start++;
+
+        // Skip empty lines
+        if (strlen(start) == 0) continue;
+
+        // Append file-name to key_files
+        key_files.push_back(std::string(buf));
+    }
+
+    // Check we found input files
+    if (key_files.size() == 0) {
+        printf("No input files found in %s.\n", list_in);
+        return 1;
+    }
+
+    return 0;
+}
+
 int main(int argc, char **argv) {
     char *list_in;
     char *file_out;
     double ratio;
-    
+
     if (argc != 3 && argc != 4) {
-	printf("Usage: %s <list.txt> <outfile> [window_radius]\n", argv[0]);
-	return -1;
+        printf("Usage: %s <list.txt> <outfile> [window_radius]\n", argv[0]);
+        return EXIT_FAILURE;
     }
-    
+
     list_in = argv[1];
     ratio = 0.6;
     file_out = argv[2];
@@ -45,47 +77,31 @@ int main(int argc, char **argv) {
 
     clock_t start = clock();
 
-    unsigned char **keys;
-    int *num_keys;
-
     /* Read the list of files */
     std::vector<std::string> key_files;
-    
-    FILE *f = fopen(list_in, "r");
-    if (f == NULL) {
-        printf("Error opening file %s for reading\n", list_in);
-        return 1;
+    if (ReadFileList(list_in, key_files) != 0) return EXIT_FAILURE;
+
+    FILE *f;
+    if ((f = fopen(file_out, "w")) == NULL) {
+        printf("Could not open %s for writing.\n", file_out);
+        return EXIT_FAILURE;
     }
-
-    char buf[512];
-    while (fgets(buf, 512, f)) {
-        /* Remove trailing newline */
-        if (buf[strlen(buf) - 1] == '\n')
-            buf[strlen(buf) - 1] = 0;
-        
-        key_files.push_back(std::string(buf));
-    }
-
-    fclose(f);
-
-    f = fopen(file_out, "w");
-    assert(f != NULL);
 
     int num_images = (int) key_files.size();
 
-    keys = new unsigned char *[num_images];
-    num_keys = new int[num_images];
+    std::vector<unsigned char*> keys(num_images);
+    std::vector<int> num_keys(num_images);
 
     /* Read all keys */
     for (int i = 0; i < num_images; i++) {
         keys[i] = NULL;
-        num_keys[i] = ReadKeyFile(key_files[i].c_str(), keys+i);
+        num_keys[i] = ReadKeyFile(key_files[i].c_str(), &keys[i]);
     }
 
-    clock_t end = clock();    
+    clock_t end = clock();
     printf("[KeyMatchFull] Reading keys took %0.3fs\n", 
            (end - start) / ((double) CLOCKS_PER_SEC));
-    
+
     for (int i = 0; i < num_images; i++) {
         if (num_keys[i] == 0)
             continue;
@@ -109,7 +125,7 @@ int main(int argc, char **argv) {
             /* Compute likely matches between two sets of keypoints */
             std::vector<KeypointMatch> matches = 
                 MatchKeys(num_keys[j], keys[j], tree, ratio);
-            
+
             int num_matches = (int) matches.size();
 
             if (num_matches >= 16) {
@@ -126,22 +142,21 @@ int main(int argc, char **argv) {
             }
         }
 
-        end = clock();    
+        end = clock();
         printf("[KeyMatchFull] Matching took %0.3fs\n", 
                (end - start) / ((double) CLOCKS_PER_SEC));
         fflush(stdout);
 
         delete tree;
     }
-    
+
     /* Free keypoints */
     for (int i = 0; i < num_images; i++) {
         if (keys[i] != NULL)
             delete [] keys[i];
     }
-    delete [] keys;
-    delete [] num_keys;
-    
+
     fclose(f);
-    return 0;
+    return EXIT_SUCCESS;
 }
+

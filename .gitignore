@@ -2,6 +2,34 @@
 *.o
 *.a
 *.so
+*.dll
 
 # emacs temp files
 *~
+
+# Compiled binaries and temporary library files
+bin/Bundle2PMVS
+bin/Bundle2Ply
+bin/Bundle2Vis
+bin/KeyMatchFull
+bin/RadialUndistort
+bin/bundler
+lib/ann_1.1_char/lib
+lib/f2c/arith.h
+lib/f2c/signal1.h
+lib/f2c/sysdep1.h
+src/Bundle2PMVS
+src/Bundle2Ply
+src/Bundle2Vis
+src/KeyMatchFull
+src/RadialUndistort
+src/bundler
+
+# Binaries we depend on
+bin/sift
+
+# misc
+list_keys.txt
+list_tmp.txt
+options.txt
+sift.txt

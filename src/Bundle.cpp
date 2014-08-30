@@ -657,9 +657,12 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
         printf("[RunSFM] run_sfm took %0.3fs\n",
             (double) (end - start) / (double) CLOCKS_PER_SEC);
 
-        /* Check for outliers */
+        /* Compute statistics and check for outliers */
 
         start = clock();
+
+        double global_reprojection_error = 0;
+        int global_num_observations = 0;
 
         std::vector<int> outliers;
         std::vector<double> reproj_errors;
@@ -784,7 +787,8 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                 iround(0.5 * num_pts_proj), dists), 
                 thresh);
 
-            // printf("Outlier threshold is %0.3f\n", thresh);
+            global_reprojection_error += sum;
+            global_num_observations += num_pts_proj;
 
             pt_count = 0;
             for (int j = 0; j < num_keys; j++) {
@@ -845,6 +849,11 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
 
             delete [] dists;
         }
+
+        printf("[RunSFM] Global mean reprojection error: %0.3e "
+               "(%d observations)\n",
+               global_reprojection_error / global_num_observations,
+               global_num_observations);
 
         /* Remove outlying points */
         if (remove_outliers) {

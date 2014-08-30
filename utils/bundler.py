@@ -81,6 +81,8 @@ CCD_WIDTHS = {
      "Canon Canon EOS 400D DIGITAL"              : 22.2,
      "Canon Canon EOS 40D"                       : 22.2,
      "Canon Canon EOS 5D"                        : 35.8,
+     "Canon Canon EOS 5D Mark II"                : 36.0,
+     "Canon Canon EOS 5D Mark III"               : 36.0,
      "Canon Canon EOS DIGITAL REBEL"             : 22.66,
      "Canon Canon EOS DIGITAL REBEL XT"          : 22.2,
      "Canon Canon EOS DIGITAL REBEL XTi"         : 22.2,
@@ -141,6 +143,7 @@ CCD_WIDTHS = {
      "Canon Canon PowerShot SD700 IS"            : 5.76,   # 1/2.5"
      "Canon Canon PowerShot SD750"               : 5.75,   # 1/2.5"
      "Canon Canon PowerShot SD800 IS"            : 5.76,   # 1/2.5"
+     "Canon Canon PowerShot SX500 IS"            : 6.17,   # 1/2.3"
      "Canon EOS 300D DIGITAL"                    : 22.66,
      "Canon EOS DIGITAL REBEL"                   : 22.66,
      "Canon PowerShot A510"                      : 5.76,   # 1/2.5" ???
