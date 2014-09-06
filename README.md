@@ -76,6 +76,10 @@ Lowe's SIFT binary, you'll need to download that binary from
 and copy it to BASE_PATH/bin (making sure it is called 'sift', or
 'siftWin32.exe' under Windows).
 
+You'll also need the 'jhead' program installed, for computing focal
+lengths from Exif metadata.  This is available, for instance, as the
+jhead package on Ubuntu.
+
 The utils/bundler.py script requires that you have Python and the
 Python Image Library (PIL) installed on your computer.
 
