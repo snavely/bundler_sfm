@@ -80,6 +80,8 @@ You'll also need the 'jhead' program installed, for computing focal
 lengths from Exif metadata.  This is available, for instance, as the
 jhead package on Ubuntu.
 
+Finally, make sure you have the ImageMagick library installed.
+
 The utils/bundler.py script requires that you have Python and the
 Python Image Library (PIL) installed on your computer.
 
