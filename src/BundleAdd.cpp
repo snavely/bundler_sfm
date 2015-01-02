@@ -28,7 +28,7 @@
 #endif
 
 #ifdef WIN32
-#define isnan _isnan
+//#define isnan _isnan
 #endif
 
 #include "defines.h"
