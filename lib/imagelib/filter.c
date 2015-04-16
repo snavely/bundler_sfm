@@ -149,7 +149,7 @@ double img_laplacian(img_t *img, int x, int y) {
 }
 
 #ifdef WIN32
-static double erf (double x) {
+double erf (double x) {
   int sign;
   double t;
 

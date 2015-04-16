@@ -198,8 +198,12 @@ void ReadListFile(char *list_file, std::vector<std::string> &files)
         if (buf[strlen(buf)-1] == '\n')
             buf[strlen(buf)-1] = 0;
 
-        char *space = index(buf, ' ');
-        if (space) *space = 0;
+        /*char *space = index(buf, ' ');
+        if (space) *space = 0;*/
+		std::string str(buf);
+		int space_pos = str.find(' ');
+		str.at(space_pos) = 0;
+		files.push_back(str);
 
         files.push_back(std::string(buf));
     }

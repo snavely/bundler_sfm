@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="abort_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="arithchk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="backspac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cabs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="close.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ctype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_abs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_acos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_asin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_atan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_atn2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_cnjg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_cos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_cosh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_dim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_imag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_int.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_lg10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_mod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_nint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_prod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_sign.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_sinh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_sqrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_tan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_tanh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="derf_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="derfc_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dfe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dolio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dtime_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="due.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ef1asc_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ef1cmc_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="endfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="erf_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="erfc_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="err.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="etime_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exit_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="f77_aloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="f77vers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fmt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fmtlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ftell_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="getarg_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="getenv_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_abs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_dim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_dnnt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_indx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_len.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_mod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_nint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h_sign.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hl_ge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hl_gt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hl_le.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hl_lt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i77vers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_abs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_dim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_dnnt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_indx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_len.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_mod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_nint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="i_sign.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iargc_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ilnw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inquire.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_ge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_gt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_le.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="l_lt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lbitbits.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lbitshft.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lwrite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="open.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_ci.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_dd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_di.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_hh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_ii.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_ri.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_zi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_zz.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_abs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_acos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_asin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_atan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_atn2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_cnjg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_cos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_cosh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_dim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_imag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_int.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_lg10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_mod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_nint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_sign.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_sinh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_sqrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_tan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_tanh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rdfmt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rewind.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rsfe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rsli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rsne.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_cat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_cmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_copy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_paus.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_rnge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_stop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sfe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sig_die.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="signal_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="signbit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="system_.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="typesize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="uio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="uninit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wref.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wrtfmt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wsfe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wsle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wsne.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xwsne.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_abs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_cos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_div.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_sqrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ctype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="f2c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rawio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="signal1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sysdep1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="arith.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

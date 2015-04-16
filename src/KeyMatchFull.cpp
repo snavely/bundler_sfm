@@ -22,6 +22,7 @@
 #include <string.h>
 
 #include "keys2a.h"
+#include <algorithm>
 
 int ReadFileList(char* list_in, std::vector<std::string>& key_files) {
     FILE* fp;
