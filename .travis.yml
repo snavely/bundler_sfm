@@ -8,14 +8,6 @@ before_install:
 install:
  - mkdir thirdparty && cd thirdparty
 
-# install gflags
- - curl https://gflags.googlecode.com/files/gflags-2.0-no-svn-files.tar.gz | tar xvz
- - cd gflags-2.0
- - ./configure --prefix=/usr/local
- - make -j$NUM_CPU
- - sudo make install
- - cd ..
-
 # install glog
  - curl https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz | tar xvz
  - cd glog-0.3.3
@@ -26,11 +18,9 @@ install:
 
 # install ceres
  - curl http://ceres-solver.org/ceres-solver-1.9.0.tar.gz | tar xvz
- - mkdir ceres-bin
- - cd ceres-bin
+ - mkdir ceres-bin && cd ceres-bin
  - cmake ../ceres-solver-1.9.0
  - make -j$NUM_CPU
-# - make test
  - sudo make install
  - cd ..
 
