@@ -1,12 +1,12 @@
 language: cpp
 
 before_install:
- - export NUM_CPU="`grep processor /proc/cpuinfo | wc -l`"; echo $NUM_CPU
+ - export NUM_CPU=3
  - sudo apt-get install -qq libatlas-base-dev libeigen3-dev gfortran libsuitesparse-dev
  
 
 install:
- - cd ..
+ - mkdir thirdparty && cd thirdparty
 
 # install gflags
  - curl https://gflags.googlecode.com/files/gflags-2.0-no-svn-files.tar.gz | tar xvz
@@ -25,16 +25,16 @@ install:
  - cd ..
 
 # install ceres
- - curl http://ceres-solver.org/ceres-solver-1.10.0.tar.gz | tar xvz
+ - curl http://ceres-solver.org/ceres-solver-1.9.0.tar.gz | tar xvz
  - mkdir ceres-bin
  - cd ceres-bin
- - cmake ../ceres-solver-1.10.0
- - make -j8
+ - cmake ../ceres-solver-1.9.0
+ - make -j$NUM_CPU
 # - make test
  - sudo make install
  - cd ..
 
- - cd bundler_sfm
+ - cd ..
 
 
 script:
