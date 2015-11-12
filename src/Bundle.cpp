@@ -266,8 +266,8 @@ CheckPointKeyConsistency(const std::vector<ImageKeyVector> pt_views,
 
             if (m_image_data[img].m_keys[key].m_extra != i) {
                 printf("[CheckPointKeyConsistency] Error: (%d,%d).m_extra "
-                    "should be %d (m_extra is %d)\n", img, key, i,
-                    m_image_data[img].m_keys[key].m_extra);
+		       "should be %d (m_extra is %d)\n", img, key, i,
+		       m_image_data[img].m_keys[key].m_extra);
                 errors++;
             }
         }
@@ -350,7 +350,7 @@ void BundlerApp::ReRunSFM(double *S, double *U, double *V, double *W)
 
                     if (fabs(diff) / m_image_data[i].m_init_focal < 0.4) {
                         printf("[ReRunSFM] Constraining focal "
-                            "length for camera %d\n", i);
+			       "length for camera %d\n", i);
 
                         /* Setup the focal length constraints */
                         SetFocalConstraint(m_image_data[i], 
@@ -398,8 +398,8 @@ void BundlerApp::ReRunSFM(double *S, double *U, double *V, double *W)
 
             if (m_image_data[v].m_keys[k].m_extra != -1) {
                 printf("Error! Already assigned this key "
-                    "[%d,%d] <- %d != %d!\n", v, k, 
-                    m_image_data[v].m_keys[k].m_extra, i);
+		       "[%d,%d] <- %d != %d!\n", v, k, 
+		       m_image_data[v].m_keys[k].m_extra, i);
             }
 
             m_image_data[v].m_keys[k].m_extra = i;
@@ -654,7 +654,7 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
         clock_t end = clock();
 
         printf("[RunSFM] run_sfm took %0.3fs\n",
-            (double) (end - start) / (double) CLOCKS_PER_SEC);
+	       (double) (end - start) / (double) CLOCKS_PER_SEC);
 
         /* Compute statistics and check for outliers */
 
@@ -780,11 +780,11 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
 
             double avg = sum / num_pts_proj;
             printf("[RunSFM] Mean error cam %d[%d] [%d pts]: %0.3e "
-                "[med: %0.3e, %0.3e]\n",
-                i, added_order[i], num_pts_proj, avg, 
-                kth_element_copy(num_pts_proj, 
-                iround(0.5 * num_pts_proj), dists), 
-                thresh);
+		   "[med: %0.3e, %0.3e]\n",
+		   i, added_order[i], num_pts_proj, avg, 
+		   kth_element_copy(num_pts_proj, 
+				    iround(0.5 * num_pts_proj), dists), 
+		   thresh);
 
             global_reprojection_error += sum;
             global_num_observations += num_pts_proj;
@@ -841,8 +841,8 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
 
                 int bin_size = idx_count - start;
                 printf("   E[%0.3e--%0.3e]: %d [%0.3f]\n", 
-                    max - pr_step, max, bin_size, 
-                    bin_size / (double) num_pts_proj);
+		       max - pr_step, max, bin_size, 
+		       bin_size / (double) num_pts_proj);
             }
 #endif
 
@@ -860,7 +860,7 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                 int idx = outliers[i];
 
                 printf("[RunSFM] Removing outlier %d "
-                    "(reproj error: %0.3f)\n", idx, reproj_errors[i]);
+		       "(reproj error: %0.3f)\n", idx, reproj_errors[i]);
 
                 if (colors != NULL) {
                     Vx(colors[idx]) = 0x0;
@@ -879,9 +879,9 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                     /* Sanity check */
                     if (GetKey(added_order[v], k).m_extra != idx)
                         printf("Error!  Entry for (%d,%d) "
-                        "should be %d, but is %d\n",
-                        added_order[v], k,
-                        idx, GetKey(added_order[v], k).m_extra);
+			       "should be %d, but is %d\n",
+			       added_order[v], k,
+			       idx, GetKey(added_order[v], k).m_extra);
 
                     GetKey(added_order[v], k).m_extra = -2;
                 }
@@ -894,7 +894,7 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
 
             end = clock();
             printf("[RunSFM] outlier removal took %0.3fs\n",
-                (double) (end - start) / (double) CLOCKS_PER_SEC);
+		   (double) (end - start) / (double) CLOCKS_PER_SEC);
 
             printf("[RunSFM] Removing %d outliers\n", num_outliers);
         }
@@ -1015,7 +1015,7 @@ void BundlerApp::InitializeBundleAdjust(int &num_init_cams,
     for (int i = 0; i < num_images; i++) {
         if (m_image_data[i].m_camera.m_adjusted) {
             printf("[InitializeBundleAdjust] Loading keys for "
-                "image %d\n", i);
+		   "image %d\n", i);
             m_image_data[i].LoadKeys(false, !m_optimize_for_fisheye);
             m_image_data[i].ReadKeyColors();
             SetTracks(i);
@@ -1093,7 +1093,7 @@ void BundlerApp::InitializeBundleAdjust(int &num_init_cams,
 
                     if (fabs(diff) / m_image_data[i].m_init_focal < 0.1) {
                         printf("[ReRunSFM] Constraining focal "
-                            "length for camera %d\n", i);
+			       "length for camera %d\n", i);
 
                         /* Setup the focal length constraints */
                         SetFocalConstraint(m_image_data[i], 
@@ -1142,7 +1142,7 @@ void BundlerApp::InitializeBundleAdjust(int &num_init_cams,
                 p.second >= (int) m_image_data[p.first].m_keys.size()) {
 
                     printf("Error: p.second[%d,%d] out of range\n", p.second,
-                        (int) m_image_data[p.first].m_keys.size());  
+			   (int) m_image_data[p.first].m_keys.size());  
             }
 
             int image_idx = p.first;
@@ -1179,7 +1179,7 @@ void BundlerApp::InitializeBundleAdjust(int &num_init_cams,
     }
 
     printf("  Avg. proj error [%d projections] = %0.3e\n", n,
-        sqrt(error / n));
+	   sqrt(error / n));
 }
 
 /* Set up the matrix of projections and the visibility mask */
@@ -1378,7 +1378,7 @@ int BundlerApp::FindCameraWithMostConnectivity(int num_cameras, int num_points,
             continue;
 
         printf("  score[%d] = %d / %d\n", 
-            i, seen_scores[i], frontier_scores[i]);
+	       i, seen_scores[i], frontier_scores[i]);
         fflush(stdout);
 
         /* Only accept images with at least 20% of the current max
@@ -1422,7 +1422,7 @@ int BundlerApp::FindCameraWithMostConnectivity(int num_cameras, int num_points,
     }
 
     printf("  accepting image %d (%d / %d)\n", i_best, 
-        seen_scores[i_best], frontier_scores[i_best]);
+	   seen_scores[i_best], frontier_scores[i_best]);
     fflush(stdout);
 
     delete [] frontier;
@@ -1598,7 +1598,7 @@ void BundlerApp::BundlePickInitialPair(int &i_best, int &j_best,
         j_best = m_initial_pair[1];
 
         printf("[BundleAdjust] Setting initial pair to "
-            "%d and %d\n", i_best, j_best);
+	       "%d and %d\n", i_best, j_best);
 
         return;
     }
@@ -1825,8 +1825,10 @@ int BundlerApp::SetupInitialCameraPair(int i_best, int j_best,
         double x_proj2 = GetKey(j_best,key_idx2).m_x;
         double y_proj2 = GetKey(j_best,key_idx2).m_y;
 
-        printf("  Adding match %d ==> %d -- %0.3f %0.3f ==> %0.3f %0.3f [%d]\n", 
-               key_idx1, key_idx2, x_proj1, y_proj1, x_proj2, y_proj2, pt_count);
+        printf("  Adding match %d ==> %d -- "
+	       "%0.3f %0.3f ==> %0.3f %0.3f [%d]\n", 
+               key_idx1, key_idx2, x_proj1, y_proj1, x_proj2, y_proj2,
+	       pt_count);
 
         /* Back project the point to a constant depth */
         if (!solved_for_extrinsics) {
@@ -2014,7 +2016,7 @@ void BundlerApp::EstimateIgnoredCameras(int &curr_num_cameras,
         clock_t end = clock();
 
         printf("[BundleAdjust] Polishing took %0.3fs\n",
-            (double) (end - start) / CLOCKS_PER_SEC);
+	       (double) (end - start) / CLOCKS_PER_SEC);
     }
 #endif
 
@@ -2048,14 +2050,14 @@ void BundlerApp::EstimateIgnoredCameras(int &curr_num_cameras,
     for (int i = 0; i < curr_num_cameras; i++) {
         if(m_image_data[added_order[i]].m_has_init_focal) {
             printf("   [%03d] %0.3f (%0.3f) %s %d; %0.3e, %0.3e\n", 
-                i, cameras[i].f, 
-                m_image_data[added_order[i]].m_init_focal,
-                m_image_data[added_order[i]].m_name,
-                added_order[i], cameras[i].k[0], cameras[i].k[1]); 
+		   i, cameras[i].f, 
+		   m_image_data[added_order[i]].m_init_focal,
+		   m_image_data[added_order[i]].m_name,
+		   added_order[i], cameras[i].k[0], cameras[i].k[1]); 
         } else {
             printf("   [%03d] %0.3f %s %d; %0.3e %0.3e\n", 
-                i, cameras[i].f, m_image_data[added_order[i]].m_name,
-                added_order[i], cameras[i].k[0], cameras[i].k[1]);
+		   i, cameras[i].f, m_image_data[added_order[i]].m_name,
+		   added_order[i], cameras[i].k[0], cameras[i].k[1]);
         }
     }
 
@@ -2128,8 +2130,8 @@ void BundlerApp::BundleAdjust()
         // good_pair_2 = 1; // j_best;
 
         printf("[BundleAdjust] Adjusting cameras "
-            "%d and %d (score = %0.3f)\n", 
-            i_best, j_best, max_score);
+	       "%d and %d (score = %0.3f)\n", 
+	       i_best, j_best, max_score);
 
         /* **** Set up the initial cameras **** */
         double init_focal_length_0 = 0.0, init_focal_length_1 = 0.0;
@@ -2245,7 +2247,7 @@ void BundlerApp::BundleAdjust()
                 cameras, points, added_order, colors, pt_views);
 
             printf("  focal lengths: %0.3f, %0.3f\n", 
-                cameras[0].f, cameras[1].f);
+		   cameras[0].f, cameras[1].f);
 
 #if 0
             if (error0 < error1) {
@@ -2285,10 +2287,10 @@ void BundlerApp::BundleAdjust()
 #if 0
         if (m_initial_pair[0] == -1 || m_initial_pair[1] == -1) {
             printf("[BundleAdjust] Error: initial good pair "
-                "not provided!\n");
+		   "not provided!\n");
             printf("[BundleAdjust] Please specify a pair of "
-                "cameras with medium baseline using\n"
-                "  --init_pair1 <img1> and --init_pair2 <img2>\n");
+		   "cameras with medium baseline using\n"
+		   "  --init_pair1 <img1> and --init_pair2 <img2>\n");
             exit(1);
         }
 
@@ -2297,7 +2299,7 @@ void BundlerApp::BundleAdjust()
 
         if (good_pair_1 == -1 || good_pair_2 == -1) {
             printf("[BundleAdjust] Error: initial pair haven't "
-                "been adjusted!\n");
+		   "been adjusted!\n");
             printf("[BundleAdjust] Please specify another pair!\n");
             exit(0);
         }
@@ -2333,9 +2335,9 @@ void BundlerApp::BundleAdjust()
             added_order[round] = next_idx;
 
             printf("[BundleAdjust[%d]] Adjusting camera %d "
-                "(parent = %d, matches = %d)\n", 
-                round, next_idx, 
-                (parent_idx == -1 ? -1 : added_order[parent_idx]), max_matches);
+		   "(parent = %d, matches = %d)\n", 
+		   round, next_idx, 
+		   (parent_idx == -1 ? -1 : added_order[parent_idx]), max_matches);
 
 
             /* **** Set up the new camera **** */
@@ -2389,14 +2391,14 @@ void BundlerApp::BundleAdjust()
             for (int i = 0; i <= round; i++) {
                 if(m_image_data[added_order[i]].m_has_init_focal) {
                     printf("   [%03d] %0.3f (%0.3f) %s %d; %0.3e, %0.3e\n", 
-                        i, cameras[i].f, 
-                        m_image_data[added_order[i]].m_init_focal,
-                        m_image_data[added_order[i]].m_name,
-                        added_order[i], cameras[i].k[0], cameras[i].k[1]); 
+			   i, cameras[i].f, 
+			   m_image_data[added_order[i]].m_init_focal,
+			   m_image_data[added_order[i]].m_name,
+			   added_order[i], cameras[i].k[0], cameras[i].k[1]); 
                 } else {
                     printf("   [%03d] %0.3f %s %d; %0.3e %0.3e\n", 
-                        i, cameras[i].f, m_image_data[added_order[i]].m_name,
-                        added_order[i], cameras[i].k[0], cameras[i].k[1]);
+			   i, cameras[i].f, m_image_data[added_order[i]].m_name,
+			   added_order[i], cameras[i].k[0], cameras[i].k[1]);
                 }
             }
 
@@ -2428,7 +2430,7 @@ void BundlerApp::BundleAdjust()
     clock_t end = clock();
 
     printf("[BundleAdjust] Bundle adjustment took %0.3fs\n",
-        (end - start) / ((double) CLOCKS_PER_SEC));
+	   (end - start) / ((double) CLOCKS_PER_SEC));
 
     if (m_estimate_ignored) {
         EstimateIgnoredCameras(curr_num_cameras,
@@ -2561,10 +2563,10 @@ std::vector<int> RefineCameraParameters(const ImageData &data,
 
     while (1) {
         printf("[RefineCameraParameters] Calling with %d points\n", 
-            num_points_curr);
+	       num_points_curr);
 
         camera_refine(num_points_curr, points_curr, projs_curr, camera, 
-            adjust_focal ? 1 : 0, estimate_distortion ? 1 : 0);
+		      adjust_focal ? 1 : 0, estimate_distortion ? 1 : 0);
 
         if (!remove_outliers)
             break;
@@ -2599,7 +2601,7 @@ std::vector<int> RefineCameraParameters(const ImageData &data,
         }
 
         printf("[RefineCameraParameters] Error: %0.3f\n", 
-            error / num_points_curr);
+	       error / num_points_curr);
 
         /* Sort and histogram errors */
         double med = kth_element_copy(num_points_curr, 
@@ -2631,12 +2633,12 @@ std::vector<int> RefineCameraParameters(const ImageData &data,
                         errors[i]);
                 } else {
                     printf("[RefineCameraParameters] Removing point with "
-                        "reprojection error %0.3f\n", errors[i]);
+			   "reprojection error %0.3f\n", errors[i]);
                 }
             }
         }
 
-#if 1
+
         qsort(errors, num_points_curr, sizeof(double), compare_doubles);
 
         double pr_min = errors[0];
@@ -2654,10 +2656,9 @@ std::vector<int> RefineCameraParameters(const ImageData &data,
 
             int bin_size = idx_count - start;
             printf("   E[%0.3e--%0.3e]: %d [%0.3f]\n", 
-                max - pr_step, max, bin_size, 
-                bin_size / (double) num_points_curr);
+		   max - pr_step, max, bin_size, 
+		   bin_size / (double) num_points_curr);
         }
-#endif
 
         delete [] points_curr;
         delete [] projs_curr;
@@ -2684,7 +2685,7 @@ std::vector<int> RefineCameraParameters(const ImageData &data,
     }
 
     printf("[RefineCameraParameters] Exiting after %d rounds "
-        "with %d / %d points\n", round + 1, num_points_curr, num_points);
+	   "with %d / %d points\n", round + 1, num_points_curr, num_points);
 
     delete [] points_curr;
     delete [] projs_curr;
@@ -2826,7 +2827,7 @@ BundlerApp::RefineCameraAndPoints(const ImageData &data, int num_points,
                 pt_views, camera_out);
 
             printf("[RefineCameraAndPoints] "
-                "Error (after point polishing): %0.3f\n", error);
+		   "Error (after point polishing): %0.3f\n", error);
 
             derror = error_old - error;
             error_old = error;
@@ -2911,7 +2912,7 @@ bool FindAndVerifyCamera(int num_points, v3_t *points_solve, v2_t *projs_solve,
     /* If number of inliers is too low, fail */
     if (r <= MIN_INLIERS_EST_PROJECTION) {
         printf("[FindAndVerifyCamera] Too few inliers to use "
-            "projection matrix\n");
+	       "projection matrix\n");
         return false;
     }
 
@@ -2967,7 +2968,7 @@ bool FindAndVerifyCamera(int num_points, v3_t *points_solve, v2_t *projs_solve,
             inliers_weak.push_back(j);
         } else {
             printf("[FindAndVerifyCamera] Removing point [%d] "
-                "(reproj. error = %0.3f)\n", idxs_solve[j], diff);
+		   "(reproj. error = %0.3f)\n", idxs_solve[j], diff);
             outliers.push_back(j);
         }
 
@@ -2977,19 +2978,13 @@ bool FindAndVerifyCamera(int num_points, v3_t *points_solve, v2_t *projs_solve,
 
     if (num_behind >= 0.9 * num_points) {
         printf("[FindAndVerifyCamera] Error: camera is pointing "
-            "away from scene\n");
+	       "away from scene\n");
         return false;
     }
 
     memcpy(K, Kinit, sizeof(double) * 9);
     memcpy(R, Rinit, sizeof(double) * 9);
     memcpy(t, tinit, sizeof(double) * 3);
-
-    // #define COLIN_HACK
-#ifdef COLIN_HACK
-    matrix_ident(3, R);
-    t[0] = t[1] = t[2] = 0.0;
-#endif
 
     return true;
 }
@@ -3027,7 +3022,7 @@ BundlerApp::BundleInitializeImage(ImageData &data,
     int *keys_solve = new int[num_keys];
 
     printf("[BundleInitializeImage] "
-        "Connecting existing matches...\n");
+	   "Connecting existing matches...\n");
 
     /* Find the tracks seen by this image */
     std::vector<int> &tracks = data.m_visible_points;
@@ -3146,7 +3141,7 @@ BundlerApp::BundleInitializeImage(ImageData &data,
                     double obs = 0.5 * (Kinit[0] + Kinit[4]);
 
                     printf("[BundleInitializeImage] "
-                        "Camera has initial focal length of %0.3f\n", init);
+			   "Camera has initial focal length of %0.3f\n", init);
 
                     if (init > obs) ratio = init / obs;
                     else            ratio = obs / init;
@@ -3158,8 +3153,8 @@ BundlerApp::BundleInitializeImage(ImageData &data,
                             &camera_new);
                     } else {
                         printf("[BundleInitializeImage] "
-                            "Estimated focal length of %0.3f "
-                            "is too different\n", obs);
+			       "Estimated focal length of %0.3f "
+			       "is too different\n", obs);
                         camera_new.f = 0.5 * (Kinit[0] + Kinit[4]);
                     }
                 } else {
@@ -3177,7 +3172,7 @@ BundlerApp::BundleInitializeImage(ImageData &data,
         }
     } else {
         printf("[BundleInitializeImage] Error!  "
-            "Pose estimation failed!\n");
+	       "Pose estimation failed!\n");
     }
 
     /* **** Finally, start the bundle adjustment **** */
@@ -3266,7 +3261,7 @@ BundlerApp::BundleInitializeImage(ImageData &data,
     clock_t end = clock();
 
     printf("[BundleInitializeImage] Initializing took %0.3fs\n",
-        (double) (end - start) / CLOCKS_PER_SEC);
+	   (double) (end - start) / CLOCKS_PER_SEC);
 
     data.ReadKeyColors();
     data.m_camera.m_adjusted = true;
@@ -3306,7 +3301,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
         keys_seen[i] = -1;
 
     printf("[BundleInitializeImageFullBundle] "
-        "Connecting existing matches...\n");
+	   "Connecting existing matches...\n");
 
     for (int i = 0; i < num_cameras; i++) {
         int other = added_order[i];
@@ -3320,8 +3315,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
         SetMatchesFromTracks(first, second);
 
         printf("  Matches[%d,%d] = %d\n", image_idx, other,
-            (int) m_matches.GetNumMatches(idx));
-        // (int) m_match_lists[idx].size());
+	       (int) m_matches.GetNumMatches(idx));
 
         for (unsigned int j = 0; j < list.size(); j++) {
             int idx1 = list[j].m_idx1;
@@ -3343,7 +3337,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
                     // printf("Haven't added point yet\n");
                 } else {
                     printf("Error!  Index = %d\n", 
-                        GetKey(other,other_idx).m_extra);
+			   GetKey(other,other_idx).m_extra);
                 }
 
                 continue;
@@ -3359,17 +3353,17 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
 
                 if (keys_seen[this_idx] != -1) {
                     printf("Error!  Already saw key %d (pt: %d)!\n", 
-                        this_idx, pt_idx);
+			   this_idx, pt_idx);
                 }
 
                 printf("  Connecting existing point "
-                    "%d => %d [%d] (cam: %d)\n", 
-                    this_idx, other_idx, pt_idx, other);
+		       "%d => %d [%d] (cam: %d)\n", 
+		       this_idx, other_idx, pt_idx, other);
 
                 keys_seen[this_idx] = pt_idx;
 
                 /* Add the point to the set we'll use to solve for
-                * the camera position */
+		 * the camera position */
 
                 points_solve[num_pts_solve] = points[pt_idx];
 
@@ -3392,8 +3386,8 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
 
                 if (num_pts_solve > num_keys) {
                     printf("Error! Number of points exceeds "
-                        "the number of keys (%d > %d)!\n", 
-                        num_pts_solve, num_keys);
+			   "the number of keys (%d > %d)!\n", 
+			   num_pts_solve, num_keys);
 
                 }
             }
@@ -3420,8 +3414,8 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
         inliers, inliers_weak, outliers);
 
     printf("[BundleInitializeImageFullBundle] "
-        "%d(%d) inliers out of %d\n", 
-        (int) inliers.size(), (int) inliers_weak.size(), num_pts_solve);
+	   "%d(%d) inliers out of %d\n", 
+	   (int) inliers.size(), (int) inliers_weak.size(), num_pts_solve);
 
     if (success) {
 
@@ -3457,8 +3451,8 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
             int num_inliers2 = (int) inliers2.size();
             if (num_inliers2 > 0.5 * num_outliers) {
                 printf("[BundleInitializeImageFullBundle] "
-                    "Adding %d inliers from second camera\n", 
-                    (int) inliers2_weak.size());
+		       "Adding %d inliers from second camera\n", 
+		       (int) inliers2_weak.size());
 
                 for (int i = 0; i < (int) inliers2_weak.size(); i++) {
                     int idx = inliers2_weak[i];
@@ -3508,7 +3502,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
                 3 * sizeof(double));
         } else {
             printf("[BundleInitializeImageFullBundle] "
-                "Error: parent_idx = -1\n");
+		   "Error: parent_idx = -1\n");
         }
     }
 
@@ -3528,7 +3522,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
                 double obs = 0.5 * (Kinit[0] + Kinit[4]);
 
                 printf("[BundleInitializeImageFullBundle] "
-                    "Camera has initial focal length of %0.3f\n", init);
+		       "Camera has initial focal length of %0.3f\n", init);
 
                 if (init > obs) ratio = init / obs;
                 else            ratio = obs / init;
@@ -3540,8 +3534,8 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
                         cameras + num_cameras);
                 } else {
                     printf("[BundleInitializeImageFullBundle] "
-                        "Estimated focal length of %0.3f "
-                        "is too different\n", obs);
+			   "Estimated focal length of %0.3f "
+			   "is too different\n", obs);
 
                     cameras[num_cameras].f = 0.5 * (Kinit[0] + Kinit[4]);   
                 }
@@ -3555,7 +3549,7 @@ void BundlerApp::BundleInitializeImageFullBundle(int image_idx, int parent_idx,
                 cameras[num_cameras].f = cameras[parent_idx].f;
             } else {
                 printf("[BundleInitializeImageFullBundle] "
-                    "Error: parent_idx = -1\n");                    
+		       "Error: parent_idx = -1\n");                    
             }
         }
     }
@@ -3698,14 +3692,14 @@ RemoveDuplicateMatches(const std::vector<KeypointMatch> &matches)
 bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 {
     printf("[BundleRegisterImage] Registering [%dx%d] image\n",
-        data.GetWidth(), data.GetHeight());
+	   data.GetWidth(), data.GetHeight());
 
     /* Read the keys for this image */
     data.LoadOrExtractKeys(m_sift_binary, !m_optimize_for_fisheye);
 
     if ((int) data.m_keys_desc.size() == 0) {
         printf("[BundleRegisterImage] "
-            "Error: image has no keypoints\n");
+	       "Error: image has no keypoints\n");
         return false;
     }
 
@@ -3808,8 +3802,8 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
             int cam_idx = GetRegisteredCameraIndex(nn_idxs[i]);
 
             printf("[BundleRegisterImage] "
-                "Comparing to image %d...\n",
-                cam_idx);
+		   "Comparing to image %d...\n",
+		   cam_idx);
 
             // m_image_data[cam_idx].LoadKeys();
 
@@ -3844,11 +3838,11 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 
             /* Remove duplicates */
             printf("Found %d matches [before pruning]\n", 
-                (int) matches.size());
+		   (int) matches.size());
 
             matches = RemoveDuplicateMatches(matches);
             printf("Found %d matches [after pruning]\n", 
-                (int) matches.size());
+		   (int) matches.size());
 
             /* Estimate a fundamental matrix */
             double F[9];
@@ -3860,7 +3854,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 
             int num_inliers = (int) inliers.size();
             printf("Inliers[%d] = %d out of %d\n", 
-                cam_idx, num_inliers, (int) matches.size());
+		   cam_idx, num_inliers, (int) matches.size());
 
             /* Refine the matches */
             KeypointMatchList new_matches;
@@ -3883,7 +3877,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
         }
 
         printf("[BundleRegisterImage] "
-            "Connecting existing matches...\n");
+	       "Connecting existing matches...\n");
 
         for (int i = 0; i < NUM_NNS; i++) {
             int other = GetRegisteredCameraIndex(nn_idxs[i]);
@@ -3903,8 +3897,8 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
                     saw[pt_idx] = 1;
 
                     printf("  Connecting existing point "
-                        "%d => %d [%d] (cam: %d)\n", 
-                        idx1, idx2, pt_idx, other);
+			   "%d => %d [%d] (cam: %d)\n", 
+			   idx1, idx2, pt_idx, other);
 
                     /* This is an old point */
                     data.m_keys_desc[idx1].m_extra = pt_idx;
@@ -3959,7 +3953,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 
         num_pts_solve = (int) matches.size();
         printf("[BundleRegisterImage] Found %d matches\n",
-            num_pts_solve);
+	       num_pts_solve);
 
         delete [] points_solve;
         delete [] projs_solve;
@@ -4038,7 +4032,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
                     double obs = 0.5 * (Kinit[0] + Kinit[4]);
 
                     printf("[BundleRegisterImage] "
-                        "Camera has initial focal length of %0.3f\n", init);
+			   "Camera has initial focal length of %0.3f\n", init);
 
                     if (init > obs) ratio = init / obs;
                     else            ratio = obs / init;
@@ -4049,8 +4043,8 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
                             SetFocalConstraint(data, camera_new);
                     } else {
                         printf("[BundleRegisterImage] "
-                            "Estimated focal length of %0.3f "
-                            "is too different\n", obs);
+			       "Estimated focal length of %0.3f "
+			       "is too different\n", obs);
 
                         camera_new->f = 0.5 * (Kinit[0] + Kinit[4]);   
                     }
@@ -4076,7 +4070,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 
     /* **** Finally, start the bundle adjustment **** */
     printf("[BundleRegisterImage] Adjusting [%d,%d]...\n",
-        (int) inliers.size(), (int) inliers_weak.size());
+	   (int) inliers.size(), (int) inliers_weak.size());
 
     int num_points_final = (int) inliers_weak.size();
     v3_t *points_final = new v3_t[num_points_final];
@@ -4111,8 +4105,8 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
 #define MIN_INLIERS_ADD_IMAGE 16
     if (num_inliers < 0.5 * num_points_final) {
         printf("[BundleRegisterImage] "
-            "Threw out too many outliers [%d / %d]\n", 
-            num_inliers, num_points_final);
+	       "Threw out too many outliers [%d / %d]\n", 
+	       num_inliers, num_points_final);
     } else if (num_inliers >= MIN_INLIERS_ADD_IMAGE) {
         printf("[BundleRegisterImage] Final camera parameters:\n");
         printf("f: %0.3f\n", camera_new->f);
@@ -4163,9 +4157,9 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
             double proj[2];
             data.m_camera.Project(m_point_data[pt_idx].m_pos, proj);
             printf("pr[%d] = %0.3f, %0.3f == %0.3f, %0.3f\n", 
-                i, proj[0], proj[1], 
-                data.m_keys_desc[key_idx].m_x, 
-                data.m_keys_desc[key_idx].m_y);
+		   i, proj[0], proj[1], 
+		   data.m_keys_desc[key_idx].m_x, 
+		   data.m_keys_desc[key_idx].m_y);
 
             data.m_keys_desc[key_idx].m_extra = pt_idx;
             data.m_visible_points.push_back(pt_idx);
@@ -4188,7 +4182,7 @@ bool BundlerApp::BundleRegisterImage(ImageData &data, bool init_location)
     clock_t end = clock();
 
     printf("[BundleRegisterImage] Registration took %0.3fs\n",
-        (double) (end - start) / (double) CLOCKS_PER_SEC);
+	   (double) (end - start) / (double) CLOCKS_PER_SEC);
 
     return success;
 }
@@ -4239,8 +4233,8 @@ int BundlerApp::RemoveBadPointsAndCameras(int num_points, int num_cameras,
 
         if (RAD2DEG(max_angle) < 0.5 * m_ray_angle_threshold) {
             printf("[RemoveBadPointsAndCamera] "
-                "Removing point %d with angle %0.3f\n",
-                i, RAD2DEG(max_angle));
+		   "Removing point %d with angle %0.3f\n",
+		   i, RAD2DEG(max_angle));
 
             for (int j = 0; j < num_views; j++) {
                 // Set extra flag back to 0
