@@ -13,6 +13,7 @@ OS=$(shell uname -o)
 ifeq ($(OS), Cygwin)
 BUNDLER=bundler.exe
 KEYMATCHFULL=KeyMatchFull.exe
+BUNDLE2PLY=Bundle2Ply.exe
 BUNDLE2PMVS=Bundle2PMVS.exe
 BUNDLE2VIS=Bundle2Vis.exe
 RADIALUNDISTORT=RadialUndistort.exe
