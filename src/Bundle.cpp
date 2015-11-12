@@ -184,7 +184,6 @@ bool CheckCheirality(v3_t p, const camera_params_t &camera)
     pt[2] -= camera.t[2];
     matrix_product(3, 3, 3, 1, (double *) camera.R, pt, cam);
 
-    // EDIT!!!
     if (cam[2] > 0.0)
         return false;
     else
@@ -2972,7 +2971,6 @@ bool FindAndVerifyCamera(int num_points, v3_t *points_solve, v2_t *projs_solve,
             outliers.push_back(j);
         }
 
-        // EDIT!!!
         if (q[2] > 0.0)
             num_behind++;  /* Cheirality constraint violated */
     }
