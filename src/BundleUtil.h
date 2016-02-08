@@ -30,6 +30,14 @@
 #include <hash_set>
 #endif
 
+#include <string>
+
+typedef struct  {
+    std::string name;
+    bool is_fisheye;
+    float focal;
+} image_t;
+
 img_t *RescaleImage(img_t *img, double scale);
 img_t *RescaleImage(img_t *img, int max_dim, double &scale);
 
@@ -59,6 +67,9 @@ void generate_permutation(int n, int *arr);
 void Tokenize(const std::string &str,
               std::vector<std::string> &tokens,
               const std::string &delimiters);
+
+bool ReadListFile(const char *list_file, std::vector<image_t> &images, 
+                  const std::string &prefix = ".");
 
 bool FileExists(const char *filename);
 

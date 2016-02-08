@@ -279,6 +279,44 @@ void Tokenize(const std::string& str,
     }
 }
 
+/* Read a list file */
+bool ReadListFile(const char *list_file, std::vector<image_t> &images, 
+                  const std::string &prefix)
+{
+    images.clear();
+
+    FILE *f = fopen(list_file, "r");
+    
+    if (f == NULL) {
+        printf("[ReadListFile] ERROR opening file %s for reading!\n",
+               list_file);
+
+        return false;
+    }
+
+    char buf[1024];
+    while (fgets(buf, 1024, f) != NULL) {
+        std::vector<std::string> tokens;
+        Tokenize(std::string(buf), tokens, std::string(" \n"));
+
+        image_t image;
+        image.name = prefix + "/" + tokens[0];
+        if ((int) tokens.size() == 1) {
+            image.is_fisheye = false;
+            image.focal = 0.0;
+        } else {
+            image.is_fisheye = (atoi(tokens[1].c_str()) == '1');
+            image.focal = atoi(tokens[2].c_str());
+        }
+
+        images.push_back(image);
+    }
+
+    fclose(f);
+
+    return true;
+}
+
 bool FileExists(const char *filename)
 {
     FILE *f = fopen(filename, "r");
