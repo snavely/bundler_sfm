@@ -305,7 +305,7 @@ bool ReadListFile(const char *list_file, std::vector<image_t> &images,
             image.is_fisheye = false;
             image.focal = 0.0;
         } else {
-            image.is_fisheye = (atoi(tokens[1].c_str()) == '1');
+	    image.is_fisheye = (tokens[1] == "1");
             image.focal = atoi(tokens[2].c_str());
         }
 

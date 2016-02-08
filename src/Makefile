@@ -17,6 +17,7 @@ BUNDLE2PLY=Bundle2Ply.exe
 BUNDLE2PMVS=Bundle2PMVS.exe
 BUNDLE2VIS=Bundle2Vis.exe
 RADIALUNDISTORT=RadialUndistort.exe
+FISHEYEUNDISTORT=FisheyeUndistort.exe
 else
 BUNDLER=bundler
 KEYMATCHFULL=KeyMatchFull
@@ -24,6 +25,7 @@ BUNDLE2PLY=Bundle2Ply
 BUNDLE2PMVS=Bundle2PMVS
 BUNDLE2VIS=Bundle2Vis
 RADIALUNDISTORT=RadialUndistort
+FISHEYEUNDISTORT=FisheyeUndistort
 endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
@@ -63,7 +65,7 @@ endif
 
 CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH)
 
-all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
+all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT) $(FISHEYEUNDISTORT)
 
 %.o : %.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(WXFLAGS) $(BUNDLER_DEFINES) $<
@@ -94,6 +96,12 @@ $(BUNDLE2VIS): Bundle2Vis.o
 	cp $@ ../bin
 
 $(RADIALUNDISTORT): RadialUndistort.o LoadJPEG.o
+	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) $^ \
+		-limage -lmatrix -llapack -lblas -lcblas -lgfortran \
+		-lminpack -ljpeg
+	cp $@ ../bin
+
+$(FISHEYEUNDISTORT): FisheyeUndistort.o BundleUtil.o LoadJPEG.o
 	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) $^ \
 		-limage -lmatrix -llapack -lblas -lcblas -lgfortran \
 		-lminpack -ljpeg
