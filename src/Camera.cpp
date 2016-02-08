@@ -21,8 +21,8 @@
 #include <math.h>
 
 #include "Camera.h"
+#include "BundleUtil.h"
 #include "Geometry.h"
-#include "SifterUtil.h"
 
 #include "defines.h"
 #include "fit.h"

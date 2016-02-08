@@ -14,7 +14,7 @@
  *
  */
 
-/* SifterUtil.cpp */
+/* BundleUtil.cpp */
 /* Various utility routines */
 
 #include <float.h>
@@ -34,7 +34,7 @@
 
 #include <vector.h>
 
-#include "SifterUtil.h"
+#include "BundleUtil.h"
 
 #include "defines.h"
 #include "filter.h"
@@ -257,21 +257,6 @@ std::vector<std::pair<int, int> >
     }
 
     return isect;    
-}
-
-double gain(double g, double x) {
-    double p = log(1.0 - g) / log(0.5);
-    
-    if (x < 1.0e-6)
-	return 0.0;
-
-    if (x > 0.999999)
-	return 1.0;
-
-    if (x < 0.5)
-	return 0.5 * pow(2.0 * x, p);
-    else
-	return 1.0 - 0.5 * pow(2.0 * (1.0 - x), p);
 }
 
 void Tokenize(const std::string& str,

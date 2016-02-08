@@ -14,11 +14,11 @@
  *
  */
 
-/* SifterUtil.h */
+/* BundleUtil.h */
 /* Various utility routines */
 
-#ifndef ___sifter_util_h___
-#define ___sifter_util_h___
+#ifndef ___bundle_util_h___
+#define ___bundle_util_h___
 
 #include "image.h"
 
@@ -52,7 +52,6 @@ std::vector<std::pair<int, int> >
 std::vector<std::pair<int, int> >
     GetArrayIntersectionUnsorted(int m, int n, const int *a1, const int *a2);
 
-double gain(double g, double x);
 void choose(int n, int k, int *arr);
 
 void generate_permutation(int n, int *arr);
@@ -79,4 +78,4 @@ typedef __gnu_cxx::hash_set<int> HashSetInt;
 typedef stdext::hash_set<int> HashSetInt;
 #endif
 
-#endif /* __sifter_util_h__ */
+#endif /* __bundle_util_h__ */

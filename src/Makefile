@@ -36,7 +36,7 @@ BUNDLER_DEFINES=-D__NO_UI__ -D__BUNDLER__ -D__BUNDLER_DISTR__
 
 BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 	Bundle.o BundleFast.o MatchTracks.o Camera.o Geometry.o		\
-	ImageData.o SifterUtil.o BaseGeometry.o BundlerGeometry.o	\
+	ImageData.o BundleUtil.o BaseGeometry.o BundlerGeometry.o	\
 	BoundingBox.o BundleAdd.o ComputeTracks.o BruteForceSearch.o	\
 	BundleIO.o ProcessBundle.o BundleTwo.o Decompose.o		\
 	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o
