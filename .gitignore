@@ -14,6 +14,7 @@ bin/Bundle2Ply
 bin/Bundle2Vis
 bin/KeyMatchFull
 bin/RadialUndistort
+bin/FisheyeUndistort
 bin/bundler
 lib/ann_1.1_char/lib
 lib/f2c/arith.h
@@ -24,6 +25,7 @@ src/Bundle2Ply
 src/Bundle2Vis
 src/KeyMatchFull
 src/RadialUndistort
+src/FisheyeUndistort
 src/bundler
 
 # Binaries we depend on
