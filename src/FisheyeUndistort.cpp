@@ -49,17 +49,10 @@ static void ReadFisheyeParameters(char *filename,
     char buf[256];
     while (fgets(buf, 256, f) != NULL) {
 	/* Split the command into tokens */
-        std::string str(buf);
-    
+        std::string str(buf);    
 	std::vector<std::string> toks;
 	
-	// wxStringTokenizer t(str, wxT(" "));
         Tokenize(str, toks, " ");
-
-	// while (t.HasMoreTokens()) {
-	//     wxString tok = t.GetNextToken();
-	//     toks.push_back(tok);
-	// }
 
 	if (toks[0] == "FisheyeCenter:") {
 	    if (toks.size() != 3) {
@@ -98,7 +91,8 @@ static void ReadFisheyeParameters(char *filename,
     fclose(f);
 }
 
-void DistortPoint(double x, double y, fisheye_params_t &p, double *R,
+void DistortPoint(const double x, const double y, 
+		  const fisheye_params_t &p, double *R,
                   double &x_out, double &y_out)
 {
     double xn = x; // - m_fCx;
@@ -124,7 +118,8 @@ void DistortPoint(double x, double y, fisheye_params_t &p, double *R,
     y_out = yn * (rnew / r) + p.fCy;
 }
 
-img_t *UndistortImage(img_t *img, fisheye_params_t &fisheye_params) {
+img_t *UndistortImage(img_t *img, 
+		      const fisheye_params_t &fisheye_params) {
     double R[9];
     matrix_ident(3, R);
 
@@ -159,7 +154,7 @@ img_t *UndistortImage(img_t *img, fisheye_params_t &fisheye_params) {
 
 
 void UndistortImages(const std::vector<image_t> &images, 
-                     fisheye_params_t &fisheye_params)
+                     const fisheye_params_t &fisheye_params)
 {
     int num_images = (int) images.size();
 
@@ -176,10 +171,10 @@ void UndistortImages(const std::vector<image_t> &images,
 	  img_u = img_copy(img);
 	}
 
-        std::string out = 
+        const std::string out = 
             images[i].name.substr(0, 
                     images[i].name.length() - 3).append("fd.jpg");
-        WriteJPEG(img_u, (char *) out.c_str());
+        WriteJPEG(img_u, (const char *) out.c_str());
 
         img_free(img);
         img_free(img_u);

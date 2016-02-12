@@ -15,7 +15,7 @@
  */
 
 /* LoadJPEG.h */
-/* Code for reading a jpeg file */
+/* Code for reading and write jpeg files */
 
 #ifndef __load_jpeg_h__
 #define __load_jpeg_h__
