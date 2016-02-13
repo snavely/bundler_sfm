@@ -25,7 +25,7 @@
 #include <string.h>
 
 #include "ImageData.h"
-#include "SifterUtil.h"
+#include "BundleUtil.h"
 #include "Register.h"
 
 #ifndef __BUNDLER__

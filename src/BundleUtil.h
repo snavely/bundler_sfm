@@ -14,11 +14,11 @@
  *
  */
 
-/* SifterUtil.h */
+/* BundleUtil.h */
 /* Various utility routines */
 
-#ifndef ___sifter_util_h___
-#define ___sifter_util_h___
+#ifndef ___bundle_util_h___
+#define ___bundle_util_h___
 
 #include "image.h"
 
@@ -29,6 +29,14 @@
 #include <hash_map>
 #include <hash_set>
 #endif
+
+#include <string>
+
+typedef struct  {
+    std::string name;
+    bool is_fisheye;
+    float focal;
+} image_t;
 
 img_t *RescaleImage(img_t *img, double scale);
 img_t *RescaleImage(img_t *img, int max_dim, double &scale);
@@ -52,7 +60,6 @@ std::vector<std::pair<int, int> >
 std::vector<std::pair<int, int> >
     GetArrayIntersectionUnsorted(int m, int n, const int *a1, const int *a2);
 
-double gain(double g, double x);
 void choose(int n, int k, int *arr);
 
 void generate_permutation(int n, int *arr);
@@ -60,6 +67,9 @@ void generate_permutation(int n, int *arr);
 void Tokenize(const std::string &str,
               std::vector<std::string> &tokens,
               const std::string &delimiters);
+
+bool ReadListFile(const char *list_file, std::vector<image_t> &images, 
+                  const std::string &prefix = ".");
 
 bool FileExists(const char *filename);
 
@@ -79,4 +89,4 @@ typedef __gnu_cxx::hash_set<int> HashSetInt;
 typedef stdext::hash_set<int> HashSetInt;
 #endif
 
-#endif /* __sifter_util_h__ */
+#endif /* __bundle_util_h__ */

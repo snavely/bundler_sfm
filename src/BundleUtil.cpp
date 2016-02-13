@@ -14,7 +14,7 @@
  *
  */
 
-/* SifterUtil.cpp */
+/* BundleUtil.cpp */
 /* Various utility routines */
 
 #include <float.h>
@@ -34,7 +34,7 @@
 
 #include <vector.h>
 
-#include "SifterUtil.h"
+#include "BundleUtil.h"
 
 #include "defines.h"
 #include "filter.h"
@@ -259,21 +259,6 @@ std::vector<std::pair<int, int> >
     return isect;    
 }
 
-double gain(double g, double x) {
-    double p = log(1.0 - g) / log(0.5);
-    
-    if (x < 1.0e-6)
-	return 0.0;
-
-    if (x > 0.999999)
-	return 1.0;
-
-    if (x < 0.5)
-	return 0.5 * pow(2.0 * x, p);
-    else
-	return 1.0 - 0.5 * pow(2.0 * (1.0 - x), p);
-}
-
 void Tokenize(const std::string& str,
               std::vector<std::string>& tokens,
               const std::string& delimiters)
@@ -292,6 +277,44 @@ void Tokenize(const std::string& str,
         /* Find next "non-delimiter" */
         pos = str.find_first_of(delimiters, lastPos);
     }
+}
+
+/* Read a list file */
+bool ReadListFile(const char *list_file, std::vector<image_t> &images, 
+                  const std::string &prefix)
+{
+    images.clear();
+
+    FILE *f = fopen(list_file, "r");
+    
+    if (f == NULL) {
+        printf("[ReadListFile] ERROR opening file %s for reading!\n",
+               list_file);
+
+        return false;
+    }
+
+    char buf[1024];
+    while (fgets(buf, 1024, f) != NULL) {
+        std::vector<std::string> tokens;
+        Tokenize(std::string(buf), tokens, std::string(" \n"));
+
+        image_t image;
+        image.name = prefix + "/" + tokens[0];
+        if ((int) tokens.size() == 1) {
+            image.is_fisheye = false;
+            image.focal = 0.0;
+        } else {
+	    image.is_fisheye = (tokens[1] == "1");
+            image.focal = atoi(tokens[2].c_str());
+        }
+
+        images.push_back(image);
+    }
+
+    fclose(f);
+
+    return true;
 }
 
 bool FileExists(const char *filename)

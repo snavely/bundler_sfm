@@ -1,7 +1,7 @@
 Bundler User's Manual
 ---------------------
-copyright 2008-2013 Noah Snavely (snavely@cs.cornell.edu)
-  
+written by Noah Snavely (snavely@cs.cornell.edu)
+
 based on the Photo Tourism work of Noah Snavely, Steven M. Seitz, 
   (University of Washington) and Richard Szeliski (Microsoft Research)
 

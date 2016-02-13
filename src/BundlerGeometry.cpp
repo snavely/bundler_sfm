@@ -25,10 +25,9 @@
 #include <time.h>
 
 #include "BundlerApp.h"
-
+#include "BundleUtil.h"
 #include "Epipolar.h"
 #include "Register.h"
-#include "SifterUtil.h"
 
 #include "defines.h"
 #include "horn.h"
