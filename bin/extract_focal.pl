@@ -54,6 +54,7 @@ $SCALE=1.0;
      "Canon Canon EOS 5D"               => 35.8,
      "Canon Canon EOS 5D Mark II"       => 36.0,
      "Canon Canon EOS 5D Mark III"      => 36.0,
+     "Canon Canon EOS 550D"             => 22.3,
      "Canon Canon EOS DIGITAL REBEL"     => 22.66,
      "Canon Canon EOS DIGITAL REBEL XT"  => 22.2,
      "Canon Canon EOS DIGITAL REBEL XTi" => 22.2,
