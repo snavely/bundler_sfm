@@ -91,12 +91,15 @@ then
 fi
 
 # Run the ToSift script to generate a list of SIFT commands
-echo "[- Extracting keypoints -]"
-rm -f sift.txt
-$TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
+if [ "$SKIP_FEATURES" != "true" ]
+then
+    echo "[- Extracting keypoints -]"
+    rm -f sift.txt
+    $TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
-# Execute the SIFT commands
-sh sift.txt
+    # Execute the SIFT commands
+    sh sift.txt
+fi
 
 # Match images (can take a while)
 echo "[- Matching keypoints (this can take a while) -]"
