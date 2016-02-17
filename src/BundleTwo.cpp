@@ -28,10 +28,8 @@
 #include "BundlerApp.h"
 #include "Bundle.h"
 #include "BundleAdd.h"
-// #include "Epipolar.h"
-// #include "Register.h"
+#include "BundleUtil.h"
 #include "Decompose.h"
-#include "SifterUtil.h"
 #include "TwoFrameModel.h"
 
 #include "sfm.h"

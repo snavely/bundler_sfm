@@ -33,9 +33,9 @@
 
 #include "BundlerApp.h"
 
+#include "BundleUtil.h"
 #include "Epipolar.h"
 #include "Register.h"
-#include "SifterUtil.h"
 
 #ifndef __USE_ANN__
 #include "BruteForceSearch.h"

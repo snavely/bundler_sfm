@@ -34,7 +34,6 @@
 #endif
 #endif /* WIN32 */
 
-// #define COLIN_HACK
 #define TEST_FOCAL
 
 typedef struct {
@@ -410,11 +409,6 @@ static void sfm_project_point(int j, int i, double *aj, double *bi,
     dt = aj + 0;
     w = aj + 3;
 
-#ifdef COLIN_HACK
-    w[0] = w[1] = w[2] = 0.0;
-    dt[2] = 0.0;
-#endif
-
     if (globs->estimate_distortion == 0) {
         sfm_project(globs->init_params + j, K, w, dt, bi, xij, 
                     globs->explicit_camera_centers);
@@ -480,16 +474,9 @@ static void sfm_project_point2_fisheye(int j, int i, double *aj, double *bi,
     dt = aj + 0;
     w = aj + 3;
 
-#ifdef COLIN_HACK
-    w[0] = w[1] = w[2] = 0.0;
-    dt[2] = 0.0;
-#endif
-
     if (w[0] != global_last_ws[3 * j + 0] ||
 	w[1] != global_last_ws[3 * j + 1] ||
 	w[2] != global_last_ws[3 * j + 2]) {
-
-	// printf("updating w: %0.3f, %0.3f, %0.3f\n", w[0], w[1], w[2]);
 
 	rot_update(globs->init_params[j].R, w, global_last_Rs + 9 * j);
 	global_last_ws[3 * j + 0] = w[0];
