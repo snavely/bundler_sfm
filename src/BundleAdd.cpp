@@ -79,7 +79,6 @@ v3_t BundlerApp::TriangulateNViews(const ImageKeyVector &views,
 	double p_n[3];
 	matrix_product(3, 3, 3, 1, Kinv, p3, p_n);
 
-        // EDIT!!!
 	pv[i] = v2_new(-p_n[0], -p_n[1]);
         pv[i] = UndistortNormalizedPoint(pv[i], cameras[camera_idx]);
 
@@ -443,7 +442,6 @@ v3_t Triangulate(v2_t p, v2_t q,
     matrix_invert(3, K2, K2inv);
 
     /* Set up the 3D point */
-    // EDIT!!!
     double proj1[3] = { Vx(p), Vy(p), -1.0 };
     double proj2[3] = { Vx(q), Vy(q), -1.0 };
 

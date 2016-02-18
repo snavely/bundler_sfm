@@ -25,7 +25,7 @@
 #include "keys.h"
 
 #include "BundlerApp.h"
-#include "SifterUtil.h"
+#include "BundleUtil.h"
 
 bool CompareFirst(const KeypointMatch &k1, const KeypointMatch &k2) {
     return (k1.m_idx1 < k2.m_idx1);

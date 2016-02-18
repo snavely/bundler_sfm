@@ -37,7 +37,6 @@ bool BundlerApp::EstimateRelativePose(int i1, int i2,
                                       camera_params_t &camera1, 
                                       camera_params_t &camera2)
 {
-    // int num_images = GetNumImages();
     MatchIndex list_idx;
 
     if (i1 < i2)
@@ -45,7 +44,6 @@ bool BundlerApp::EstimateRelativePose(int i1, int i2,
     else
         list_idx = GetMatchIndex(i2, i1);
 
-    // int num_matches = (int) m_match_lists[list_idx].size();
     std::vector<KeypointMatch> &matches = m_matches.GetMatchList(list_idx);
     int num_matches = (int) matches.size();
 
@@ -206,11 +204,8 @@ bool BundlerApp::EstimateRelativePose2(int i1, int i2,
         list_idx = GetMatchIndex(i2, i1); // i2 * num_images + i1;
 
     std::vector<KeypointMatch> &matches = m_matches.GetMatchList(list_idx);
-    // int num_matches = (int) m_match_lists[list_idx].size();
     int num_matches = (int) matches.size();
 
-    // double f1 = m_image_data[i1].m_init_focal;
-    // double f2 = m_image_data[i2].m_init_focal;
     double K1[9], K2[9];
     GetIntrinsics(camera1, K1);
     GetIntrinsics(camera2, K2);
@@ -224,7 +219,7 @@ bool BundlerApp::EstimateRelativePose2(int i1, int i2,
                                m_image_data[i2].m_keys, 
                                matches,
                                512, /* m_fmatrix_rounds, 8 * m_fmatrix_rounds */
-                               0.25 * m_fmatrix_threshold, // 0.003, // 0.004 /*0.001,*/ // /*0.5 **/ m_fmatrix_threshold, 
+                               0.25 * m_fmatrix_threshold,
                                K1, K2, R0, t0);
         printf("R,t\n");
         matrix_print(3, 3, R0);
@@ -236,7 +231,7 @@ bool BundlerApp::EstimateRelativePose2(int i1, int i2,
         num_inliers = 
             EstimatePose5Point(k1, k2, matches,
                                1024, /*512*/ /* m_fmatrix_rounds, 8 * m_fmatrix_rounds */
-                               0.25 * m_fmatrix_threshold, // 0.004, /*0.001,*/ // /*0.5 **/ m_fmatrix_threshold, 
+                               0.25 * m_fmatrix_threshold,
                                K1, K2, R0, t0);
     }
     
@@ -249,7 +244,6 @@ bool BundlerApp::EstimateRelativePose2(int i1, int i2,
     bool initialized = false;
     if (!initialized) {
         memcpy(camera2.R, R0, sizeof(double) * 9);
-
         matrix_transpose_product(3, 3, 3, 1, R0, t0, camera2.t);
         matrix_scale(3, 1, camera2.t, -1.0, camera2.t);
     }

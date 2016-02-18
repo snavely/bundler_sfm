@@ -431,17 +431,12 @@ int find_extrinsics_essential(double *E, v2_t p1, v2_t p2,
     c1 = Vz(Q);
     c2 = Vz(PQ);
 
-    // EDIT!!!
     if (c1 < 0 && c2 < 0) {
 	memcpy(R, Ra, 9 * sizeof(double));
 	t[0] = tu[0]; t[1] = tu[1]; t[2] = tu[2];
-        // printf("[find_extrinsics] Case 1\n");
-    } else if (c1 > 0 && c2 > 0) { // EDIT!!!
+    } else if (c1 > 0 && c2 > 0) {
 	memcpy(R, Ra, 9 * sizeof(double));
-	// // t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
 	t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
-        // printf("[find_extrinsics] Case 2\n");
-
         Q = triangulate(p1, p2, I, t0, R, t, &error);
     } else {
         /* Triangulate again */
@@ -454,17 +449,12 @@ int find_extrinsics_essential(double *E, v2_t p1, v2_t p2,
         c1 = Vz(Q);
         c2 = Vz(PQ);
 
-        // EDIT!!!
         if (c1 < 0 && c2 < 0) {
             memcpy(R, Rb, 9 * sizeof(double));
             t[0] = tu[0]; t[1] = tu[1]; t[2] = tu[2];
-            // printf("[find_extrinsics] Case 3\n");
-        } else if (c1 > 0 && c2 > 0) { // EDIT!!!
+        } else if (c1 > 0 && c2 > 0) {
             memcpy(R, Rb, 9 * sizeof(double));
-            // // t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
             t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
-            // printf("[find_extrinsics] Case 4\n");
-
             Q = triangulate(p1, p2, I, t0, R, t, &error);
         } else {
             printf("[find_extrinsics] Error: no case found!\n");
@@ -569,20 +559,12 @@ int find_extrinsics_essential_multipt(double *E, int n,
             c2_neg++;
     }
 
-    // printf("[1] c1_pos: %d, c1_neg: %d\n", c1_pos, c1_neg);
-    // printf("[1] c2_pos: %d, c2_neg: %d\n", c2_pos, c2_neg);
-
-    // EDIT!!!
     if (c1_pos < c1_neg && c2_pos < c2_neg) {
 	memcpy(R, Ra, 9 * sizeof(double));
 	t[0] = tu[0]; t[1] = tu[1]; t[2] = tu[2];
-        // printf("[find_extrinsics] Case 1\n");
-    } else if (c1_pos > c1_neg && c2_pos > c2_neg) { // EDIT!!!
+    } else if (c1_pos > c1_neg && c2_pos > c2_neg) {
 	memcpy(R, Ra, 9 * sizeof(double));
-	// // t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
 	t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
-        // printf("[find_extrinsics] Case 2\n");
-        // Q = triangulate(p1, p2, I, t0, R, t, &error);
     } else {
         /* Triangulate again */
         c1_pos = c1_neg = c2_pos = c2_neg = 0;
@@ -608,33 +590,17 @@ int find_extrinsics_essential_multipt(double *E, int n,
                 c2_neg++;
         }
 
-        // printf("[2] c1_pos: %d, c1_neg: %d\n", c1_pos, c1_neg);
-        // printf("[2] c2_pos: %d, c2_neg: %d\n", c2_pos, c2_neg);
-        
-        if (c1_pos < c1_neg && c2_pos < c2_neg) { // EDIT!!!
+        if (c1_pos < c1_neg && c2_pos < c2_neg) {
             memcpy(R, Rb, 9 * sizeof(double));
             t[0] = tu[0]; t[1] = tu[1]; t[2] = tu[2];
-            // printf("[find_extrinsics] Case 3\n");
-        } else if (c1_pos > c1_neg && c2_pos > c2_neg) { // EDIT!!!
+        } else if (c1_pos > c1_neg && c2_pos > c2_neg) {
             memcpy(R, Rb, 9 * sizeof(double));
-            // // t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
             t[0] = -tu[0]; t[1] = -tu[1]; t[2] = -tu[2];
-            // printf("[find_extrinsics] Case 4\n");
-
-            // Q = triangulate(p1, p2, I, t0, R, t, &error);
         } else {
             fprintf(stderr, "[find_extrinsics] Error: no case found!\n");
             return 0;
         }
     }
-
-    // printf("[find_extrinsics] error: %0.3e\n", error);
-
-    // matrix_product(3, 3, 3, 1, R, Q.p, tmp2);
-    // matrix_sum(3, 1, 3, 1, tmp2, t, tmp2);
-    // printf("  %0.3f => %0.3f\n", Vx(p2), tmp2[0] / tmp2[2]);
-    // printf("  %0.3f => %0.3f\n", Vy(p2), tmp2[1] / tmp2[2]);
-    // printf("  %0.3f\n", tmp2[2]);
 
     return 1;
 }
@@ -784,7 +750,6 @@ int find_projection_3x4(int num_pts, v3_t *points, v2_t *projs, double *P) {
 	    row1[6]  = 0.0;
 	    row1[7]  = 0.0;
 	
-            // EDIT!!!
 	    row1[8]  = Vx(projs_new[i]) * Vx(points_new[i]);
 	    row1[9]  = Vx(projs_new[i]) * Vy(points_new[i]);
 	    row1[10] = Vx(projs_new[i]) * Vz(points_new[i]);
@@ -802,7 +767,6 @@ int find_projection_3x4(int num_pts, v3_t *points, v2_t *projs, double *P) {
 	    row2[6]  = Vz(points_new[i]);
 	    row2[7]  = 1.0;	
 
-            // EDIT!!!
 	    row2[8]  = Vy(projs_new[i]) * Vx(points_new[i]);
 	    row2[9]  = Vy(projs_new[i]) * Vy(points_new[i]);
 	    row2[10] = Vy(projs_new[i]) * Vz(points_new[i]);
@@ -831,7 +795,6 @@ int find_projection_3x4(int num_pts, v3_t *points, v2_t *projs, double *P) {
 	    double dx, dy, dist;
 
 	    matrix_product341(P, pt, pr);
-            // EDIT!!!
 	    pr[0] /= -pr[2];
 	    pr[1] /= -pr[2];
 	    
@@ -880,7 +843,6 @@ static void projection_residual(const int *m, const int *n, double *x,
 	double dx, dy;
 	
 	matrix_product341(P, pt, pr);
-        // EDIT!!
 	pr[0] /= -pr[2];
 	pr[1] /= -pr[2];
 	    
@@ -1026,11 +988,9 @@ int find_projection_3x4_ransac(int num_pts, v3_t *points, v2_t *projs,
 		matrix_product341(Ptmp, pt, pr);
 
 		/* Check cheirality */
-                // EDIT!!!
 		if (sign * pr[2] > 0.0) 
 		    continue;
 
-                // EDIT!!!
 		pr[0] /= -pr[2];
 		pr[1] /= -pr[2];
 	    
@@ -1107,11 +1067,9 @@ int find_projection_3x4_ransac(int num_pts, v3_t *points, v2_t *projs,
 	    matrix_product341(Pbest, pt, pr);
 
 	    /* Check cheirality */
-            // EDIT!!!
 	    if (sign * pr[2] > 0.0) 
 		continue;
 
-            // EDIT!!!
 	    pr[0] /= -pr[2];
 	    pr[1] /= -pr[2];
 	    
@@ -1163,11 +1121,9 @@ int find_projection_3x4_ransac(int num_pts, v3_t *points, v2_t *projs,
 	    
 	    matrix_product341(Plinear, pt, pr);
 
-            // EDIT!!!
 	    if (sign * pr[2] > 0.0)
 		continue;
 
-            // EDIT!!!
 	    pr[0] /= -pr[2];
 	    pr[1] /= -pr[2];
 	    
@@ -1247,11 +1203,9 @@ int find_projection_3x4_ransac(int num_pts, v3_t *points, v2_t *projs,
 	    
 		matrix_product341(P, pt, pr);
 
-                // EDIT!!!
 		if (sign * pr[2] > 0.0)
 		    continue;
 
-                // EDIT!!!
 		pr[0] /= -pr[2];
 		pr[1] /= -pr[2];
 	    
@@ -1287,7 +1241,6 @@ int find_projection_3x4_ransac(int num_pts, v3_t *points, v2_t *projs,
 	    
 	    matrix_product341(P, pt, pr);
 
-            // EDIT!!!
 	    pr[0] /= -pr[2];
 	    pr[1] /= -pr[2];
 	    
