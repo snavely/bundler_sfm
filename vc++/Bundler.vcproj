@@ -277,10 +277,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\src\SifterUtil.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\src\TwoFrameModel.cpp"
 				>
 			</File>

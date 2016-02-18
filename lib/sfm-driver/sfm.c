@@ -620,7 +620,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
 #endif
     double info[10];
 
-    int i, j, idx, base;
+    int i, j, base;
     int num_camera_params, num_pt_params, num_params;
 
     sfm_global_t global_params;
