@@ -582,19 +582,9 @@ int evaluate_Ematrix(int n, v2_t *r_pts, v2_t *l_pts, double thresh_norm,
     double likelihood = 0.0;
 
     for (i = 0; i < n; i++) {
-#if 1
         v3_t r = v3_new(Vx(r_pts[i]), Vy(r_pts[i]), 1.0);
         v3_t l = v3_new(Vx(l_pts[i]), Vy(l_pts[i]), 1.0);
-#else
-        v3_t r = v3_new(-Vx(r_pts[i]), -Vy(r_pts[i]), 1.0);
-        v3_t l = v3_new(-Vx(l_pts[i]), -Vy(l_pts[i]), 1.0);
-#endif
-
-#if 0
-        double resid = fmatrix_compute_residual(E, l, r);
-#else
         double resid = fmatrix_compute_residual(F, l, r);
-#endif     
    
         likelihood += log(1.0 + resid * resid / (thresh_norm));
 
@@ -609,7 +599,6 @@ int evaluate_Ematrix(int n, v2_t *r_pts, v2_t *l_pts, double thresh_norm,
     }
 
     *score = likelihood;
-    // *score = 1.0 / num_inliers;
 
     return num_inliers;
 }
