@@ -12,6 +12,10 @@
 ANN_TARGET = linux-g++-shared
 
 OS = $(shell uname -o)
+PREFIX = $(DESTDIR)/usr
+BINDIR = $(PREFIX)/bin
+LIBDIR = $(PREFIX)/lib
+
 ifeq ($(OS), Cygwin)
 ANN_TARGET = win32-g++-shared
 endif
@@ -31,7 +35,42 @@ default:
 # Main program
 	cd src; $(MAKE)
 
+install:
+	cd bin;
+	mkdir -p $(BINDIR)
+	mkdir -p $(LIBDIR)
 
+# Install shared library
+	install -Dm644 bin/libANN_char.so $(LIBDIR)/libANN_char.so
+
+# Install binaries
+	install -Dm755 bin/Bundle2Ply $(BINDIR)/Bundle2Ply
+	install -Dm755 bin/Bundle2PMVS $(BINDIR)/Bundle2PMVS
+	install -Dm755 bin/Bundle2Vis $(BINDIR)/Bundle2Vis
+	install -Dm755 bin/bundler $(BINDIR)/bundler_sfm
+	install -Dm755 bin/extract_focal.pl $(BINDIR)/extract_focal.pl
+	install -Dm755 bin/FisheyeUndistort $(BINDIR)/FisheyeUndistort
+	install -Dm755 bin/KeyMatchFull $(BINDIR)/KeyMatchFull
+	install -Dm755 bin/RadialUndistort $(BINDIR)/RadialUndistort
+	install -Dm755 bin/ToSift.sh $(BINDIR)/ToSift.sh
+	install -Dm755 bin/ToSiftList.sh $(BINDIR)/ToSiftList.sh
+
+uninstall:
+	# Uninstall shared library
+	rm $(LIBDIR)/libANN_char.so
+
+	# Uninstall binaries
+	rm $(BINDIR)/Bundle2Ply
+	rm $(BINDIR)/Bundle2PMVS
+	rm $(BINDIR)/Bundle2Vis
+	rm $(BINDIR)/bundler_sfm
+	rm $(BINDIR)/extract_focal.pl
+	rm $(BINDIR)/FisheyeUndistort
+	rm $(BINDIR)/KeyMatchFull
+	rm $(BINDIR)/RadialUndistort
+	rm $(BINDIR)/ToSift.sh
+	rm $(BINDIR)/ToSiftList.sh
+	
 clean:
 	cd lib/5point; $(MAKE) clean
 	cd lib/ann_1.1_char; $(MAKE) clean
