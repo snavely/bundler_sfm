@@ -329,6 +329,8 @@ CCD_WIDTHS = {
      "SONY DSC-W5"                               : 7.176,  # 1/1.8"
      "SONY DSC-W7"                               : 7.176,  # 1/1.8"
      "SONY DSC-W80"                              : 5.75,   # 1/2.5"
+     "SONY DSLR-A700"                            : 23.5,   # 23.5 x 15.6mm
+     "SONY SLT-A99V"                             : 35.8,   # 35.8 x 23.9mm
 }
 
 def get_images():
