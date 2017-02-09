@@ -24,7 +24,6 @@ import argparse
 import gzip
 import os
 import sys
-import Image
 import glob
 import subprocess
 import tempfile
