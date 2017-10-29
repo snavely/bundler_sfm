@@ -213,7 +213,8 @@ void WritePMVS(const char *output_path,
         fclose(f);
 
         int last_dot = images[i].rfind('.', images[i].length()-1);
-        std::string basename = images[i].substr(0, last_dot);
+        int last_slash = images[i].rfind('/', last_dot-1);
+        std::string basename = images[i].substr(last_slash + 1, last_dot - last_slash - 1);
 
         fprintf(f_scr, "mv pmvs/%s.rd.jpg %s/visualize/%08d.jpg\n", 
                 basename.c_str(), output_path, count);
