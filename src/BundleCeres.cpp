@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
-#include <sys/time.h>
+//#include <sys/time.h>	//UNIX
+#include "time_unix.h"	//WINDOWS
 
 #include "matrix.h"
 #include "qsort.h"
@@ -19,6 +20,7 @@
 
 #include <ceres/ceres.h>
 #include "snavely_reprojection_error.h"
+#include "ceres/rotation.h"
 
 #include <omp.h>
 
@@ -232,8 +234,9 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
             double axis[3]; //, angle;
             // double RT[9];
             // matrix_transpose(3, 3, init_camera_params[i].R, RT);
-            rot2aa(init_camera_params[i].R, axis); // , &angle);
+            //rot2aa(init_camera_params[i].R, axis); // , &angle);
             // matrix_scale(3, 1, axis, angle, axis);
+			ceres::RotationMatrixToAngleAxis(init_camera_params[i].R, axis);
 
             double *c = init_camera_params[i].t;
             double t[3];
@@ -468,7 +471,8 @@ double BundlerApp::RunSFM_Ceres(int num_pts, int num_cameras,
 
             // axis_angle_to_matrix(axis, angle, init_camera_params[i].R);
             double RT[9];
-            aa2rot(axis, RT);
+            //aa2rot(axis, RT);
+			ceres::AngleAxisToRotationMatrix(axis, RT);
             matrix_transpose(3, 3, RT, init_camera_params[i].R);
 
             double t[3];
