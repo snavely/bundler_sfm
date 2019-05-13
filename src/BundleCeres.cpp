@@ -7,8 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+#if defined(_WIN32) || defined(_WIN64)
+#include "time_unix.h"	
+#else
 #include <sys/time.h>
-
+#endif
 #include "matrix.h"
 #include "qsort.h"
 #include "util.h"
@@ -19,6 +22,7 @@
 
 #include <ceres/ceres.h>
 #include "snavely_reprojection_error.h"
+#include "ceres/rotation.h"
 
 #include <omp.h>
 
