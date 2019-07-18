@@ -68,6 +68,11 @@ to run the bundler pipeline, you will also need to create a
 RunBundler.sh config file with the line USE_CERES=true (see
 RunBundler.sh for more details).
 
+Run "make install" to install bundler_sfm executable, along with its shared library and helper scripts.
+
+Run "make uninstall" to uninstall bundler_sfm.
+
+
 For Windows systems, see the vc++ directory for a Visual Studio 2005
 solution file (vc++/Bundler.sln).
 
