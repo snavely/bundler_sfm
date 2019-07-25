@@ -26,7 +26,7 @@
 #include "util.h"
 
 #ifdef WIN32
-#define isnan _isnan
+//#define isnan _isnan
 #endif
 
 static void ReadVector(FILE *f, int n, double *v)

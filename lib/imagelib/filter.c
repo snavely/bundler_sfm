@@ -149,34 +149,34 @@ double img_laplacian(img_t *img, int x, int y) {
 }
 
 #ifdef WIN32
-static double erf (double x) {
-  int sign;
-  double t;
+//static double erf (double x) {
+//  int sign;
+//  double t;
 
-  if (x < 0)
-    {
-      sign = -1;
-      x = -x;
-    }
-  else sign = 1;
+//  if (x < 0)
+//    {
+//      sign = -1;
+//      x = -x;
+//    }
+//  else sign = 1;
    
   /* This form uses equation 7.126 of A&S.  It is accurate to 1.5e-7. */
    
-  t = 1 / (1 + 0.3275911 * x);
+//  t = 1 / (1 + 0.3275911 * x);
    
-  if (x < 1.0e17) {
-    t = 1.0 - (t * (0.254829592 + t * 
-		    (-0.284496736 + t *
-		     (1.421413741 + t *
-		      (-1.453152027 + t *
-		       (1.061405429)))))) * exp (-x * x);
-  }
-  else t = 1.0;
+//  if (x < 1.0e17) {
+//    t = 1.0 - (t * (0.254829592 + t * 
+//		    (-0.284496736 + t *
+//		     (1.421413741 + t *
+//		      (-1.453152027 + t *
+//		       (1.061405429)))))) * exp (-x * x);
+//  }
+//  else t = 1.0;
 
-  t = t * sign;
+//  t = t * sign;
    
-  return t;
-} 
+//  return t;
+//} 
 #endif
 
 /* Compute a filter kernel for a gaussian filter with the *

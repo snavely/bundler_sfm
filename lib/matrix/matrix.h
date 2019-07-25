@@ -54,7 +54,7 @@ void matrix_transpose_product2_ipp(int Am, int An, int Bm,
 void matrix_array_product_ipp(int count, int Am, int An, int Bn,
                               const double *A, const double *B, double *R);
 
-static inline void matrix_product33(double *A, double *B, double *R)
+static __inline void matrix_product33(double *A, double *B, double *R)
 {
     R[0] = A[0] * B[0] + A[1] * B[3] + A[2] * B[6];
     R[1] = A[0] * B[1] + A[1] * B[4] + A[2] * B[7];
@@ -69,17 +69,17 @@ static inline void matrix_product33(double *A, double *B, double *R)
     R[8] = A[6] * B[2] + A[7] * B[5] + A[8] * B[8];            
 }       
 
-static inline void matrix_product121(double *A, double *b, double *r)
+static __inline void matrix_product121(double *A, double *b, double *r)
 {
     r[0] = A[0] * b[0] + A[1] * b[1];            
 }
     
-static inline void matrix_product131(double *A, double *b, double *r)
+static __inline void matrix_product131(double *A, double *b, double *r)
 {
     r[0] = A[0] * b[0] + A[1] * b[1] + A[2] * b[2];
 }
        
-static inline void matrix_product331(double *A, double *b, double *r)
+static __inline void matrix_product331(double *A, double *b, double *r)
 {
     r[0] = A[0] * b[0] + A[1] * b[1] + A[2] * b[2];
     r[1] = A[3] * b[0] + A[4] * b[1] + A[5] * b[2];

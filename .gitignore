@@ -17,9 +17,6 @@ bin/RadialUndistort
 bin/FisheyeUndistort
 bin/bundler
 lib/ann_1.1_char/lib
-lib/f2c/arith.h
-lib/f2c/signal1.h
-lib/f2c/sysdep1.h
 src/Bundle2PMVS
 src/Bundle2Ply
 src/Bundle2Vis
