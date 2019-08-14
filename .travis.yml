@@ -1,0 +1,32 @@
+language: cpp
+
+before_install:
+ - export NUM_CPU=3
+ - sudo apt-get install -qq libatlas-base-dev libeigen3-dev gfortran libsuitesparse-dev
+ 
+
+install:
+ - mkdir thirdparty && cd thirdparty
+
+# install glog
+ - curl https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz | tar xvz
+ - cd glog-0.3.3
+ - ./configure --with-gflags=/usr/local/
+ - make -j$NUM_CPU
+ - sudo make install
+ - cd ..
+
+# install ceres
+ - curl http://ceres-solver.org/ceres-solver-1.9.0.tar.gz | tar xvz
+ - mkdir ceres-bin && cd ceres-bin
+ - cmake ../ceres-solver-1.9.0
+ - make -j$NUM_CPU
+ - sudo make install
+ - cd ..
+
+ - cd ..
+
+
+script:
+ - make -j$NUM_CPU
+ - sudo cp bin/libANN_char.so /usr/lib
