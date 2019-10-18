@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DCA45EA3-CE31-4D66-87E4-89D85BEE8BAE}</ProjectGuid>
+    <RootNamespace>clapack</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\f2c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;NO_BLAS_WRAP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\f2c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;NO_BLAS_WRAP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BLAS\SRC\dasum.c" />
+    <ClCompile Include="BLAS\SRC\daxpy.c" />
+    <ClCompile Include="BLAS\SRC\dcabs1.c" />
+    <ClCompile Include="BLAS\SRC\dcopy.c" />
+    <ClCompile Include="BLAS\SRC\ddot.c" />
+    <ClCompile Include="BLAS\SRC\dgbmv.c" />
+    <ClCompile Include="BLAS\SRC\dgemm.c" />
+    <ClCompile Include="BLAS\SRC\dgemv.c" />
+    <ClCompile Include="BLAS\SRC\dger.c" />
+    <ClCompile Include="BLAS\SRC\dnrm2.c" />
+    <ClCompile Include="BLAS\SRC\drot.c" />
+    <ClCompile Include="BLAS\SRC\drotg.c" />
+    <ClCompile Include="BLAS\SRC\drotm.c" />
+    <ClCompile Include="BLAS\SRC\drotmg.c" />
+    <ClCompile Include="BLAS\SRC\dsbmv.c" />
+    <ClCompile Include="BLAS\SRC\dscal.c" />
+    <ClCompile Include="BLAS\SRC\dsdot.c" />
+    <ClCompile Include="BLAS\SRC\dspmv.c" />
+    <ClCompile Include="BLAS\SRC\dspr.c" />
+    <ClCompile Include="BLAS\SRC\dspr2.c" />
+    <ClCompile Include="BLAS\SRC\dswap.c" />
+    <ClCompile Include="BLAS\SRC\dsymm.c" />
+    <ClCompile Include="BLAS\SRC\dsymv.c" />
+    <ClCompile Include="BLAS\SRC\dsyr.c" />
+    <ClCompile Include="BLAS\SRC\dsyr2.c" />
+    <ClCompile Include="BLAS\SRC\dsyr2k.c" />
+    <ClCompile Include="BLAS\SRC\dsyrk.c" />
+    <ClCompile Include="BLAS\SRC\dtbmv.c" />
+    <ClCompile Include="BLAS\SRC\dtbsv.c" />
+    <ClCompile Include="BLAS\SRC\dtpmv.c" />
+    <ClCompile Include="BLAS\SRC\dtpsv.c" />
+    <ClCompile Include="BLAS\SRC\dtrmm.c" />
+    <ClCompile Include="BLAS\SRC\dtrmv.c" />
+    <ClCompile Include="BLAS\SRC\dtrsm.c" />
+    <ClCompile Include="BLAS\SRC\dtrsv.c" />
+    <ClCompile Include="BLAS\SRC\dzasum.c" />
+    <ClCompile Include="BLAS\SRC\dznrm2.c" />
+    <ClCompile Include="BLAS\SRC\icamax.c" />
+    <ClCompile Include="BLAS\SRC\idamax.c" />
+    <ClCompile Include="BLAS\SRC\isamax.c" />
+    <ClCompile Include="BLAS\SRC\izamax.c" />
+    <ClCompile Include="BLAS\SRC\lsame.c" />
+    <ClCompile Include="BLAS\SRC\xerbla.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="INSTALL\dlamch.c" />
+    <ClCompile Include="INSTALL\dlamchtst.c" />
+    <ClCompile Include="INSTALL\dsecndtst.c" />
+    <ClCompile Include="INSTALL\ilaver.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="INSTALL\LAPACK_version.c" />
+    <ClCompile Include="INSTALL\lsame.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="INSTALL\lsametst.c" />
+    <ClCompile Include="INSTALL\tstiee.c" />
+    <ClCompile Include="SRC\dbdsdc.c" />
+    <ClCompile Include="SRC\dbdsqr.c" />
+    <ClCompile Include="SRC\ddisna.c" />
+    <ClCompile Include="SRC\dgbbrd.c" />
+    <ClCompile Include="SRC\dgbcon.c" />
+    <ClCompile Include="SRC\dgbequ.c" />
+    <ClCompile Include="SRC\dgbrfs.c" />
+    <ClCompile Include="SRC\dgbsv.c" />
+    <ClCompile Include="SRC\dgbsvx.c" />
+    <ClCompile Include="SRC\dgbtf2.c" />
+    <ClCompile Include="SRC\dgbtrf.c" />
+    <ClCompile Include="SRC\dgbtrs.c" />
+    <ClCompile Include="SRC\dgebak.c" />
+    <ClCompile Include="SRC\dgebal.c" />
+    <ClCompile Include="SRC\dgebd2.c" />
+    <ClCompile Include="SRC\dgebrd.c" />
+    <ClCompile Include="SRC\dgecon.c" />
+    <ClCompile Include="SRC\dgeequ.c" />
+    <ClCompile Include="SRC\dgees.c" />
+    <ClCompile Include="SRC\dgeesx.c" />
+    <ClCompile Include="SRC\dgeev.c" />
+    <ClCompile Include="SRC\dgeevx.c" />
+    <ClCompile Include="SRC\dgegs.c" />
+    <ClCompile Include="SRC\dgegv.c" />
+    <ClCompile Include="SRC\dgehd2.c" />
+    <ClCompile Include="SRC\dgehrd.c" />
+    <ClCompile Include="SRC\dgelq2.c" />
+    <ClCompile Include="SRC\dgelqf.c" />
+    <ClCompile Include="SRC\dgels.c" />
+    <ClCompile Include="SRC\dgelsd.c" />
+    <ClCompile Include="SRC\dgelss.c" />
+    <ClCompile Include="SRC\dgelsx.c" />
+    <ClCompile Include="SRC\dgelsy.c" />
+    <ClCompile Include="SRC\dgeql2.c" />
+    <ClCompile Include="SRC\dgeqlf.c" />
+    <ClCompile Include="SRC\dgeqp3.c" />
+    <ClCompile Include="SRC\dgeqpf.c" />
+    <ClCompile Include="SRC\dgeqr2.c" />
+    <ClCompile Include="SRC\dgeqrf.c" />
+    <ClCompile Include="SRC\dgerfs.c" />
+    <ClCompile Include="SRC\dgerq2.c" />
+    <ClCompile Include="SRC\dgerqf.c" />
+    <ClCompile Include="SRC\dgesc2.c" />
+    <ClCompile Include="SRC\dgesdd.c" />
+    <ClCompile Include="SRC\dgesv.c" />
+    <ClCompile Include="SRC\dgesvd.c" />
+    <ClCompile Include="SRC\dgesvx.c" />
+    <ClCompile Include="SRC\dgetc2.c" />
+    <ClCompile Include="SRC\dgetf2.c" />
+    <ClCompile Include="SRC\dgetrf.c" />
+    <ClCompile Include="SRC\dgetri.c" />
+    <ClCompile Include="SRC\dgetrs.c" />
+    <ClCompile Include="SRC\dggbak.c" />
+    <ClCompile Include="SRC\dggbal.c" />
+    <ClCompile Include="SRC\dgges.c" />
+    <ClCompile Include="SRC\dggesx.c" />
+    <ClCompile Include="SRC\dggev.c" />
+    <ClCompile Include="SRC\dggevx.c" />
+    <ClCompile Include="SRC\dggglm.c" />
+    <ClCompile Include="SRC\dgghrd.c" />
+    <ClCompile Include="SRC\dgglse.c" />
+    <ClCompile Include="SRC\dggqrf.c" />
+    <ClCompile Include="SRC\dggrqf.c" />
+    <ClCompile Include="SRC\dggsvd.c" />
+    <ClCompile Include="SRC\dggsvp.c" />
+    <ClCompile Include="SRC\dgtcon.c" />
+    <ClCompile Include="SRC\dgtrfs.c" />
+    <ClCompile Include="SRC\dgtsv.c" />
+    <ClCompile Include="SRC\dgtsvx.c" />
+    <ClCompile Include="SRC\dgttrf.c" />
+    <ClCompile Include="SRC\dgttrs.c" />
+    <ClCompile Include="SRC\dgtts2.c" />
+    <ClCompile Include="SRC\dhgeqz.c" />
+    <ClCompile Include="SRC\dhsein.c" />
+    <ClCompile Include="SRC\dhseqr.c" />
+    <ClCompile Include="SRC\disnan.c" />
+    <ClCompile Include="SRC\dlabad.c" />
+    <ClCompile Include="SRC\dlabrd.c" />
+    <ClCompile Include="SRC\dlacn2.c" />
+    <ClCompile Include="SRC\dlacon.c" />
+    <ClCompile Include="SRC\dlacpy.c" />
+    <ClCompile Include="SRC\dladiv.c" />
+    <ClCompile Include="SRC\dlae2.c" />
+    <ClCompile Include="SRC\dlaebz.c" />
+    <ClCompile Include="SRC\dlaed0.c" />
+    <ClCompile Include="SRC\dlaed1.c" />
+    <ClCompile Include="SRC\dlaed2.c" />
+    <ClCompile Include="SRC\dlaed3.c" />
+    <ClCompile Include="SRC\dlaed4.c" />
+    <ClCompile Include="SRC\dlaed5.c" />
+    <ClCompile Include="SRC\dlaed6.c" />
+    <ClCompile Include="SRC\dlaed7.c" />
+    <ClCompile Include="SRC\dlaed8.c" />
+    <ClCompile Include="SRC\dlaed9.c" />
+    <ClCompile Include="SRC\dlaeda.c" />
+    <ClCompile Include="SRC\dlaein.c" />
+    <ClCompile Include="SRC\dlaev2.c" />
+    <ClCompile Include="SRC\dlaexc.c" />
+    <ClCompile Include="SRC\dlag2.c" />
+    <ClCompile Include="SRC\dlag2s.c" />
+    <ClCompile Include="SRC\dlags2.c" />
+    <ClCompile Include="SRC\dlagtf.c" />
+    <ClCompile Include="SRC\dlagtm.c" />
+    <ClCompile Include="SRC\dlagts.c" />
+    <ClCompile Include="SRC\dlagv2.c" />
+    <ClCompile Include="SRC\dlahqr.c" />
+    <ClCompile Include="SRC\dlahr2.c" />
+    <ClCompile Include="SRC\dlahrd.c" />
+    <ClCompile Include="SRC\dlaic1.c" />
+    <ClCompile Include="SRC\dlaisnan.c" />
+    <ClCompile Include="SRC\dlaln2.c" />
+    <ClCompile Include="SRC\dlals0.c" />
+    <ClCompile Include="SRC\dlalsa.c" />
+    <ClCompile Include="SRC\dlalsd.c" />
+    <ClCompile Include="SRC\dlamrg.c" />
+    <ClCompile Include="SRC\dlaneg.c" />
+    <ClCompile Include="SRC\dlangb.c" />
+    <ClCompile Include="SRC\dlange.c" />
+    <ClCompile Include="SRC\dlangt.c" />
+    <ClCompile Include="SRC\dlanhs.c" />
+    <ClCompile Include="SRC\dlansb.c" />
+    <ClCompile Include="SRC\dlansp.c" />
+    <ClCompile Include="SRC\dlanst.c" />
+    <ClCompile Include="SRC\dlansy.c" />
+    <ClCompile Include="SRC\dlantb.c" />
+    <ClCompile Include="SRC\dlantp.c" />
+    <ClCompile Include="SRC\dlantr.c" />
+    <ClCompile Include="SRC\dlanv2.c" />
+    <ClCompile Include="SRC\dlapll.c" />
+    <ClCompile Include="SRC\dlapmt.c" />
+    <ClCompile Include="SRC\dlapy2.c" />
+    <ClCompile Include="SRC\dlapy3.c" />
+    <ClCompile Include="SRC\dlaqgb.c" />
+    <ClCompile Include="SRC\dlaqge.c" />
+    <ClCompile Include="SRC\dlaqp2.c" />
+    <ClCompile Include="SRC\dlaqps.c" />
+    <ClCompile Include="SRC\dlaqr0.c" />
+    <ClCompile Include="SRC\dlaqr1.c" />
+    <ClCompile Include="SRC\dlaqr2.c" />
+    <ClCompile Include="SRC\dlaqr3.c" />
+    <ClCompile Include="SRC\dlaqr4.c" />
+    <ClCompile Include="SRC\dlaqr5.c" />
+    <ClCompile Include="SRC\dlaqsb.c" />
+    <ClCompile Include="SRC\dlaqsp.c" />
+    <ClCompile Include="SRC\dlaqsy.c" />
+    <ClCompile Include="SRC\dlaqtr.c" />
+    <ClCompile Include="SRC\dlar1v.c" />
+    <ClCompile Include="SRC\dlar2v.c" />
+    <ClCompile Include="SRC\dlarf.c" />
+    <ClCompile Include="SRC\dlarfb.c" />
+    <ClCompile Include="SRC\dlarfg.c" />
+    <ClCompile Include="SRC\dlarft.c" />
+    <ClCompile Include="SRC\dlarfx.c" />
+    <ClCompile Include="SRC\dlargv.c" />
+    <ClCompile Include="SRC\dlarnv.c" />
+    <ClCompile Include="SRC\dlarra.c" />
+    <ClCompile Include="SRC\dlarrb.c" />
+    <ClCompile Include="SRC\dlarrc.c" />
+    <ClCompile Include="SRC\dlarrd.c" />
+    <ClCompile Include="SRC\dlarre.c" />
+    <ClCompile Include="SRC\dlarrf.c" />
+    <ClCompile Include="SRC\dlarrj.c" />
+    <ClCompile Include="SRC\dlarrk.c" />
+    <ClCompile Include="SRC\dlarrr.c" />
+    <ClCompile Include="SRC\dlarrv.c" />
+    <ClCompile Include="SRC\dlartg.c" />
+    <ClCompile Include="SRC\dlartv.c" />
+    <ClCompile Include="SRC\dlaruv.c" />
+    <ClCompile Include="SRC\dlarz.c" />
+    <ClCompile Include="SRC\dlarzb.c" />
+    <ClCompile Include="SRC\dlarzt.c" />
+    <ClCompile Include="SRC\dlas2.c" />
+    <ClCompile Include="SRC\dlascl.c" />
+    <ClCompile Include="SRC\dlasd0.c" />
+    <ClCompile Include="SRC\dlasd1.c" />
+    <ClCompile Include="SRC\dlasd2.c" />
+    <ClCompile Include="SRC\dlasd3.c" />
+    <ClCompile Include="SRC\dlasd4.c" />
+    <ClCompile Include="SRC\dlasd5.c" />
+    <ClCompile Include="SRC\dlasd6.c" />
+    <ClCompile Include="SRC\dlasd7.c" />
+    <ClCompile Include="SRC\dlasd8.c" />
+    <ClCompile Include="SRC\dlasda.c" />
+    <ClCompile Include="SRC\dlasdq.c" />
+    <ClCompile Include="SRC\dlasdt.c" />
+    <ClCompile Include="SRC\dlaset.c" />
+    <ClCompile Include="SRC\dlasq1.c" />
+    <ClCompile Include="SRC\dlasq2.c" />
+    <ClCompile Include="SRC\dlasq3.c" />
+    <ClCompile Include="SRC\dlasq4.c" />
+    <ClCompile Include="SRC\dlasq5.c" />
+    <ClCompile Include="SRC\dlasq6.c" />
+    <ClCompile Include="SRC\dlasr.c" />
+    <ClCompile Include="SRC\dlasrt.c" />
+    <ClCompile Include="SRC\dlassq.c" />
+    <ClCompile Include="SRC\dlasv2.c" />
+    <ClCompile Include="SRC\dlaswp.c" />
+    <ClCompile Include="SRC\dlasy2.c" />
+    <ClCompile Include="SRC\dlasyf.c" />
+    <ClCompile Include="SRC\dlatbs.c" />
+    <ClCompile Include="SRC\dlatdf.c" />
+    <ClCompile Include="SRC\dlatps.c" />
+    <ClCompile Include="SRC\dlatrd.c" />
+    <ClCompile Include="SRC\dlatrs.c" />
+    <ClCompile Include="SRC\dlatrz.c" />
+    <ClCompile Include="SRC\dlatzm.c" />
+    <ClCompile Include="SRC\dlauu2.c" />
+    <ClCompile Include="SRC\dlauum.c" />
+    <ClCompile Include="SRC\dlazq3.c" />
+    <ClCompile Include="SRC\dlazq4.c" />
+    <ClCompile Include="SRC\dopgtr.c" />
+    <ClCompile Include="SRC\dopmtr.c" />
+    <ClCompile Include="SRC\dorg2l.c" />
+    <ClCompile Include="SRC\dorg2r.c" />
+    <ClCompile Include="SRC\dorgbr.c" />
+    <ClCompile Include="SRC\dorghr.c" />
+    <ClCompile Include="SRC\dorgl2.c" />
+    <ClCompile Include="SRC\dorglq.c" />
+    <ClCompile Include="SRC\dorgql.c" />
+    <ClCompile Include="SRC\dorgqr.c" />
+    <ClCompile Include="SRC\dorgr2.c" />
+    <ClCompile Include="SRC\dorgrq.c" />
+    <ClCompile Include="SRC\dorgtr.c" />
+    <ClCompile Include="SRC\dorm2l.c" />
+    <ClCompile Include="SRC\dorm2r.c" />
+    <ClCompile Include="SRC\dormbr.c" />
+    <ClCompile Include="SRC\dormhr.c" />
+    <ClCompile Include="SRC\dorml2.c" />
+    <ClCompile Include="SRC\dormlq.c" />
+    <ClCompile Include="SRC\dormql.c" />
+    <ClCompile Include="SRC\dormqr.c" />
+    <ClCompile Include="SRC\dormr2.c" />
+    <ClCompile Include="SRC\dormr3.c" />
+    <ClCompile Include="SRC\dormrq.c" />
+    <ClCompile Include="SRC\dormrz.c" />
+    <ClCompile Include="SRC\dormtr.c" />
+    <ClCompile Include="SRC\dpbcon.c" />
+    <ClCompile Include="SRC\dpbequ.c" />
+    <ClCompile Include="SRC\dpbrfs.c" />
+    <ClCompile Include="SRC\dpbstf.c" />
+    <ClCompile Include="SRC\dpbsv.c" />
+    <ClCompile Include="SRC\dpbsvx.c" />
+    <ClCompile Include="SRC\dpbtf2.c" />
+    <ClCompile Include="SRC\dpbtrf.c" />
+    <ClCompile Include="SRC\dpbtrs.c" />
+    <ClCompile Include="SRC\dpocon.c" />
+    <ClCompile Include="SRC\dpoequ.c" />
+    <ClCompile Include="SRC\dporfs.c" />
+    <ClCompile Include="SRC\dposv.c" />
+    <ClCompile Include="SRC\dposvx.c" />
+    <ClCompile Include="SRC\dpotf2.c" />
+    <ClCompile Include="SRC\dpotrf.c" />
+    <ClCompile Include="SRC\dpotri.c" />
+    <ClCompile Include="SRC\dpotrs.c" />
+    <ClCompile Include="SRC\dppcon.c" />
+    <ClCompile Include="SRC\dppequ.c" />
+    <ClCompile Include="SRC\dpprfs.c" />
+    <ClCompile Include="SRC\dppsv.c" />
+    <ClCompile Include="SRC\dppsvx.c" />
+    <ClCompile Include="SRC\dpptrf.c" />
+    <ClCompile Include="SRC\dpptri.c" />
+    <ClCompile Include="SRC\dpptrs.c" />
+    <ClCompile Include="SRC\dptcon.c" />
+    <ClCompile Include="SRC\dpteqr.c" />
+    <ClCompile Include="SRC\dptrfs.c" />
+    <ClCompile Include="SRC\dptsv.c" />
+    <ClCompile Include="SRC\dptsvx.c" />
+    <ClCompile Include="SRC\dpttrf.c" />
+    <ClCompile Include="SRC\dpttrs.c" />
+    <ClCompile Include="SRC\dptts2.c" />
+    <ClCompile Include="SRC\drscl.c" />
+    <ClCompile Include="SRC\dsbev.c" />
+    <ClCompile Include="SRC\dsbevd.c" />
+    <ClCompile Include="SRC\dsbevx.c" />
+    <ClCompile Include="SRC\dsbgst.c" />
+    <ClCompile Include="SRC\dsbgv.c" />
+    <ClCompile Include="SRC\dsbgvd.c" />
+    <ClCompile Include="SRC\dsbgvx.c" />
+    <ClCompile Include="SRC\dsbtrd.c" />
+    <ClCompile Include="SRC\dsgesv.c" />
+    <ClCompile Include="SRC\dspcon.c" />
+    <ClCompile Include="SRC\dspev.c" />
+    <ClCompile Include="SRC\dspevd.c" />
+    <ClCompile Include="SRC\dspevx.c" />
+    <ClCompile Include="SRC\dspgst.c" />
+    <ClCompile Include="SRC\dspgv.c" />
+    <ClCompile Include="SRC\dspgvd.c" />
+    <ClCompile Include="SRC\dspgvx.c" />
+    <ClCompile Include="SRC\dsprfs.c" />
+    <ClCompile Include="SRC\dspsv.c" />
+    <ClCompile Include="SRC\dspsvx.c" />
+    <ClCompile Include="SRC\dsptrd.c" />
+    <ClCompile Include="SRC\dsptrf.c" />
+    <ClCompile Include="SRC\dsptri.c" />
+    <ClCompile Include="SRC\dsptrs.c" />
+    <ClCompile Include="SRC\dstebz.c" />
+    <ClCompile Include="SRC\dstedc.c" />
+    <ClCompile Include="SRC\dstegr.c" />
+    <ClCompile Include="SRC\dstein.c" />
+    <ClCompile Include="SRC\dstemr.c" />
+    <ClCompile Include="SRC\dsteqr.c" />
+    <ClCompile Include="SRC\dsterf.c" />
+    <ClCompile Include="SRC\dstev.c" />
+    <ClCompile Include="SRC\dstevd.c" />
+    <ClCompile Include="SRC\dstevr.c" />
+    <ClCompile Include="SRC\dstevx.c" />
+    <ClCompile Include="SRC\dsycon.c" />
+    <ClCompile Include="SRC\dsyev.c" />
+    <ClCompile Include="SRC\dsyevd.c" />
+    <ClCompile Include="SRC\dsyevr.c" />
+    <ClCompile Include="SRC\dsyevx.c" />
+    <ClCompile Include="SRC\dsygs2.c" />
+    <ClCompile Include="SRC\dsygst.c" />
+    <ClCompile Include="SRC\dsygv.c" />
+    <ClCompile Include="SRC\dsygvd.c" />
+    <ClCompile Include="SRC\dsygvx.c" />
+    <ClCompile Include="SRC\dsyrfs.c" />
+    <ClCompile Include="SRC\dsysv.c" />
+    <ClCompile Include="SRC\dsysvx.c" />
+    <ClCompile Include="SRC\dsytd2.c" />
+    <ClCompile Include="SRC\dsytf2.c" />
+    <ClCompile Include="SRC\dsytrd.c" />
+    <ClCompile Include="SRC\dsytrf.c" />
+    <ClCompile Include="SRC\dsytri.c" />
+    <ClCompile Include="SRC\dsytrs.c" />
+    <ClCompile Include="SRC\dtbcon.c" />
+    <ClCompile Include="SRC\dtbrfs.c" />
+    <ClCompile Include="SRC\dtbtrs.c" />
+    <ClCompile Include="SRC\dtgevc.c" />
+    <ClCompile Include="SRC\dtgex2.c" />
+    <ClCompile Include="SRC\dtgexc.c" />
+    <ClCompile Include="SRC\dtgsen.c" />
+    <ClCompile Include="SRC\dtgsja.c" />
+    <ClCompile Include="SRC\dtgsna.c" />
+    <ClCompile Include="SRC\dtgsy2.c" />
+    <ClCompile Include="SRC\dtgsyl.c" />
+    <ClCompile Include="SRC\dtpcon.c" />
+    <ClCompile Include="SRC\dtprfs.c" />
+    <ClCompile Include="SRC\dtptri.c" />
+    <ClCompile Include="SRC\dtptrs.c" />
+    <ClCompile Include="SRC\dtrcon.c" />
+    <ClCompile Include="SRC\dtrevc.c" />
+    <ClCompile Include="SRC\dtrexc.c" />
+    <ClCompile Include="SRC\dtrrfs.c" />
+    <ClCompile Include="SRC\dtrsen.c" />
+    <ClCompile Include="SRC\dtrsna.c" />
+    <ClCompile Include="SRC\dtrsyl.c" />
+    <ClCompile Include="SRC\dtrti2.c" />
+    <ClCompile Include="SRC\dtrtri.c" />
+    <ClCompile Include="SRC\dtrtrs.c" />
+    <ClCompile Include="SRC\dtzrqf.c" />
+    <ClCompile Include="SRC\dtzrzf.c" />
+    <ClCompile Include="SRC\dzsum1.c" />
+    <ClCompile Include="SRC\icmax1.c" />
+    <ClCompile Include="SRC\ieeeck.c" />
+    <ClCompile Include="SRC\ilaenv.c" />
+    <ClCompile Include="SRC\ilaver.c" />
+    <ClCompile Include="SRC\iparmq.c" />
+    <ClCompile Include="SRC\izmax1.c" />
+    <ClCompile Include="SRC\lsamen.c" />
+    <ClCompile Include="SRC\xerbla.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
